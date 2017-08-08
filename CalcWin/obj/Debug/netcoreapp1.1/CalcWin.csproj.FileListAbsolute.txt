@@ -1,0 +1,10 @@
+C:\Users\Michał Makowej\Desktop\C#\Projekty\CalcWin\CalcWin\bin\Debug\netcoreapp1.1\CalcWin.deps.json
+C:\Users\Michał Makowej\Desktop\C#\Projekty\CalcWin\CalcWin\bin\Debug\netcoreapp1.1\CalcWin.runtimeconfig.json
+C:\Users\Michał Makowej\Desktop\C#\Projekty\CalcWin\CalcWin\bin\Debug\netcoreapp1.1\CalcWin.runtimeconfig.dev.json
+C:\Users\Michał Makowej\Desktop\C#\Projekty\CalcWin\CalcWin\bin\Debug\netcoreapp1.1\CalcWin.dll
+C:\Users\Michał Makowej\Desktop\C#\Projekty\CalcWin\CalcWin\bin\Debug\netcoreapp1.1\CalcWin.pdb
+C:\Users\Michał Makowej\Desktop\C#\Projekty\CalcWin\CalcWin\obj\Debug\netcoreapp1.1\CalcWin.csprojResolveAssemblyReference.cache
+C:\Users\Michał Makowej\Desktop\C#\Projekty\CalcWin\CalcWin\obj\Debug\netcoreapp1.1\UserSecretsAssemblyInfo.cs
+C:\Users\Michał Makowej\Desktop\C#\Projekty\CalcWin\CalcWin\obj\Debug\netcoreapp1.1\CalcWin.AssemblyInfo.cs
+C:\Users\Michał Makowej\Desktop\C#\Projekty\CalcWin\CalcWin\obj\Debug\netcoreapp1.1\CalcWin.dll
+C:\Users\Michał Makowej\Desktop\C#\Projekty\CalcWin\CalcWin\obj\Debug\netcoreapp1.1\CalcWin.pdb
