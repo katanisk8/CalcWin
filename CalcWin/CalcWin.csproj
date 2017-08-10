@@ -35,7 +35,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Calculator\" />
-    <Folder Include="Views\Settings\" />
     <Folder Include="Views\Archive\" />
   </ItemGroup>
 

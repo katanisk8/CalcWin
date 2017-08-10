@@ -12,5 +12,20 @@ namespace CalcWin.Controllers
         {
             return View();
         }
+
+        public IActionResult General()
+        {
+            return View();
+        }
+
+        public IActionResult Fruits()
+        {
+            return View();
+        }
+
+        public IActionResult AdminSettings()
+        {
+            return View();
+        }
     }
 }
