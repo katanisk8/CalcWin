@@ -21,7 +21,7 @@
   },
   "targets": {
     ".NETCoreApp,Version=v1.1": {
-      "calcwin/1.0.0": {
+      "calcwin/3.0.0": {
         "dependencies": {
           "Microsoft.ApplicationInsights.AspNetCore": "2.0.0",
           "Microsoft.AspNetCore": "1.1.2",
@@ -3542,7 +3542,7 @@
     }
   },
   "libraries": {
-    "calcwin/1.0.0": {
+    "calcwin/3.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
@@ -4467,7 +4467,7 @@
     "microsoft.netcore.dotnethostresolver/1.1.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-GMOeUVs09+IzpASiHFu+jdAdeDxf8BXwZ66Ue9UPAvsrYy8ZYNPNwhb9l7NNVk9rTfgfxAsfksgvbIkYLFF/Rg==",
+      "sha512": "sha512-xf7RRVJ4M1w1Hg9TTzTH4g+zFqGtu6uXBjpcyy+o5UYrRj44dtJkmlnc1OnoKQFU0pZ8i9C8eNbSeqq/p6n19w==",
       "path": "microsoft.netcore.dotnethostresolver/1.1.0",
       "hashPath": "microsoft.netcore.dotnethostresolver.1.1.0.nupkg.sha512"
     },

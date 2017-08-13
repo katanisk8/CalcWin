@@ -5626,7 +5626,7 @@
       ]
     },
     "Microsoft.NETCore.DotNetHostResolver/1.1.0": {
-      "sha512": "GMOeUVs09+IzpASiHFu+jdAdeDxf8BXwZ66Ue9UPAvsrYy8ZYNPNwhb9l7NNVk9rTfgfxAsfksgvbIkYLFF/Rg==",
+      "sha512": "xf7RRVJ4M1w1Hg9TTzTH4g+zFqGtu6uXBjpcyy+o5UYrRj44dtJkmlnc1OnoKQFU0pZ8i9C8eNbSeqq/p6n19w==",
       "type": "package",
       "path": "microsoft.netcore.dotnethostresolver/1.1.0",
       "files": [
@@ -10950,15 +10950,15 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Michał Makowej\\.nuget\\packages\\": {}
+    "C:\\Users\\Michal Makowej\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Michał Makowej\\Desktop\\C#\\Projekty\\CalcWin\\CalcWin\\CalcWin.csproj",
+      "projectUniqueName": "C:\\Users\\Michal Makowej\\Desktop\\C#\\Projekty\\CalcWin-MVC\\CalcWin\\CalcWin.csproj",
       "projectName": "CalcWin",
-      "projectPath": "C:\\Users\\Michał Makowej\\Desktop\\C#\\Projekty\\CalcWin\\CalcWin\\CalcWin.csproj",
-      "outputPath": "C:\\Users\\Michał Makowej\\Desktop\\C#\\Projekty\\CalcWin\\CalcWin\\obj\\",
+      "projectPath": "C:\\Users\\Michal Makowej\\Desktop\\C#\\Projekty\\CalcWin-MVC\\CalcWin\\CalcWin.csproj",
+      "outputPath": "C:\\Users\\Michal Makowej\\Desktop\\C#\\Projekty\\CalcWin-MVC\\CalcWin\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"
