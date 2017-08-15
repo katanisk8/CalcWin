@@ -1,9 +1,64 @@
 @{
     ViewData["Title"] = "Calculator";
+    @model CalcWin.Views.Calculator.EntryDataViewModel
 }
 
-@model CalcWin.Models.Flavor
-
-
-
-@Model.Name
+<div class="row content text-center">
+    <div class="col-sm-3">
+        <h2>Fruits</h2>
+        <h4>Choose fruits which you would like to use to make wine.</h4>
+        @foreach (var Fruit in Model.Fruits)
+        {
+            <div class="row" style="padding: 2px">
+                <div class="col-sm-8 text-left">
+                    @Fruit.Name
+                </div>
+                <div class="col-sm-4">
+                    <input type="text" class="form-control input-sm" id="fruitQuantity" placeholder="Quantity">
+                </div>
+            </div>
+        }
+    </div>
+    <div class="col-sm-9">
+        <div class="row content">
+            <h1>Ustawienia</h1>
+            <div class="well" ">
+            </div>
+        </div>
+        <div class="row content">
+            <h1>Wyniki</h1>
+            <div class="well">
+                <p>Parametry</p>
+                <div class="row content">
+                    <div class="col-sm-6">
+                        <div class="well">
+                            <p>Nastw</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="well">
+                            <p>Wino</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row content">
+            <div class="well">
+                <p>Przepis</p>
+                <div class="row content">
+                    <div class="col-sm-6">
+                        <div class="well">
+                            <p>Owoce</p>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="well">
+                            <p>Dodatki</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

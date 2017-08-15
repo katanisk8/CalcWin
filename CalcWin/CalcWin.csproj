@@ -11,7 +11,7 @@
   <PropertyGroup>
     <UserSecretsId>aspnet-CalcWin-6cf5177e-f34a-4128-8bae-d4552d72d2ef</UserSecretsId>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <Description>Third version of wine calculator wrote in C#/ASP.NET Core</Description>
+    <Description>Third version of wine calculator wrote in C#/ASP.NET Core MVC</Description>
     <Version>1.0.0</Version>
     <NeutralLanguage>en-150</NeutralLanguage>
     <RepositoryUrl>https://github.com/katanisk8/CalcWin-MVC</RepositoryUrl>
@@ -19,6 +19,8 @@
     <Copyright>Copyright by Łukasz &amp; Michał Makowej ©  2017</Copyright>
     <Company>ThreeM</Company>
     <Authors>Łukasz &amp; Michał Makowej</Authors>
+    <AssemblyVersion>3.0.0.0</AssemblyVersion>
+    <FileVersion>3.0.0.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
@@ -47,7 +49,6 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Calculator\" />
     <Folder Include="Views\Archive\" />
   </ItemGroup>
 

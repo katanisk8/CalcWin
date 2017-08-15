@@ -29,7 +29,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a href="@Url.Action("Index", "Calculator")" class="navbar-brand">
+                <a href="@Url.Action("Index", "Home")" class="navbar-brand">
                     <img src="~/images/wine.png" title="CalcWin" alt="CalcWin"/>
                 </a>
             </div>
@@ -59,11 +59,11 @@
             </div>
         </div>
     </nav>
-    <div class="container body-content">
+    <div class="container-fluid body-content">
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; 2017 - CalcWin</p>
+            <p>&copy; @DateTime.Now.Year - CalcWin</p>
         </footer>
     </div>
 
