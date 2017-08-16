@@ -48,3 +48,35 @@ textarea {
         display: none;
     }
 }
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    vertical-align: middle;
+}
+
+td.td-fruits {
+    width: 65%;
+}
+
+.btn-group.bton-group-flavors {
+    margin: 0px;
+    display: flex;
+}
+
+.btn.btn-flavor {
+    width: 25%;
+    padding-left: 1px;
+    padding-right: 1px;
+    font-size: 12px;
+    align-content: center;
+}
+
+.well.well-result {
+    background-color: white;
+    margin: 5px;
+    padding: 5px;
+}
