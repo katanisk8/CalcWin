@@ -3,6 +3,8 @@ using CalcWin.Data;
 using CalcWin.Models;
 using CalcWin.Views.Calculator;
 using System.Linq;
+using System.Collections.Generic;
+using System;
 
 namespace CalcWin.Controllers
 {
@@ -15,6 +17,7 @@ namespace CalcWin.Controllers
             db = context;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             EntryDataViewModel viewModel = new EntryDataViewModel();
@@ -23,30 +26,77 @@ namespace CalcWin.Controllers
 
             return View(viewModel);
         }
-        
-        public void AddSampleData()
-        {
-            db.Fruits.Add(new Fruit { Name = "Jabłka", Sugar = 100, Acid = 10.5, Price = 1.87 });
-            db.Fruits.Add(new Fruit { Name = "Winogrona", Sugar = 155, Acid = 8, Price = 4.83 });
-            db.Fruits.Add(new Fruit { Name = "Agrest", Sugar = 70, Acid = 19, Price = 3.5 });
-            db.Fruits.Add(new Fruit { Name = "Czarne Jagody", Sugar = 55, Acid = 10, Price = 9 });
-            db.Fruits.Add(new Fruit { Name = "Czewrone Borówki", Sugar = 70, Acid = 21, Price = 15.5 });
-            db.Fruits.Add(new Fruit { Name = "Czereśnie", Sugar = 100, Acid = 4, Price = 9 });
-            db.Fruits.Add(new Fruit { Name = "Gruszki", Sugar = 100, Acid = 3, Price = 3.83 });
-            db.Fruits.Add(new Fruit { Name = "Truskawki", Sugar = 45, Acid = 10, Price = 5.83 });
-            db.Fruits.Add(new Fruit { Name = "Jeżyny", Sugar = 60, Acid = 11, Price = 15.5 });
-            db.Fruits.Add(new Fruit { Name = "Maliny", Sugar = 100, Acid = 15, Price = 6.83 });
-            db.Fruits.Add(new Fruit { Name = "Białe Porzeczki", Sugar = 70, Acid = 24, Price = 9.83 });
-            db.Fruits.Add(new Fruit { Name = "Czerwone Porzeczki", Sugar = 60, Acid = 24, Price = 15.83 });
-            db.Fruits.Add(new Fruit { Name = "Czarne Porzeczki", Sugar = 85, Acid = 30, Price = 4.33 });
-            db.Fruits.Add(new Fruit { Name = "Wiśnie", Sugar = 100, Acid = 13, Price = 3.83 });
-            db.Fruits.Add(new Fruit { Name = "Poziomki", Sugar = 60, Acid = 20, Price = 21.83 });
-            db.Fruits.Add(new Fruit { Name = "Renklody", Sugar = 90, Acid = 15, Price = 2.83 });
-            db.Fruits.Add(new Fruit { Name = "Węgierki", Sugar = 100, Acid = 8, Price = 5.83 });
-            db.Fruits.Add(new Fruit { Name = "Rodzynki", Sugar = 70, Acid = 12, Price = 10.83 });
-            db.Fruits.Add(new Fruit { Name = "Żurawina", Sugar = 80, Acid = 11, Price = 19.99 });
 
+        [HttpPost]
+        public IActionResult Save(WineProject wineProject)
+        {
+            db.Projects.Add(wineProject);
             db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
+
+        [HttpGet]
+        public IActionResult Open()
+        {
+            ProjectsViewModel viewModel = new ProjectsViewModel();
+
+            viewModel.Projects = db.Projects.ToList();
+
+            return View(viewModel);
+        }
+
+        [HttpGet]
+        public IActionResult LoadProject(int wineProjectId)
+        {
+            EntryDataViewModel viewModel = new EntryDataViewModel();
+            WineProject wineProject = new WineProject();
+
+            wineProject = db.Projects.FirstOrDefault(x => x.Id == wineProjectId);
+
+            viewModel.Fruits = db.Fruits.ToList();
+            viewModel.Flavors = db.Flavors.ToList();
+            viewModel.SelectedFruits = wineProject.Ingredients.ToList();
+            viewModel.SelectedFlavor = wineProject.Flavor;
+            viewModel.SelectedAlcoholQuantity = wineProject.AlcoholQuantity;
+
+            return View(viewModel);
+        }
+
+        
+
+        //public IActionResult AddProjects()
+        //{
+        //    ApplicationUser user = db.Users.FirstOrDefault(x => x.Email == "michal@makowej.pl");
+        //    Flavor flavor = db.Flavors.FirstOrDefault(x => x.Id == 2);
+            
+        //    List<Ingredient> ingredients = new List<Ingredient>
+        //    {
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 2), Quantity = 10 },
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 3), Quantity = 20 },
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 4), Quantity = 20 }
+        //    };
+        //    List<Ingredient> ingredients1 = new List<Ingredient>
+        //    {
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 2), Quantity = 10 },
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 3), Quantity = 20 },
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 4), Quantity = 20 }
+        //    };
+        //    List<Ingredient> ingredients2 = new List<Ingredient>
+        //    {
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 2), Quantity = 10 },
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 3), Quantity = 20 },
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 4), Quantity = 20 }
+        //    };
+
+
+        //    db.Projects.Add(new WineProject { User = user, Ingredients = ingredients, Name = "Difrent - 12", Flavor = flavor, AlcoholQuantity = 16, Date = DateTime.Now });
+        //    db.Projects.Add(new WineProject { User = user, Ingredients = ingredients1, Name = "Difrent - 13", Flavor = flavor, AlcoholQuantity = 16, Date = DateTime.Now });
+        //    db.Projects.Add(new WineProject { User = user, Ingredients = ingredients2, Name = "Difrent - 14", Flavor = flavor, AlcoholQuantity = 16, Date = DateTime.Now });
+            
+        //    db.SaveChanges();
+
+        //    return Ok();
+        //}
     }
 }

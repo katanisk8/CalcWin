@@ -1,0 +1,28 @@
+@{
+    ViewData["Title"] = "Open Project";
+    @model CalcWin.Views.Calculator.ProjectsViewModel
+}
+
+<div class="col-sm-8">
+    <table>
+        @foreach (var project in Model.Projects)
+        {
+            <tr>
+                <td>@project.Name</td>
+                <td>
+                    @foreach (var ingredient in project.Ingredients)
+                    {
+                        <h4>ingredient.Fruit.Name</h4>
+                        <h5>ingredient.Quantity</h5>
+                    }
+                </td>
+                <td>@project.Flavor</td>
+                <td>@project.AlcoholQuantity</td>
+                <td>@project.Date</td>
+            </tr>
+        }
+    </table>
+</div>
+<div class="col-sm-4">
+
+</div>

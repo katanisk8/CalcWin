@@ -1,0 +1,93 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Wrapping element */
+/* Set some basic padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 0px;
+    padding-right: 0px;
+}
+
+/* Set widths on the form inputs since otherwise they're 100% wide */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+/* Carousel */
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4;
+}
+
+/* buttons and links extension to use brackets: [ click me ] */
+.btn-bracketed::before {
+    display: inline-block;
+    content: "[";
+    padding-right: 0.5em;
+}
+
+.btn-bracketed::after {
+    display: inline-block;
+    content: "]";
+    padding-left: 0.5em;
+}
+
+/* Make .svg files in the carousel display properly in older browsers */
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%;
+}
+
+/* Hide/rearrange for smaller screens */
+@media screen and (max-width: 767px) {
+    /* Hide captions */
+    .carousel-caption {
+        display: none;
+    }
+}
+
+.table > thead > tr > th,
+.table > tbody > tr > th,
+.table > tfoot > tr > th,
+.table > thead > tr > td,
+.table > tbody > tr > td,
+.table > tfoot > tr > td {
+    vertical-align: middle;
+    padding: 2px;
+}
+
+td.td-fruits {
+    width: 65%;
+}
+
+.btn-group.bton-group-flavors {
+    margin: 0px;
+    display: flex;
+}
+
+.btn.btn-flavor {
+    width: 25%;
+    padding-left: 1px;
+    padding-right: 1px;
+    font-size: 12px;
+    align-content: center;
+}
+
+.well.well-result {
+    background-color: white;
+    margin: 5px;
+    padding: 5px;
+}
+
+.content.content-calculator {
+    margin: 10px;
+}
+
+.footer {
+    position: absolute;
+    width: 100%;
+    height: 50px;
+}

@@ -22,7 +22,7 @@ namespace CalcWin.Models
         public IEnumerable<Ingredient> Ingredients { get; set; }
 
         [Required]
-        [Display(Name = "Flavor")]
+        [Display(Name = "Project Name")]
         [StringLength(20, ErrorMessage = "Flavor name cannot be longer than 20 characters.")]
         [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$")]
         public string Name { get; set; }

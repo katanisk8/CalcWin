@@ -28,3 +28,4 @@ C:\Users\Michal Makowej\Desktop\C#\Projekty\CalcWin-MVC\CalcWin\obj\Debug\netcor
 C:\Users\Michal Makowej\Desktop\C#\Projekty\CalcWin-MVC\CalcWin\obj\Debug\netcoreapp1.1\CalcWin.AssemblyInfo.cs
 C:\Users\Michal Makowej\Desktop\C#\Projekty\CalcWin-MVC\CalcWin\obj\Debug\netcoreapp1.1\CalcWin.dll
 C:\Users\Michal Makowej\Desktop\C#\Projekty\CalcWin-MVC\CalcWin\obj\Debug\netcoreapp1.1\CalcWin.pdb
+C:\Users\Michal Makowej\Desktop\C#\Projekty\CalcWin-MVC\CalcWin\obj\Debug\netcoreapp1.1\CalcWin.csproj.CoreCompileInputs.cache
