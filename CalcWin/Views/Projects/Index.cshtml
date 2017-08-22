@@ -1,0 +1,119 @@
+@{
+    ViewData["Title"] = "Projects";
+    @model List<WineProject>
+}
+
+
+<form class="container">
+    <div class="well well-projects text-center col-sm-3">
+        <h4>Options</h4>
+        <a asp-controller="Calculator" asp-action="Index" class="btn btn-info btn-block">New</a>
+        <a asp-controller="Projects" asp-action="Open" class="btn btn-success btn-block">Open</a>
+        <button type="button" data-toggle="modal" data-target="#EditModal" class="btn btn-warning btn-block">Edit</button>
+        <button type="button" data-toggle="modal" data-target="#DeleteModal" class="btn btn-danger btn-block">Delete</button>
+    </div>
+    <div class="table-responsive well well-projects text-center col-sm-6">
+        <h2>Wine Projects</h2>
+        <p>Choose project which you would like to load</p>
+        <table class="table table-hover text-center">
+            <thead class="text-center">
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Fruits</th>
+                    <th>Quantity [kg]</th>
+                    <th>Flavor</th>
+                    <th>Alcohol [%]</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var project in Model)
+            {
+                    <tr>
+                        <td class="col-sm-1">
+                            <input type="radio" name="projects">
+                        </td>
+                        <td class="col-sm-2">@project.Name</td>
+                        <td class="col-sm-2">
+                            @foreach (var ingredient in project.Ingredients)
+                            {
+                                <p>@ingredient.Fruit.Name</p>
+                            }
+                        </td>
+                        <td class="col-sm-1">
+                            @foreach (var ingredient in project.Ingredients)
+                            {
+                                <p>@ingredient.Quantity</p>
+                            }
+                        </td>
+                        <td class="col-sm-2">@project.Flavor.Name</td>
+                        <td class="col-sm-2">@project.AlcoholQuantity</td>
+                        <td class="col-sm-2">
+                            @project.Date
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <button onclick="topFunction()" id="myBtn" class="btn btn-info btn-block" title="Go to top"><span class="glyphicon glyphicon-chevron-up"></span></button>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="EditModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Project</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Project Name:</p>
+                    <input id="ProjectName" type="text" class="form-control" name="ProjectName" placeholder="Project Name">
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" formmethod="post" asp-controller="Projects" asp-action="Edit" class="btn btn-default">Edit</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="DeleteModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Project</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" formmethod="post" asp-controller="Projects" asp-action="Delete" class="btn btn-default">Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () { scrollFunction() };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("myBtn").style.display = "block";
+        } else {
+            document.getElementById("myBtn").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function topFunction() {
+        document.body.scrollTop = 0;
+        document.documentElement.scrollTop = 0;
+    }
+</script>

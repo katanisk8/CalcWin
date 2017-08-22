@@ -20,7 +20,7 @@ namespace CalcWin.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            EntryDataViewModel viewModel = new EntryDataViewModel();
+            CalculatorViewModel viewModel = new CalculatorViewModel();
             viewModel.Fruits = db.Fruits.ToList();
             viewModel.Flavors = db.Flavors.ToList();
 
@@ -30,46 +30,16 @@ namespace CalcWin.Controllers
         [HttpPost]
         public IActionResult Save(WineProject wineProject)
         {
-            db.Projects.Add(wineProject);
-            db.SaveChanges();
-
-            return RedirectToAction("Index");
+            return View("Index");
         }
 
-        [HttpGet]
-        public IActionResult Open()
+
+
+        public IActionResult AddProjects()
         {
-            ProjectsViewModel viewModel = new ProjectsViewModel();
-
-            viewModel.Projects = db.Projects.ToList();
-
-            return View(viewModel);
-        }
-
-        [HttpGet]
-        public IActionResult LoadProject(int wineProjectId)
-        {
-            EntryDataViewModel viewModel = new EntryDataViewModel();
-            WineProject wineProject = new WineProject();
-
-            wineProject = db.Projects.FirstOrDefault(x => x.Id == wineProjectId);
-
-            viewModel.Fruits = db.Fruits.ToList();
-            viewModel.Flavors = db.Flavors.ToList();
-            viewModel.SelectedFruits = wineProject.Ingredients.ToList();
-            viewModel.SelectedFlavor = wineProject.Flavor;
-            viewModel.SelectedAlcoholQuantity = wineProject.AlcoholQuantity;
-
-            return View(viewModel);
-        }
-
-        
-
-        //public IActionResult AddProjects()
-        //{
         //    ApplicationUser user = db.Users.FirstOrDefault(x => x.Email == "michal@makowej.pl");
         //    Flavor flavor = db.Flavors.FirstOrDefault(x => x.Id == 2);
-            
+
         //    List<Ingredient> ingredients = new List<Ingredient>
         //    {
         //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 2), Quantity = 10 },
@@ -93,10 +63,10 @@ namespace CalcWin.Controllers
         //    db.Projects.Add(new WineProject { User = user, Ingredients = ingredients, Name = "Difrent - 12", Flavor = flavor, AlcoholQuantity = 16, Date = DateTime.Now });
         //    db.Projects.Add(new WineProject { User = user, Ingredients = ingredients1, Name = "Difrent - 13", Flavor = flavor, AlcoholQuantity = 16, Date = DateTime.Now });
         //    db.Projects.Add(new WineProject { User = user, Ingredients = ingredients2, Name = "Difrent - 14", Flavor = flavor, AlcoholQuantity = 16, Date = DateTime.Now });
-            
+
         //    db.SaveChanges();
 
-        //    return Ok();
-        //}
+            return Ok();
+        }
     }
 }
