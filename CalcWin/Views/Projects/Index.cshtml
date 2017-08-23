@@ -56,7 +56,7 @@
                 }
             </tbody>
         </table>
-        <button onclick="topFunction()" id="myBtn" class="btn btn-info btn-block" title="Go to top"><span class="glyphicon glyphicon-chevron-up"></span></button>
+        <a onclick="animateScrollTop(0,1000)" id="myBtn" class="btn btn-info btn-block" title="Go to top"><span class="glyphicon glyphicon-chevron-up"></span></a>
     </div>
 
     <!-- Edit Modal -->
@@ -68,12 +68,44 @@
                     <h4 class="modal-title">Edit Project</h4>
                 </div>
                 <div class="modal-body">
-                    <p>Project Name:</p>
-                    <input id="ProjectName" type="text" class="form-control" name="ProjectName" placeholder="Project Name">
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" formmethod="post" asp-controller="Projects" asp-action="Edit" class="btn btn-default">Edit</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <table class="table text-center table-project-edit">
+                        <thead class="text-center">
+                            <tr>
+                                <th>Name</th>
+                                <th>Fruits</th>
+                                <th>Quantity [kg]</th>
+                                <th>Flavor</th>
+                                <th>Alcohol [%]</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class=""><input class="form-control input-sm" placeholder="@Model[0].Name" /></td>
+                                <td class="">
+                                    @foreach (var ingredient in Model[0].Ingredients)
+                                    {
+                                        <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Fruit.Name" />
+                                    }
+                                </td>
+                                <td class="">
+                                    @foreach (var ingredient in Model[0].Ingredients)
+                                    {
+                                        <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Quantity" />
+                                    }
+                                </td>
+                                <td class=""><input class="form-control input-sm" placeholder="@Model[0].Flavor.Name" /></td>
+                                <td class=""><input class="form-control input-sm" placeholder="@Model[0].AlcoholQuantity" /></td>
+                                <td class="">
+                                    <input class="form-control input-sm" placeholder="@Model[0].Date" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="submit" formmethod="post" asp-controller="Projects" asp-action="Edit" class="btn btn-default">Edit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -112,8 +144,38 @@
     }
 
     // When the user clicks on the button, scroll to the top of the document
-    function topFunction() {
-        document.body.scrollTop = 0;
-        document.documentElement.scrollTop = 0;
+    function animateScrollTop(target, duration) {
+        duration = duration || 16;
+
+        var $window = $(window);
+        var scrollTopProxy = { value: $window.scrollTop() };
+        var expectedScrollTop = scrollTopProxy.value;
+
+        if (scrollTopProxy.value != target) {
+            $(scrollTopProxy).animate(
+                { value: target },
+                {
+                    duration: duration,
+
+                    step: function (stepValue) {
+                        var roundedValue = Math.round(stepValue);
+                        if ($window.scrollTop() !== expectedScrollTop) {
+                            // The user has tried to scroll the page
+                            $(scrollTopProxy).stop();
+                        }
+                        $window.scrollTop(roundedValue);
+                        expectedScrollTop = roundedValue;
+                    },
+
+                    complete: function () {
+                        if ($window.scrollTop() != target) {
+                            setTimeout(function () {
+                                animateScrollTop(target);
+                            }, 16);
+                        }
+                    }
+                }
+            );
+        }
     }
 </script>
