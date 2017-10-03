@@ -10958,11 +10958,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\Michal Makowej\\Desktop\\C#\\Projekty\\CalcWin-MVC\\CalcWin\\CalcWin.csproj",
+      "projectUniqueName": "C:\\Users\\Michal Makowej\\Desktop\\C#\\Projekty\\CalcWin\\CalcWin\\CalcWin.csproj",
       "projectName": "CalcWin",
-      "projectPath": "C:\\Users\\Michal Makowej\\Desktop\\C#\\Projekty\\CalcWin-MVC\\CalcWin\\CalcWin.csproj",
+      "projectPath": "C:\\Users\\Michal Makowej\\Desktop\\C#\\Projekty\\CalcWin\\CalcWin\\CalcWin.csproj",
       "packagesPath": "C:\\Users\\Michal Makowej\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Michal Makowej\\Desktop\\C#\\Projekty\\CalcWin-MVC\\CalcWin\\obj\\",
+      "outputPath": "C:\\Users\\Michal Makowej\\Desktop\\C#\\Projekty\\CalcWin\\CalcWin\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Michal Makowej\\AppData\\Roaming\\NuGet\\NuGet.Config",

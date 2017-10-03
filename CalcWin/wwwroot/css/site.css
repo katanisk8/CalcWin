@@ -200,16 +200,6 @@ td.td-fruits {
     margin-top: 100px;
 }
 
-#bg {
-    position: fixed;
-    /* top: -50%; */
-    top: 0;
-    /* left: -50%; */
-    width: 100%;
-    height: 100%;
-    background-size: cover;
-    background-image: url('../images/4.jpg');
-}
 
 #bg {
     background: url('../images/bgimg.jpg') no-repeat center center fixed;
