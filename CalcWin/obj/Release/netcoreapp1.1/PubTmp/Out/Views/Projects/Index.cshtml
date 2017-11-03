@@ -1,0 +1,181 @@
+@{
+    ViewData["Title"] = "Projects";
+    @model List<WineProject>
+}
+
+
+<form class="container">
+    <div class="well well-projects text-center col-sm-3">
+        <h4>Options</h4>
+        <a asp-controller="Calculator" asp-action="Index" class="btn btn-info btn-block">New</a>
+        <a asp-controller="Projects" asp-action="Open" class="btn btn-success btn-block">Open</a>
+        <button type="button" data-toggle="modal" data-target="#EditModal" class="btn btn-warning btn-block">Edit</button>
+        <button type="button" data-toggle="modal" data-target="#DeleteModal" class="btn btn-danger btn-block">Delete</button>
+    </div>
+    <div class="table-responsive well well-projects text-center col-sm-6">
+        <h2>Wine Projects</h2>
+        <p>Choose project which you would like to load</p>
+        <table class="table table-hover text-center">
+            <thead class="text-center">
+                <tr>
+                    <th></th>
+                    <th>Name</th>
+                    <th>Fruits</th>
+                    <th>Quantity [kg]</th>
+                    <th>Flavor</th>
+                    <th>Alcohol [%]</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var project in Model)
+            {
+                    <tr>
+                        <td class="col-sm-1">
+                            <input type="radio" name="projects">
+                        </td>
+                        <td class="col-sm-2">@project.Name</td>
+                        <td class="col-sm-2">
+                            @foreach (var ingredient in project.Ingredients)
+                            {
+                                <p>@ingredient.Fruit.Name</p>
+                            }
+                        </td>
+                        <td class="col-sm-1">
+                            @foreach (var ingredient in project.Ingredients)
+                            {
+                                <p>@ingredient.Quantity</p>
+                            }
+                        </td>
+                        <td class="col-sm-2">@project.Flavor.Name</td>
+                        <td class="col-sm-2">@project.AlcoholQuantity</td>
+                        <td class="col-sm-2">
+                            @project.Date
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <a onclick="animateScrollTop(1000)" id="myBtn" class="btn btn-info btn-block" title="Go to top"><span class="glyphicon glyphicon-chevron-up"></span></a>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal fade" id="EditModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Project</h4>
+                </div>
+                <div class="modal-body">
+                    <table class="table text-center table-project-edit">
+                        <thead class="text-center">
+                            <tr>
+                                <th>Name</th>
+                                <th>Fruits</th>
+                                <th>Quantity [kg]</th>
+                                <th>Flavor</th>
+                                <th>Alcohol [%]</th>
+                                <th>Date</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class=""><input class="form-control input-sm" placeholder="@Model[0].Name" /></td>
+                                <td class="">
+                                    @foreach (var ingredient in Model[0].Ingredients)
+                                    {
+                                        <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Fruit.Name" />
+                                    }
+                                </td>
+                                <td class="">
+                                    @foreach (var ingredient in Model[0].Ingredients)
+                                    {
+                                        <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Quantity" />
+                                    }
+                                </td>
+                                <td class=""><input class="form-control input-sm" placeholder="@Model[0].Flavor.Name" /></td>
+                                <td class=""><input class="form-control input-sm" placeholder="@Model[0].AlcoholQuantity" /></td>
+                                <td class="">
+                                    <input class="form-control input-sm" placeholder="@Model[0].Date" />
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="modal-footer">
+                        <button type="submit" formmethod="post" asp-controller="Projects" asp-action="Edit" class="btn btn-default">Edit</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete Modal -->
+    <div class="modal fade" id="DeleteModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Delete Project</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Are you sure?</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" formmethod="post" asp-controller="Projects" asp-action="Delete" class="btn btn-default">Delete</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script>
+    // When the user scrolls down 20px from the top of the document, show the button
+    window.onscroll = function () { scrollFunction() };
+
+    function scrollFunction() {
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("myBtn").style.display = "block";
+        } else {
+            document.getElementById("myBtn").style.display = "none";
+        }
+    }
+
+    // When the user clicks on the button, scroll to the top of the document
+    function animateScrollTop(duration) {
+        duration = duration || 16;
+
+        var $window = $(window);
+        var scrollTopProxy = { value: $window.scrollTop() };
+        var expectedScrollTop = scrollTopProxy.value;
+
+        if (scrollTopProxy.value != 0) {
+            $(scrollTopProxy).animate(
+                { value: target },
+                {
+                    duration: duration,
+
+                    step: function (stepValue) {
+                        var roundedValue = Math.round(stepValue);
+                        if ($window.scrollTop() !== expectedScrollTop) {
+                            // The user has tried to scroll the page
+                            $(scrollTopProxy).stop();
+                        }
+                        $window.scrollTop(roundedValue);
+                        expectedScrollTop = roundedValue;
+                    },
+
+                    complete: function () {
+                        if ($window.scrollTop() != target) {
+                            setTimeout(function () {
+                                animateScrollTop(target);
+                            }, 16);
+                        }
+                    }
+                }
+            );
+        }
+    }
+</script>
