@@ -35,3 +35,9 @@ C:\inetpub\wwwroot\CalcWin\netcoreapp1.1\CalcWin.runtimeconfig.json
 C:\inetpub\wwwroot\CalcWin\netcoreapp1.1\CalcWin.runtimeconfig.dev.json
 C:\inetpub\wwwroot\CalcWin\netcoreapp1.1\CalcWin.dll
 C:\inetpub\wwwroot\CalcWin\netcoreapp1.1\CalcWin.pdb
+C:\Users\Michal Makowej\Desktop\C#\Projekty\CalcWin\CalcWin\obj\Debug\netcoreapp1.1\CalcWin.AssemblyInfoInputs.cache
+C:\inetpub\wwwroot\netcoreapp1.1\CalcWin.deps.json
+C:\inetpub\wwwroot\netcoreapp1.1\CalcWin.runtimeconfig.json
+C:\inetpub\wwwroot\netcoreapp1.1\CalcWin.runtimeconfig.dev.json
+C:\inetpub\wwwroot\netcoreapp1.1\CalcWin.dll
+C:\inetpub\wwwroot\netcoreapp1.1\CalcWin.pdb

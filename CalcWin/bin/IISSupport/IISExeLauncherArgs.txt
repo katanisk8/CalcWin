@@ -1,0 +1,8 @@
+-p C:\Program Files\dotnet\dotnet.exe
+-pidFile C:\Users\Michal Makowej\Desktop\C#\Projekty\CalcWin\CalcWin\bin\IISSupport\pidfile.txt
+-wd C:\Users\Michal Makowej\Desktop\C#\Projekty\CalcWin\CalcWin
+-a exec "C:\inetpub\wwwroot\netcoreapp1.1\CalcWin.dll"
+-pipe 25bc177d-bd62-4612-a4d6-d151c7ce5507
+-pr CalcWin
+-owningPid 10740
+-env ASPNETCORE_CONTENTROOT=C:\Users\Michal Makowej\Desktop\C#\Projekty\CalcWin\CalcWin|ASPNETCORE_ENVIRONMENT=Development|COMPLUS_ForceENC=1|

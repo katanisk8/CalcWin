@@ -3,8 +3,6 @@ using CalcWin.Data;
 using CalcWin.Models;
 using CalcWin.Views.Calculator;
 using System.Linq;
-using System.Collections.Generic;
-using System;
 
 namespace CalcWin.Controllers
 {
