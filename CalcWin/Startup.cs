@@ -8,6 +8,7 @@ using CalcWin.Data;
 using CalcWin.Models;
 using CalcWin.Services;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Server.IISIntegration;
 
 namespace CalcWin
 {
@@ -30,6 +31,8 @@ namespace CalcWin
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
+
+            services.AddAuthentication(IISDefaults.AuthenticationScheme);
 
             services.AddMvc();
 

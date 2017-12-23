@@ -1,13 +1,13 @@
-﻿using Microsoft.AspNetCore.Authentication;
+﻿using System.Collections.Generic;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
-using System.Collections.Generic;
 
-namespace CalcWin.Models.ManageViewModels
+namespace AspNetCoreDotNetCore2App.Models.ManageViewModels
 {
-   public class ManageLoginsViewModel
-   {
-      public IList<UserLoginInfo> CurrentLogins { get; set; }
+    public class ManageLoginsViewModel
+    {
+        public IList<UserLoginInfo> CurrentLogins { get; set; }
 
-      public IList<AuthenticationScheme> OtherLogins { get; set; }
-   }
+        public IList<AuthenticationScheme> OtherLogins { get; set; }
+    }
 }
