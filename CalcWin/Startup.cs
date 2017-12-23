@@ -31,13 +31,6 @@ namespace CalcWin
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.Configure<IISOptions>(options =>
-            {
-                options.AuthenticationDisplayName = "ss";
-                options.AutomaticAuthentication = true;
-                options.ForwardClientCertificate = true;
-            });
-
             services.AddMvc();
 
             // Add application services.
@@ -54,8 +47,8 @@ namespace CalcWin
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseBrowserLink();
                 app.UseDatabaseErrorPage();
-                //app.UseBrowserLink();
             }
             else
             {
@@ -65,9 +58,7 @@ namespace CalcWin
             app.UseStaticFiles();
 
             app.UseAuthentication();
-
-            // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
-
+            
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
