@@ -2,12 +2,8 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
-    "iis": {
-      "applicationUrl": "http://localhost/64852",
-      "sslPort": 0
-    },
     "iisExpress": {
-      "applicationUrl": "http://localhost:64851/",
+      "applicationUrl": "http://localhost:60000",
       "sslPort": 0
     }
   },
@@ -20,12 +16,12 @@
       }
     },
     "CalcWin": {
-      "commandName": "IIS",
+      "commandName": "IISExpress",
       "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://localhost:64852"
+      "applicationUrl": "http://localhost:60000"
     }
   }
 }
