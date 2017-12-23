@@ -1,10 +1,10 @@
 -p C:\Program Files\dotnet\dotnet.exe
 -pidFile C:\Users\Michal Makowej\Desktop\C#\Projekty\CalcWin\CalcWin\bin\IISSupport\pidfile.txt
 -wd C:\Users\Michal Makowej\Desktop\C#\Projekty\CalcWin\CalcWin
--a exec "C:\inetpub\wwwroot\netcoreapp1.1\CalcWin.dll"
--wbe Global\Buildb55aa031-f9d6-481b-9934-9277dfa82f87
--lse Global\Launchaa48ea8a-7a49-47c8-b2a0-8a82ce245eea
--pipe d73f2a1c-f542-412f-9a6c-8ed157444f09
+-a exec "C:\Users\Michal Makowej\Desktop\C#\Projekty\CalcWin\CalcWin\bin\Debug\netcoreapp2.0\CalcWin.dll"
+-wbe Global\Buildb97d32c2-abcf-4e17-bff4-57baa42ec761
+-lse Global\Launch8c147396-09f1-4eda-a56d-f54842488d3e
+-pipe 1fa3e5c4-12d8-4cb2-b757-74b475881225
 -pr CalcWin
--owningPid 5928
--env ASPNETCORE_CONTENTROOT=C:\Users\Michal Makowej\Desktop\C#\Projekty\CalcWin\CalcWin|ASPNETCORE_ENVIRONMENT=Development|COMPLUS_ForceENC=1|
+-owningPid 8220
+-env ASPNETCORE_CONTENTROOT=C:\Users\Michal Makowej\Desktop\C#\Projekty\CalcWin\CalcWin|DOTNET_ADDITIONAL_DEPS=C:\Program Files\dotnet\additionalDeps\Microsoft.AspNetCore.ApplicationInsights.HostingStartup|ASPNETCORE_HOSTINGSTARTUPASSEMBLIES=Microsoft.AspNetCore.ApplicationInsights.HostingStartup|ASPNETCORE_ENVIRONMENT=Development|COMPLUS_ForceENC=1|

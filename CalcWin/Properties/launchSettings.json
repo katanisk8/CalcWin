@@ -3,7 +3,7 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iis": {
-      "applicationUrl": "http://localhost/CalcWin",
+      "applicationUrl": "http://localhost/64852",
       "sslPort": 0
     },
     "iisExpress": {
