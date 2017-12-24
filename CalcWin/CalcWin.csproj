@@ -1,48 +1,21 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
+    <UserSecretsId>aspnet-CalcWin-C052891A-7CEF-48FF-BC2A-00ECB658C906</UserSecretsId>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
-  </PropertyGroup>
 
-  <PropertyGroup>
-    <UserSecretsId>aspnet-CalcWin-6cf5177e-f34a-4128-8bae-d4552d72d2ef</UserSecretsId>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <Description>Third version of wine calculator wrote in C#/ASP.NET Core MVC</Description>
-    <Version>1.0.0</Version>
-    <NeutralLanguage>en-150</NeutralLanguage>
-    <RepositoryUrl>https://github.com/katanisk8/CalcWin-MVC</RepositoryUrl>
-    <RepositoryType>Github</RepositoryType>
-    <Copyright>Copyright by Łukasz &amp; Michał Makowej ©  2017</Copyright>
-    <Company>ThreeM</Company>
-    <Authors>Łukasz &amp; Michał Makowej</Authors>
-    <AssemblyVersion>3.0.0.0</AssemblyVersion>
-    <FileVersion>3.0.0.0</FileVersion>
-    <AssemblyName>CalcWin</AssemblyName>
-    <StartupObject>CalcWin.Program</StartupObject>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <OutputPath>bin\Release</OutputPath>
-    <WarningLevel>2</WarningLevel>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath>bin\Debug</OutputPath>
-  </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.0" PrivateAssets="All" />
   </ItemGroup>
+
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Projects\" />
   </ItemGroup>
 
 </Project>

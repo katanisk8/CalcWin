@@ -1,6 +1,12 @@
-﻿using Microsoft.AspNetCore;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
 
 namespace CalcWin
 {
@@ -12,13 +18,8 @@ namespace CalcWin
         }
 
         public static IWebHost BuildWebHost(string[] args) =>
-              WebHost.CreateDefaultBuilder(args)
-                  .UseStartup<Startup>()
-                  .ConfigureAppConfiguration((hostContext, config) =>
-                  {
-                    config.Sources.Clear();
-                    config.AddJsonFile("appsettings.json", optional: true);
-                  })
-                  .Build();
+            WebHost.CreateDefaultBuilder(args)
+                .UseStartup<Startup>()
+                .Build();
     }
 }
