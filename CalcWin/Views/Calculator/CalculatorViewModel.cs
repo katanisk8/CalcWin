@@ -1,16 +1,16 @@
-﻿using CalcWin.Data;
-using CalcWin.Models;
+﻿using CalcWin.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 
 namespace CalcWin.Views.Calculator
 {
     public class CalculatorViewModel
     {
-        public List<Fruit> Fruits { get; set; }
-        public List<Flavor> Flavors { get; set; }
+        public IEnumerable<Ingredient> Ingredients { get; set; }
+        public SelectList Flavors { get; set; }
 
-        public List<Ingredient> SelectedFruits { get; set; }
-        public Flavor SelectedFlavor {get; set;}
-        public double SelectedAlcoholQuantity;
+        public string Name { get; set; }
+        public int SelectedFlavor { get; set; }
+        public double SelectedAlcoholQuantity { get; set; }
     }
 }

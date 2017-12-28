@@ -1,12 +1,11 @@
-﻿<script>
-    function animateScrollTop(target, duration) {
-        duration = duration || 16;
+﻿function animateScrollTop(target, duration) {
+    duration = duration || 16;
 
     var $window = $(window);
-        var scrollTopProxy = {value: $window.scrollTop() };
-        var expectedScrollTop = scrollTopProxy.value;
+    var scrollTopProxy = { value: $window.scrollTop() };
+    var expectedScrollTop = scrollTopProxy.value;
 
-        if (scrollTopProxy.value != target) {
+    if (scrollTopProxy.value != target) {
         $(scrollTopProxy).animate(
             { value: target },
             {
@@ -31,5 +30,4 @@
             }
         );
     }
-    }
-</script>
+}

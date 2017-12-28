@@ -15,7 +15,7 @@ namespace CalcWin.Models
         public byte[] Timestamp { get; set; }
 
         [Required]
-        public ApplicationUser User { get; set; }
+        public string User { get; set; }
 
         public IEnumerable<Ingredient> Ingredients { get; set; }
 

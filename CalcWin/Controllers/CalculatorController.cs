@@ -3,6 +3,9 @@ using CalcWin.Data;
 using CalcWin.Models;
 using CalcWin.Views.Calculator;
 using System.Linq;
+using System.Collections.Generic;
+using System;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CalcWin.Controllers
 {
@@ -19,66 +22,104 @@ namespace CalcWin.Controllers
         public IActionResult Index()
         {
             CalculatorViewModel viewModel = new CalculatorViewModel();
-            viewModel.Fruits = db.Fruits.ToList();
-            viewModel.Flavors = db.Flavors.ToList();
+            List<Ingredient> fruits = new List<Ingredient>();
+
+            foreach (var fruit in db.Fruits.ToList())
+            {
+                fruits.Add(
+                    new Ingredient
+                    {
+                        Fruit = fruit
+                    }
+                );
+            }
+            viewModel.Ingredients = fruits;
+
+            viewModel.Flavors = new SelectList(db.Flavors, "Id", "Name");
 
             return View(viewModel);
         }
 
         [HttpPost]
-        public IActionResult Save(WineProject wineProject)
+        public IActionResult Add(CalculatorViewModel model)
         {
-            return View("Index");
+            if (User.Identity.IsAuthenticated)
+            {
+                WineProject wineProject = new WineProject();
+                wineProject.User = User.Claims.First().Value;
+
+                List<Ingredient> ingredients = new List<Ingredient>();
+
+                foreach (var ingredient in model.Ingredients)
+                {
+                    if (ingredient.Quantity > 0)
+                    {
+                        ingredient.Fruit = db.Fruits.First(x => x.Id == ingredient.Fruit.Id);
+                        ingredient.Project = wineProject;
+                        ingredients.Add(ingredient);
+                    }
+                }
+
+                wineProject.Ingredients = ingredients;
+                wineProject.Name = model.Name;
+               // wineProject.Flavor = model.SelectedFlavor;
+                wineProject.AlcoholQuantity = model.SelectedAlcoholQuantity;
+                wineProject.Date = DateTime.Now;
+
+                db.Projects.Add(wineProject);
+            }
+
+            return RedirectToAction("Index");
         }
 
 
 
-        public IActionResult AddProjects()
-        {
-            //ApplicationUser user = db.Users.FirstOrDefault(x => x.Email == "michal@makowej.pl");
-            //Flavor flavor = db.Flavors.FirstOrDefault(x => x.Id == 2);
+        //public IActionResult AddProjects()
+        //{
+        //    ApplicationUser user = db.Users.FirstOrDefault(x => x.Email == "michal@makowej.pl");
+        //    Flavor flavor = db.Flavors.FirstOrDefault(x => x.Id == 2);
 
-            //List<Ingredient> ingredients = new List<Ingredient>
-            //{
-            //new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 2), Quantity = 10 },
-            //new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 3), Quantity = 20 },
-            //new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 4), Quantity = 20 }
-            //};
-            //List<Ingredient> ingredients1 = new List<Ingredient>
-            //{
-            //new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 2), Quantity = 10 },
-            //new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 3), Quantity = 20 },
-            //new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 4), Quantity = 20 }
-            //};
-            //List<Ingredient> ingredients2 = new List<Ingredient>
-            //{
-            //new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 2), Quantity = 10 },
-            //new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 3), Quantity = 20 },
-            //new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 4), Quantity = 20 }
-            //};
-            //List<Ingredient> ingredients3 = new List<Ingredient>
-            //{
-            //new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 2), Quantity = 10 },
-            //new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 3), Quantity = 20 },
-            //new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 4), Quantity = 20 }
-            //};
-            //List<Ingredient> ingredients4 = new List<Ingredient>
-            //{
-            //new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 2), Quantity = 10 },
-            //new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 3), Quantity = 20 },
-            //new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 4), Quantity = 20 }
-            //};
+        //    List<Ingredient> ingredients = new List<Ingredient>
+        //    {
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 2), Quantity = 10 },
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 3), Quantity = 20 },
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 4), Quantity = 20 }
+        //    };
+        //    List<Ingredient> ingredients1 = new List<Ingredient>
+        //    {
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 2), Quantity = 10 },
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 3), Quantity = 20 },
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 4), Quantity = 20 }
+        //    };
+        //    List<Ingredient> ingredients2 = new List<Ingredient>
+        //    {
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 2), Quantity = 10 },
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 3), Quantity = 20 },
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 4), Quantity = 20 }
+        //    };
+        //    List<Ingredient> ingredients3 = new List<Ingredient>
+        //    {
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 2), Quantity = 10 },
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 3), Quantity = 20 },
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 4), Quantity = 20 }
+        //    };
+        //    List<Ingredient> ingredients4 = new List<Ingredient>
+        //    {
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 2), Quantity = 10 },
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 3), Quantity = 20 },
+        //    new Ingredient { Fruit = db.Fruits.FirstOrDefault(x => x.Id == 4), Quantity = 20 }
+        //    };
 
 
-            //db.Projects.Add(new WineProject { User = user, Ingredients = ingredients, Name = "asd24vasdv", Flavor = flavor, AlcoholQuantity = 16, Date = DateTime.Now });
-            //db.Projects.Add(new WineProject { User = user, Ingredients = ingredients1, Name = "da1241fvdafv", Flavor = flavor, AlcoholQuantity = 16, Date = DateTime.Now });
-            //db.Projects.Add(new WineProject { User = user, Ingredients = ingredients2, Name = "ad124vdf", Flavor = flavor, AlcoholQuantity = 16, Date = DateTime.Now });
-            //db.Projects.Add(new WineProject { User = user, Ingredients = ingredients3, Name = "dafvdq124afv", Flavor = flavor, AlcoholQuantity = 16, Date = DateTime.Now });
-            //db.Projects.Add(new WineProject { User = user, Ingredients = ingredients4, Name = "ad124124vdf", Flavor = flavor, AlcoholQuantity = 16, Date = DateTime.Now });
+        //    db.Projects.Add(new WineProject { User = user, Ingredients = ingredients, Name = "Jabłkowe", Flavor = flavor, AlcoholQuantity = 16, Date = DateTime.Now });
+        //    db.Projects.Add(new WineProject { User = user, Ingredients = ingredients1, Name = "Gruszkowe", Flavor = flavor, AlcoholQuantity = 17, Date = DateTime.Now });
+        //    db.Projects.Add(new WineProject { User = user, Ingredients = ingredients2, Name = "Wiśniowe", Flavor = flavor, AlcoholQuantity = 18, Date = DateTime.Now });
+        //    db.Projects.Add(new WineProject { User = user, Ingredients = ingredients3, Name = "Czereśniowe", Flavor = flavor, AlcoholQuantity = 19, Date = DateTime.Now });
+        //    db.Projects.Add(new WineProject { User = user, Ingredients = ingredients4, Name = "Ryżowe", Flavor = flavor, AlcoholQuantity = 20, Date = DateTime.Now });
 
-            //db.SaveChanges();
+        //    db.SaveChanges();
 
-            return Ok();
-        }
+        //    return Ok();
+        //}
     }
 }

@@ -5029,6 +5029,16 @@
         "runtime": {
           "lib/netstandard1.3/Microsoft.WindowsAzure.Storage.dll": {}
         }
+      },
+      "Calculator/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.0",
+        "compile": {
+          "bin/placeholder/Calculator.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Calculator.dll": {}
+        }
       }
     }
   },
@@ -13105,10 +13115,16 @@
         "windowsazure.storage.8.1.4.nupkg.sha512",
         "windowsazure.storage.nuspec"
       ]
+    },
+    "Calculator/1.0.0": {
+      "type": "project",
+      "path": "../Calculator/Calculator.csproj",
+      "msbuildProject": "../Calculator/Calculator.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
+      "Calculator >= 1.0.0",
       "Microsoft.AspNetCore.All >= 2.0.0",
       "Microsoft.EntityFrameworkCore.Tools >= 2.0.0",
       "Microsoft.NETCore.App >= 2.0.0",
@@ -13147,7 +13163,11 @@
       },
       "frameworks": {
         "netcoreapp2.0": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Michal Makowej\\Desktop\\C#\\Projekty\\CalcWin\\Calculator\\Calculator.csproj": {
+              "projectPath": "C:\\Users\\Michal Makowej\\Desktop\\C#\\Projekty\\CalcWin\\Calculator\\Calculator.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

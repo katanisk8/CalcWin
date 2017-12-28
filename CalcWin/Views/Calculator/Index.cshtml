@@ -1,9 +1,9 @@
+@model CalcWin.Views.Calculator.CalculatorViewModel
 @{
     ViewData["Title"] = "Calculator";
-    @model CalcWin.Views.Calculator.CalculatorViewModel
 }
 
-<form class="form-buttons">
+<form class="form-buttons" method="post">
     <div class="row content content-calculator text-center">
         <div class="col-sm-3">
             <div class="well well-result">
@@ -11,12 +11,18 @@
                 <h4>Choose fruits which you would like to use to make wine.</h4>
                 <div class="table-responsive">
                     <table class="table table-hover">
-                        @foreach (var fruit in Model.Fruits)
+                        @{int i = 0;}
+                        @foreach (var ingredient in Model.Ingredients)
                         {
-                            <tr class="tr-fruits">
-                                <td class="td-fruits">@fruit.Name</td>
-                                <td><input type="number" id="@fruit.Id" name="Fruits" class="form-control input-sm" placeholder="Quantity" min="0" step="0.1"/></td>
+                            <tr>
+                                <td class="td-fruits">@ingredient.Fruit.Name</td>
+                                <td>
+                                    <input type="hidden" name="Ingredients[@i].Fruit.Id" value="@ingredient.Fruit.Id" />
+                                    <input type="hidden" name="Ingredients[@i].Fruit.Name" value="@ingredient.Fruit.Name" />
+                                    <input type="number" name="Ingredients[@i].Quantity" class="form-control input-sm" placeholder="Quantity" min="0" step="0.1" />
+                                </td>
                             </tr>
+                            i++;
                         }
                     </table>
                 </div>
@@ -31,24 +37,12 @@
                                 <h4>Wine</h4>
                                 <div class="form-horizontal">
                                     <div class="form-group">
-                                        <div class="form-group"></div>
                                         <label class="col-sm-4 control-label">Alcohol Quantity:</label>
                                         <div class="col-sm-8">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><i class="fa fa-percent"></i></span>
-                                                <input type="number" id="alcoholQuantity" name="alcoholQuantity" class="form-control" placeholder="Quantity" min="0">
+                                                <input type="number" id="alcoholQuantity" name="SelectedAlcoholQuantity" class="form-control" placeholder="Quantity" min="0" max="20" step="0.1">
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">Flavor:</label>
-                                        <div class="col-sm-8">
-                                            <select class="form-control" id="sel1">
-                                                @foreach (var flavor in Model.Flavors)
-                                                {
-                                                    <option value="@flavor.Id">@flavor.Name</option>
-                                                }
-                                            </select>
                                         </div>
                                     </div>
                                     <div class="form-group">
@@ -60,6 +54,12 @@
                                                 </span>
                                                 <input type="number" id="mixtureCorretionQuantity" name="mixtureCorretionQuantity" class="form-control" placeholder="Quantity" min="0" disabled>
                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-sm-4 control-label">Flavor:</label>
+                                        <div class="col-sm-8">
+                                            @Html.DropDownListFor(Model => Model.SelectedFlavor, Model.Flavors, new { @class = "form-control" })
                                         </div>
                                     </div>
                                 </div>
@@ -229,10 +229,10 @@
                 </div>
                 <div class="modal-body">
                     <p>Project Name:</p>
-                    <input id="ProjectName" type="text" class="form-control" name="ProjectName" placeholder="Project Name">
+                    <input id="Name" name="Name" type="text" class="form-control" value="@Model.Name" placeholder="Project Name">
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" formmethod="post" asp-controller="Calculator" asp-action="Save" class="btn btn-default">Save</button>
+                    <button type="submit" asp-controller="Calculator" asp-action="Add" class="btn btn-default">Save</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
