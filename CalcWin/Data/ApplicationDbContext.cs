@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using CalcWin.Models;
+using Calculator.Models;
 
 namespace CalcWin.Data
 {
@@ -23,7 +20,6 @@ namespace CalcWin.Data
         public virtual DbSet<Fruit> Fruits { get; set; }
         public virtual DbSet<Flavor> Flavors { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
-        public virtual DbSet<Supplements> Supplements { get; set; }
         public virtual DbSet<WineProject> Projects { get; set; }
     }
 }

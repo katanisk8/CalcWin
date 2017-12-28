@@ -1,17 +1,16 @@
-@{
-    ViewData["Title"] = "Projects";
-    @model List<WineProject>
-}
-@section Scripts
-{
+@model CalcWin.Views.Projects.ProjectsViewModel
+@section Scripts{
     <script type="text/javascript" src="@Url.Content("~/js/ScrollUp.js")"></script>
 }
+@{
+    ViewData["Title"] = "Projects";
+}
 
-<form class="container">
+<form class="container" method="post">
     <div class="well well-projects text-center col-sm-3">
         <h4>Options</h4>
         <a asp-controller="Calculator" asp-action="Index" class="btn btn-info btn-block">New</a>
-        <a asp-controller="Projects" asp-action="Open" class="btn btn-success btn-block">Open</a>
+        <button type="submit" asp-controller="Projects" asp-action="Open" class="btn btn-success btn-block">Open</button>
         <button type="button" data-toggle="modal" data-target="#EditModal" class="btn btn-warning btn-block">Edit</button>
         <button type="button" data-toggle="modal" data-target="#DeleteModal" class="btn btn-danger btn-block">Delete</button>
     </div>
@@ -31,11 +30,11 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var project in Model)
-            {
+                @foreach (var project in Model.Projects)
+                {
                     <tr>
                         <td class="col-sm-1">
-                            <input type="radio" name="projects">
+                            <input type="radio" id="Project[@project.Id]" name="OpenWineProjectId" value="@project.Id" />
                         </td>
                         <td class="col-sm-2">@project.Name</td>
                         <td class="col-sm-2">
@@ -84,24 +83,27 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td class=""><input class="form-control input-sm" placeholder="@Model[0].Name" /></td>
-                                <td class="">
-                                    @foreach (var ingredient in Model[0].Ingredients)
-                                    {
-                                        <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Fruit.Name" />
-                                    }
-                                </td>
-                                <td class="">
-                                    @foreach (var ingredient in Model[0].Ingredients)
-                                    {
-                                        <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Quantity" />
-                                    }
-                                </td>
-                                <td class=""><input class="form-control input-sm" placeholder="@Model[0].Flavor.Name" /></td>
-                                <td class=""><input class="form-control input-sm" placeholder="@Model[0].AlcoholQuantity" /></td>
-                                <td class="">
-                                    <input class="form-control input-sm" placeholder="@Model[0].Date" />
-                                </td>
+                                @if (Model.Projects.Count > 0)
+                                {
+                                    <td class=""><input class="form-control input-sm" placeholder="@Model.Projects.First().Name" /></td>
+                                    <td class="">
+                                        @foreach (var ingredient in Model.Projects.First().Ingredients)
+                                        {
+                                            <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Fruit.Name" />
+                                        }
+                                    </td>
+                                    <td class="">
+                                        @foreach (var ingredient in Model.Projects.First().Ingredients)
+                                        {
+                                            <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Quantity" />
+                                        }
+                                    </td>
+                                    <td class=""><input class="form-control input-sm" placeholder="@Model.Projects.First().Flavor.Name" /></td>
+                                    <td class=""><input class="form-control input-sm" placeholder="@Model.Projects.First().AlcoholQuantity" /></td>
+                                    <td class="">
+                                        <input class="form-control input-sm" placeholder="@Model.Projects.First().Date" />
+                                    </td>
+                                }
                             </tr>
                         </tbody>
                     </table>

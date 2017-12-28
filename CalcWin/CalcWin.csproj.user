@@ -6,5 +6,7 @@
   <PropertyGroup>
     <ActiveDebugProfile>CalcWin</ActiveDebugProfile>
     <NameOfLastUsedPublishProfile>CustomProfile</NameOfLastUsedPublishProfile>
+    <WebStackScaffolding_ViewDialogWidth>600</WebStackScaffolding_ViewDialogWidth>
+    <ShowAllFiles>false</ShowAllFiles>
   </PropertyGroup>
 </Project>

@@ -8,11 +8,11 @@ using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
-namespace CalcWin.Data.Migrations
+namespace CalcWin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20171223223051_ModelCreating")]
-    partial class ModelCreating
+    [Migration("20171228112405_InitialModels")]
+    partial class InitialModels
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,115 @@ namespace CalcWin.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Calculator.Models.Flavor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<double>("Acidity");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Flavors");
+                });
+
+            modelBuilder.Entity("Calculator.Models.Fruit", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<double>("Acid");
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("Image");
+
+                    b.Property<string>("Link");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<int?>("ParentId");
+
+                    b.Property<double>("Price");
+
+                    b.Property<double>("Sugar");
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("User");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentId");
+
+                    b.ToTable("Fruits");
+                });
+
+            modelBuilder.Entity("Calculator.Models.Ingredient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("FruitId");
+
+                    b.Property<int>("ProjectId");
+
+                    b.Property<double>("Quantity");
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FruitId");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("Ingredients");
+                });
+
+            modelBuilder.Entity("Calculator.Models.WineProject", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<double>("AlcoholQuantity");
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<int>("FlavorId");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(20);
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<string>("User")
+                        .IsRequired();
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FlavorId");
+
+                    b.ToTable("Projects");
+                });
 
             modelBuilder.Entity("CalcWin.Models.ApplicationUser", b =>
                 {
@@ -70,148 +179,6 @@ namespace CalcWin.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("CalcWin.Models.Flavor", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<double>("Acidity");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20);
-
-                    b.Property<byte[]>("Timestamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Flavors");
-                });
-
-            modelBuilder.Entity("CalcWin.Models.Fruit", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<double>("Acid");
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Image");
-
-                    b.Property<string>("Link");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20);
-
-                    b.Property<int?>("ParentId");
-
-                    b.Property<double>("Price");
-
-                    b.Property<double>("Sugar");
-
-                    b.Property<byte[]>("Timestamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
-
-                    b.Property<string>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ParentId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Fruits");
-                });
-
-            modelBuilder.Entity("CalcWin.Models.Ingredient", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("FruitId");
-
-                    b.Property<int>("ProjectId");
-
-                    b.Property<double>("Quantity");
-
-                    b.Property<byte[]>("Timestamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FruitId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("Ingredients");
-                });
-
-            modelBuilder.Entity("CalcWin.Models.Supplements", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<double>("Acid");
-
-                    b.Property<double>("Sugar");
-
-                    b.Property<byte[]>("Timestamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
-
-                    b.Property<string>("UserId")
-                        .IsRequired();
-
-                    b.Property<double>("Water");
-
-                    b.Property<double>("Yeast");
-
-                    b.Property<double>("YeastFood");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Supplements");
-                });
-
-            modelBuilder.Entity("CalcWin.Models.WineProject", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<double>("AlcoholQuantity");
-
-                    b.Property<DateTime>("Date");
-
-                    b.Property<int>("FlavorId");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(20);
-
-                    b.Property<byte[]>("Timestamp")
-                        .IsConcurrencyToken()
-                        .ValueGeneratedOnAddOrUpdate();
-
-                    b.Property<string>("UserId")
-                        .IsRequired();
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("FlavorId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Projects");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -322,48 +289,31 @@ namespace CalcWin.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("CalcWin.Models.Fruit", b =>
+            modelBuilder.Entity("Calculator.Models.Fruit", b =>
                 {
-                    b.HasOne("CalcWin.Models.Fruit", "Parent")
+                    b.HasOne("Calculator.Models.Fruit", "Parent")
                         .WithMany()
                         .HasForeignKey("ParentId");
-
-                    b.HasOne("CalcWin.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("CalcWin.Models.Ingredient", b =>
+            modelBuilder.Entity("Calculator.Models.Ingredient", b =>
                 {
-                    b.HasOne("CalcWin.Models.Fruit", "Fruit")
+                    b.HasOne("Calculator.Models.Fruit", "Fruit")
                         .WithMany()
                         .HasForeignKey("FruitId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CalcWin.Models.WineProject", "Project")
+                    b.HasOne("Calculator.Models.WineProject", "Project")
                         .WithMany("Ingredients")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("CalcWin.Models.Supplements", b =>
+            modelBuilder.Entity("Calculator.Models.WineProject", b =>
                 {
-                    b.HasOne("CalcWin.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("CalcWin.Models.WineProject", b =>
-                {
-                    b.HasOne("CalcWin.Models.Flavor", "Flavor")
+                    b.HasOne("Calculator.Models.Flavor", "Flavor")
                         .WithMany()
                         .HasForeignKey("FlavorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CalcWin.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
