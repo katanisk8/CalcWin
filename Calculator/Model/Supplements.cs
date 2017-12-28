@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CalcWin.Models
+namespace Calculator.Models
 {
     public class Supplements
     {
@@ -13,21 +13,21 @@ namespace CalcWin.Models
         public byte[] Timestamp { get; set; }
 
         [Required]
-        public ApplicationUser User { get; set; }
+        public string User { get; set; }
         
         [Required]
-        public double Water { get; set; }
+        public Suplement Water { get; set; }
 
         [Required]
-        public double Sugar { get; set; }
+        public Suplement Sugar { get; set; }
 
         [Required]
-        public double Acid { get; set; }
+        public Suplement Acid { get; set; }
 
         [Required]
-        public double Yeast { get; set; }
+        public Suplement Yeast { get; set; }
 
         [Required]
-        public double YeastFood { get; set; }
+        public Suplement YeastFood { get; set; }
     }
 }

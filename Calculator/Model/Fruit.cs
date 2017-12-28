@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CalcWin.Models
+namespace Calculator.Models
 {
     public class Fruit
     {
@@ -12,7 +12,7 @@ namespace CalcWin.Models
         [Timestamp]
         public byte[] Timestamp { get; set; }
         
-        public ApplicationUser User { get; set; }
+        public string User { get; set; }
 
         public Fruit Parent { get; set; }
 

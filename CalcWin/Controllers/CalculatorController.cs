@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CalcWin.Data;
-using CalcWin.Models;
 using CalcWin.Views.Calculator;
 using System.Linq;
 using System.Collections.Generic;
 using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Calculator.Models;
 
 namespace CalcWin.Controllers
 {
@@ -33,9 +33,16 @@ namespace CalcWin.Controllers
                     }
                 );
             }
-            viewModel.Ingredients = fruits;
 
+            viewModel.Ingredients = fruits;
             viewModel.Flavors = new SelectList(db.Flavors, "Id", "Name");
+            viewModel.Result = new Result
+            {
+                Mixture = new Mixture(),
+                Recipe = new Recipe { Ingredients = new List<Ingredient>() },
+                Wine = new Wine()
+            };
+
 
             return View(viewModel);
         }
@@ -46,9 +53,9 @@ namespace CalcWin.Controllers
             if (User.Identity.IsAuthenticated)
             {
                 WineProject wineProject = new WineProject();
-                wineProject.User = User.Claims.First().Value;
-
                 List<Ingredient> ingredients = new List<Ingredient>();
+
+                wineProject.User = User.Claims.First().Value;
 
                 foreach (var ingredient in model.Ingredients)
                 {
@@ -62,7 +69,7 @@ namespace CalcWin.Controllers
 
                 wineProject.Ingredients = ingredients;
                 wineProject.Name = model.Name;
-               // wineProject.Flavor = model.SelectedFlavor;
+                wineProject.Flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
                 wineProject.AlcoholQuantity = model.SelectedAlcoholQuantity;
                 wineProject.Date = DateTime.Now;
 

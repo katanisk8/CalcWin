@@ -201,14 +201,12 @@ namespace CalcWin.Data.Migrations
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate();
 
-                    b.Property<string>("UserId")
+                    b.Property<string>("User")
                         .IsRequired();
 
                     b.HasKey("Id");
 
                     b.HasIndex("FlavorId");
-
-                    b.HasIndex("UserId");
 
                     b.ToTable("Projects");
                 });
@@ -358,11 +356,6 @@ namespace CalcWin.Data.Migrations
                     b.HasOne("CalcWin.Models.Flavor", "Flavor")
                         .WithMany()
                         .HasForeignKey("FlavorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("CalcWin.Models.ApplicationUser", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
