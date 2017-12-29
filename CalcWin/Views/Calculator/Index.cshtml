@@ -59,7 +59,12 @@
                                     <div class="form-group">
                                         <label class="col-sm-4 control-label">Flavor:</label>
                                         <div class="col-sm-8">
-                                            @Html.DropDownListFor(Model => Model.SelectedFlavor, Model.Flavors, new { @class = "form-control" })
+                                            <select id="FlavorId" name="SelectedFlavor" class="form-control">
+                                                @foreach (var flavor in Model.Flavors)
+                                                {
+                                                    <option id="@flavor.Id" value="@flavor.Id">@flavor.Name</option>
+                                                }
+                                            </select>
                                         </div>
                                     </div>
                                 </div>
