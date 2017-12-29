@@ -4,19 +4,8 @@
     <script>
         $('#ProjectsTable tr').click(function () {
             $(this).find('td input:radio').prop('checked', true);
-            
+
         })
-    </script>
-    <script type="text/javascript">
-        function GetSelectedItem(s) {
-            document.getElementById("projectId").value = s.value;
-        }
-    </script>
-    <script>
-        $('#EditModal').modal({
-            remote: url,
-            refresh: true
-        });
     </script>
 }
 @{
@@ -29,7 +18,7 @@
     <div class="well well-projects text-center col-sm-3">
         <h4>Options</h4>
         <a asp-controller="Calculator" asp-action="Index" class="btn btn-info btn-block">New</a>
-        <button type="submit" asp-controller="Projects" asp-action="Open" class="btn btn-success btn-block">Open</button>
+        <button type="submit" asp-controller="Calculator" asp-action="Open" class="btn btn-success btn-block">Open</button>
         <button type="button" data-toggle="modal" data-target="#EditModal" class="btn btn-warning btn-block">Edit</button>
         <button type="button" data-toggle="modal" data-target="#DeleteModal" class="btn btn-danger btn-block">Delete</button>
     </div>
@@ -51,7 +40,7 @@
                 {
                     <tr>
                         <td class="col-sm-1">
-                            <input type="radio" id="Project[@project.Id]" name="SelectedWineProjectId" value="@project.Id" />
+                            <input type="radio" id="Project[@project.Id]" name="projectId" value="@project.Id" />
                         </td>
                         <td class="col-sm-2">@project.Name</td>
                         <td class="col-sm-4">
@@ -101,27 +90,27 @@
                             @if (projectId > 0)
                             {
                                 var wineProject = @Model.Projects.First(x => x.Id == projectId);
-                                    <tr>
-                                        <td><input class="form-control input-sm" placeholder="@wineProject.Name" /></td>
-                                        <td>
-                                            @foreach (var ingredient in @wineProject.Ingredients)
-                                            {
-                                                <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Fruit.Name" />
-                                            }
-                                        </td>
-                                        <td>
-                                            @foreach (var ingredient in @wineProject.Ingredients)
-                                            {
-                                                <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Quantity" />
-                                            }
-                                        </td>
-                                        <td><input class="form-control input-sm" placeholder="@wineProject.Flavor.Name" /></td>
-                                        <td><input class="form-control input-sm" placeholder="@wineProject.AlcoholQuantity" /></td>
-                                        <td>
-                                            <input class="form-control input-sm" placeholder="@wineProject.Date" />
-                                        </td>
-                                    </tr>
-                                    }
+                                <tr>
+                                    <td><input class="form-control input-sm" placeholder="@wineProject.Name" /></td>
+                                    <td>
+                                        @foreach (var ingredient in @wineProject.Ingredients)
+                                        {
+                                            <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Fruit.Name" />
+                                        }
+                                    </td>
+                                    <td>
+                                        @foreach (var ingredient in @wineProject.Ingredients)
+                                        {
+                                            <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Quantity" />
+                                        }
+                                    </td>
+                                    <td><input class="form-control input-sm" placeholder="@wineProject.Flavor.Name" /></td>
+                                    <td><input class="form-control input-sm" placeholder="@wineProject.AlcoholQuantity" /></td>
+                                    <td>
+                                        <input class="form-control input-sm" placeholder="@wineProject.Date" />
+                                    </td>
+                                </tr>
+                            }
                         </tbody>
                     </table>
                     <div class="modal-footer">

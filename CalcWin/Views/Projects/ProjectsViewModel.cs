@@ -10,8 +10,5 @@ namespace CalcWin.Views.Projects
 
         // Edit Project
         public WineProject WineProject { get; set; }
-
-        // Open/Delete project
-        public int SelectedWineProjectId { get; set; }
     }
 }

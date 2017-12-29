@@ -7,6 +7,7 @@ using System;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Calculator.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.EntityFrameworkCore;
 
 namespace CalcWin.Controllers
 {
@@ -46,12 +47,30 @@ namespace CalcWin.Controllers
 
             return View(viewModel);
         }
-
+        
         [HttpPost]
         [Authorize]
-        public IActionResult Open(CalculatorViewModel model)
+        public IActionResult Open(int projectId)
         {
-            return View("Index", model);
+            if (projectId > 0)
+            {
+                CalculatorViewModel viewModel = new CalculatorViewModel();
+
+                WineProject wineProject = db.Projects
+                    .Include(x => x.Flavor)
+                    .Include(x => x.Ingredients)
+                    .ThenInclude(x => x.Fruit)
+                    .First(x => x.Id == projectId);
+
+                viewModel.Ingredients = wineProject.Ingredients;
+                //viewModel.Flavors = new SelectList(db.Flavors, "Id", "Name");
+                viewModel.SelectedFlavor = wineProject.Flavor.Id;
+                viewModel.SelectedAlcoholQuantity = wineProject.AlcoholQuantity;
+
+                return RedirectToAction("Open", "Calculator", viewModel);
+            }
+
+            return RedirectToAction("Index", "Calculator");
         }
 
         [HttpPost]

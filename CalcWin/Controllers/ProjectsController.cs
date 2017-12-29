@@ -34,32 +34,6 @@ namespace CalcWin.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Open(ProjectsViewModel model)
-        {
-
-            if (model.SelectedWineProjectId > 0)
-            {
-                CalculatorViewModel viewModel = new CalculatorViewModel();
-
-                WineProject wineProject = db.Projects
-                    .Include(x => x.Flavor)
-                    .Include(x => x.Ingredients)
-                    .ThenInclude(x => x.Fruit)
-                    .First(x => x.Id == model.SelectedWineProjectId);
-
-                viewModel.Ingredients = wineProject.Ingredients;
-                //viewModel.Flavors = new SelectList(db.Flavors, "Id", "Name");
-                viewModel.SelectedFlavor = wineProject.Flavor.Id;
-                viewModel.SelectedAlcoholQuantity = wineProject.AlcoholQuantity;
-
-                return RedirectToAction("Open", "Calculator", viewModel);
-            }
-
-            return RedirectToAction("Index", "Calculator");
-        }
-
-        [HttpPost]
-        [Authorize]
         public IActionResult Edit(ProjectsViewModel model)
         {
             db.Projects.Update(model.WineProject);
@@ -70,9 +44,9 @@ namespace CalcWin.Controllers
 
         [HttpPost]
         [Authorize]
-        public IActionResult Delete(ProjectsViewModel model)
+        public IActionResult Delete(int projectId)
         {
-            WineProject wineProject = db.Projects.First(x => x.Id == model.SelectedWineProjectId);
+            WineProject wineProject = db.Projects.First(x => x.Id == projectId);
 
             db.Projects.Remove(wineProject);
             db.SaveChanges();
