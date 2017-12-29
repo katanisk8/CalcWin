@@ -61,7 +61,12 @@ namespace CalcWin.Controllers
         [HttpPost]
         public IActionResult Delete(ProjectsViewModel model)
         {
-            return View("Index");
+            WineProject wineProject = db.Projects.First(x => x.Id == model.SelectedWineProjectId);
+
+            db.Projects.Remove(wineProject);
+            db.SaveChanges();
+
+            return RedirectToAction("Index");
         }
     }
 }

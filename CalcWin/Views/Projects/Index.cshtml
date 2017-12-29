@@ -1,9 +1,28 @@
 @model CalcWin.Views.Projects.ProjectsViewModel
 @section Scripts{
     <script type="text/javascript" src="@Url.Content("~/js/ScrollUp.js")"></script>
+    <script>
+        $('#ProjectsTable tr').click(function () {
+            $(this).find('td input:radio').prop('checked', true);
+            
+        })
+    </script>
+    <script type="text/javascript">
+        function GetSelectedItem(s) {
+            document.getElementById("projectId").value = s.value;
+        }
+    </script>
+    <script>
+        $('#EditModal').modal({
+            remote: url,
+            refresh: true
+        });
+    </script>
 }
 @{
     ViewData["Title"] = "Projects";
+
+    int projectId = 0;
 }
 
 <form class="container" method="post">
@@ -15,9 +34,7 @@
         <button type="button" data-toggle="modal" data-target="#DeleteModal" class="btn btn-danger btn-block">Delete</button>
     </div>
     <div class="table-responsive well well-projects text-center col-sm-6">
-        <h2>Wine Projects</h2>
-        <p>Choose project which you would like to load</p>
-        <table class="table table-hover text-center">
+        <table id="ProjectsTable" class="table table-hover text-center">
             <thead class="text-center">
                 <tr>
                     <th></th>
@@ -34,10 +51,10 @@
                 {
                     <tr>
                         <td class="col-sm-1">
-                            <input type="radio" id="Project[@project.Id]" name="OpenWineProjectId" value="@project.Id" />
+                            <input type="radio" id="Project[@project.Id]" name="SelectedWineProjectId" value="@project.Id" />
                         </td>
                         <td class="col-sm-2">@project.Name</td>
-                        <td class="col-sm-2">
+                        <td class="col-sm-4">
                             @foreach (var ingredient in project.Ingredients)
                             {
                                 <p>@ingredient.Fruit.Name</p>
@@ -50,7 +67,7 @@
                             }
                         </td>
                         <td class="col-sm-2">@project.Flavor.Name</td>
-                        <td class="col-sm-2">@project.AlcoholQuantity</td>
+                        <td class="col-sm-1">@project.AlcoholQuantity</td>
                         <td class="col-sm-2">
                             @project.Date
                         </td>
@@ -60,9 +77,8 @@
         </table>
         <a onclick="animateScrollTop(0, 1000)" id="myBtn" class="btn btn-info btn-block" title="Go to top"><span class="glyphicon glyphicon-chevron-up"></span></a>
     </div>
-
     <!-- Edit Modal -->
-    <div class="modal fade" id="EditModal" role="dialog">
+    <div class="modal fade" id="EditModal" role="dialog" onload="">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
@@ -82,29 +98,30 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                @if (Model.Projects.Count > 0)
-                                {
-                                    <td class=""><input class="form-control input-sm" placeholder="@Model.Projects.First().Name" /></td>
-                                    <td class="">
-                                        @foreach (var ingredient in Model.Projects.First().Ingredients)
-                                        {
-                                            <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Fruit.Name" />
-                                        }
-                                    </td>
-                                    <td class="">
-                                        @foreach (var ingredient in Model.Projects.First().Ingredients)
-                                        {
-                                            <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Quantity" />
-                                        }
-                                    </td>
-                                    <td class=""><input class="form-control input-sm" placeholder="@Model.Projects.First().Flavor.Name" /></td>
-                                    <td class=""><input class="form-control input-sm" placeholder="@Model.Projects.First().AlcoholQuantity" /></td>
-                                    <td class="">
-                                        <input class="form-control input-sm" placeholder="@Model.Projects.First().Date" />
-                                    </td>
-                                }
-                            </tr>
+                            @if (projectId > 0)
+                            {
+                                var wineProject = @Model.Projects.First(x => x.Id == projectId);
+                                    <tr>
+                                        <td><input class="form-control input-sm" placeholder="@wineProject.Name" /></td>
+                                        <td>
+                                            @foreach (var ingredient in @wineProject.Ingredients)
+                                            {
+                                                <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Fruit.Name" />
+                                            }
+                                        </td>
+                                        <td>
+                                            @foreach (var ingredient in @wineProject.Ingredients)
+                                            {
+                                                <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Quantity" />
+                                            }
+                                        </td>
+                                        <td><input class="form-control input-sm" placeholder="@wineProject.Flavor.Name" /></td>
+                                        <td><input class="form-control input-sm" placeholder="@wineProject.AlcoholQuantity" /></td>
+                                        <td>
+                                            <input class="form-control input-sm" placeholder="@wineProject.Date" />
+                                        </td>
+                                    </tr>
+                                    }
                         </tbody>
                     </table>
                     <div class="modal-footer">
@@ -128,7 +145,7 @@
                     <p>Are you sure?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" formmethod="post" asp-controller="Projects" asp-action="Delete" class="btn btn-default">Delete</button>
+                    <button type="submit" asp-controller="Projects" asp-action="Delete" class="btn btn-default">Delete</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
