@@ -4,7 +4,6 @@ using CalcWin.Data;
 using Microsoft.EntityFrameworkCore;
 using Calculator.Models;
 using CalcWin.Views.Projects;
-using CalcWin.Views.Calculator;
 using Microsoft.AspNetCore.Authorization;
 
 namespace CalcWin.Controllers
@@ -32,24 +31,49 @@ namespace CalcWin.Controllers
             return View(viewModel);
         }
 
-        [HttpPost]
+        [HttpGet]
         [Authorize]
-        public IActionResult Edit(ProjectsViewModel model)
+        public IActionResult Edit(int ProjectId)
         {
-            db.Projects.Update(model.WineProject);
-            db.SaveChanges();
+            if (ProjectId > 0)
+            {
+                WineProject model = new WineProject();
+                model = db.Projects
+                    .Include(x => x.Flavor)
+                    .Include(x => x.Ingredients)
+                    .ThenInclude(x => x.Fruit)
+                    .First(x => x.Id == ProjectId);
 
-            return RedirectToAction("Index");
+                return View("EditProject", model);
+            }
+
+            return View("Index");
         }
 
         [HttpPost]
         [Authorize]
+        public IActionResult Update(WineProject wineProject)
+        {
+            if (wineProject != null)
+            {
+                //db.Projects.Update(wineProject);
+                //db.SaveChanges();
+            }
+
+            return RedirectToAction("Index");
+        }
+
+        [HttpGet]
+        [Authorize]
         public IActionResult Delete(int projectId)
         {
-            WineProject wineProject = db.Projects.First(x => x.Id == projectId);
+            if (projectId > 0)
+            {
+                WineProject wineProject = db.Projects.First(x => x.Id == projectId);
 
-            db.Projects.Remove(wineProject);
-            db.SaveChanges();
+                db.Projects.Remove(wineProject);
+                db.SaveChanges();
+            }
 
             return RedirectToAction("Index");
         }

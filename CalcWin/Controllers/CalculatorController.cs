@@ -48,7 +48,7 @@ namespace CalcWin.Controllers
             return View(viewModel);
         }
         
-        [HttpPost]
+        [HttpGet]
         [Authorize]
         public IActionResult Open(int projectId)
         {
@@ -63,43 +63,45 @@ namespace CalcWin.Controllers
                     .First(x => x.Id == projectId);
 
                 viewModel.Ingredients = wineProject.Ingredients;
-                //viewModel.Flavors = new SelectList(db.Flavors, "Id", "Name");
                 viewModel.SelectedFlavor = wineProject.Flavor.Id;
                 viewModel.SelectedAlcoholQuantity = wineProject.AlcoholQuantity;
 
                 return RedirectToAction("Open", "Calculator", viewModel);
             }
 
-            return RedirectToAction("Index", "Calculator");
+            return View("Index");
         }
 
         [HttpPost]
         [Authorize]
         public IActionResult Add(CalculatorViewModel model)
         {
-            WineProject wineProject = new WineProject();
-            List<Ingredient> ingredients = new List<Ingredient>();
-
-            wineProject.User = User.Claims.First().Value;
-
-            foreach (var ingredient in model.Ingredients)
+            if (model != null)
             {
-                if (ingredient.Quantity > 0)
+                WineProject wineProject = new WineProject();
+                List<Ingredient> ingredients = new List<Ingredient>();
+
+                wineProject.User = User.Claims.First().Value;
+
+                foreach (var ingredient in model.Ingredients)
                 {
-                    ingredient.Fruit = db.Fruits.First(x => x.Id == ingredient.Fruit.Id);
-                    ingredient.Project = wineProject;
-                    ingredients.Add(ingredient);
+                    if (ingredient.Quantity > 0)
+                    {
+                        ingredient.Fruit = db.Fruits.First(x => x.Id == ingredient.Fruit.Id);
+                        ingredient.Project = wineProject;
+                        ingredients.Add(ingredient);
+                    }
                 }
+
+                wineProject.Ingredients = ingredients;
+                wineProject.Name = model.Name;
+                wineProject.Flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
+                wineProject.AlcoholQuantity = model.SelectedAlcoholQuantity;
+                wineProject.Date = DateTime.Now;
+
+                db.Projects.Add(wineProject);
+                db.SaveChanges();
             }
-
-            wineProject.Ingredients = ingredients;
-            wineProject.Name = model.Name;
-            wineProject.Flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
-            wineProject.AlcoholQuantity = model.SelectedAlcoholQuantity;
-            wineProject.Date = DateTime.Now;
-
-            db.Projects.Add(wineProject);
-            db.SaveChanges();
 
             return RedirectToAction("Index");
         }

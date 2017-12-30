@@ -9,6 +9,7 @@ namespace CalcWin.Views.Projects
         public List<WineProject> Projects { get; set; }
 
         // Edit Project
+        public int ProjectId { get; set; }
         public WineProject WineProject { get; set; }
     }
 }

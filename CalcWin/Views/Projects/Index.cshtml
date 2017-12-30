@@ -10,16 +10,14 @@
 }
 @{
     ViewData["Title"] = "Projects";
-
-    int projectId = 0;
 }
 
-<form class="container" method="post">
+<form class="container" method="get">
     <div class="well well-projects text-center col-sm-3">
         <h4>Options</h4>
         <a asp-controller="Calculator" asp-action="Index" class="btn btn-info btn-block">New</a>
         <button type="submit" asp-controller="Calculator" asp-action="Open" class="btn btn-success btn-block">Open</button>
-        <button type="button" data-toggle="modal" data-target="#EditModal" class="btn btn-warning btn-block">Edit</button>
+        <button type="submit" asp-controller="Projects" asp-action="Edit" class="btn btn-warning btn-block">Edit</button>
         <button type="button" data-toggle="modal" data-target="#DeleteModal" class="btn btn-danger btn-block">Delete</button>
     </div>
     <div class="table-responsive well well-projects text-center col-sm-6">
@@ -40,7 +38,7 @@
                 {
                     <tr>
                         <td class="col-sm-1">
-                            <input type="radio" id="Project[@project.Id]" name="projectId" value="@project.Id" />
+                            <input type="radio" id="Project[@project.Id]" name="ProjectId" value="@project.Id" />
                         </td>
                         <td class="col-sm-2">@project.Name</td>
                         <td class="col-sm-4">
@@ -65,61 +63,6 @@
             </tbody>
         </table>
         <a onclick="animateScrollTop(0, 1000)" id="myBtn" class="btn btn-info btn-block" title="Go to top"><span class="glyphicon glyphicon-chevron-up"></span></a>
-    </div>
-    <!-- Edit Modal -->
-    <div class="modal fade" id="EditModal" role="dialog" onload="">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Edit Project</h4>
-                </div>
-                <div class="modal-body">
-                    <table class="table text-center table-project-edit">
-                        <thead class="text-center">
-                            <tr>
-                                <th>Name</th>
-                                <th>Fruits</th>
-                                <th>Quantity [kg]</th>
-                                <th>Flavor</th>
-                                <th>Alcohol [%]</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @if (projectId > 0)
-                            {
-                                var wineProject = @Model.Projects.First(x => x.Id == projectId);
-                                <tr>
-                                    <td><input class="form-control input-sm" placeholder="@wineProject.Name" /></td>
-                                    <td>
-                                        @foreach (var ingredient in @wineProject.Ingredients)
-                                        {
-                                            <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Fruit.Name" />
-                                        }
-                                    </td>
-                                    <td>
-                                        @foreach (var ingredient in @wineProject.Ingredients)
-                                        {
-                                            <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Quantity" />
-                                        }
-                                    </td>
-                                    <td><input class="form-control input-sm" placeholder="@wineProject.Flavor.Name" /></td>
-                                    <td><input class="form-control input-sm" placeholder="@wineProject.AlcoholQuantity" /></td>
-                                    <td>
-                                        <input class="form-control input-sm" placeholder="@wineProject.Date" />
-                                    </td>
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-                    <div class="modal-footer">
-                        <button type="submit" formmethod="post" asp-controller="Projects" asp-action="Edit" class="btn btn-default">Edit</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- Delete Modal -->
