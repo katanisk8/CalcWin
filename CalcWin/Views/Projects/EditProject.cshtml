@@ -24,21 +24,23 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><input class="form-control input-sm" placeholder="@Model.Name" /></td>
+                    <td><input name="Name" placeholder="@Model.Name" class="form-control input-sm" /></td>
                     <td>
                         @foreach (var ingredient in @Model.Ingredients)
                         {
-                            <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Fruit.Name" />
+                            <input disabled="disabled" value="@ingredient.Fruit.Name" class="form-control input-sm input-project-edit" />
                         }
                     </td>
                     <td>
+                        @{int i = 0;}
                         @foreach (var ingredient in @Model.Ingredients)
                         {
-                            <input class="form-control input-sm input-project-edit" placeholder="@ingredient.Quantity" />
+                            <input name="Ingredients[@i].Quantity" placeholder="@ingredient.Quantity" class="form-control input-sm input-project-edit" />
+                            i++;
                         }
                     </td>
-                    <td><input class="form-control input-sm" placeholder="@Model.Flavor.Name" /></td>
-                    <td><input class="form-control input-sm" placeholder="@Model.AlcoholQuantity" /></td>
+                    <td><input name="Flavor.Name" placeholder="@Model.Flavor.Name" class="form-control input-sm" /></td>
+                    <td><input name="AlcoholQuantity" placeholder="@Model.AlcoholQuantity" class="form-control input-sm" /></td>
                     <td>
                         <input asp-for="Date" class="form-control" />
                         <span asp-validation-for="Date" class="text-danger"></span>

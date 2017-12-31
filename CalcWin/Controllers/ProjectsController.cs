@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Calculator.Models;
 using CalcWin.Views.Projects;
 using Microsoft.AspNetCore.Authorization;
+using CalcWin.Views.Calculator;
 
 namespace CalcWin.Controllers
 {
@@ -28,7 +29,31 @@ namespace CalcWin.Controllers
                 .ThenInclude(x => x.Fruit)
                 .ToList();
 
-            return View(viewModel);
+            return View(MVC.Views.Projects.Index, viewModel);
+        }
+
+        [HttpGet]
+        [Authorize]
+        public IActionResult Open(int projectId)
+        {
+            if (projectId > 0)
+            {
+                CalculatorViewModel viewModel = new CalculatorViewModel();
+
+                WineProject wineProject = db.Projects
+                    .Include(x => x.Flavor)
+                    .Include(x => x.Ingredients)
+                    .ThenInclude(x => x.Fruit)
+                    .First(x => x.Id == projectId);
+
+                viewModel.Ingredients = wineProject.Ingredients;
+                viewModel.SelectedFlavor = wineProject.Flavor.Id;
+                viewModel.SelectedAlcoholQuantity = wineProject.AlcoholQuantity;
+
+                return RedirectToAction(MVC.Actions.Projects.Index, viewModel);
+            }
+
+            return View(MVC.Views.Projects.Index);
         }
 
         [HttpGet]
@@ -44,10 +69,10 @@ namespace CalcWin.Controllers
                     .ThenInclude(x => x.Fruit)
                     .First(x => x.Id == ProjectId);
 
-                return View("EditProject", model);
+                return View(MVC.Views.Projects.EditProject, model);
             }
 
-            return View("Index");
+            return View(MVC.Views.Projects.Index);
         }
 
         [HttpPost]
@@ -60,7 +85,7 @@ namespace CalcWin.Controllers
                 //db.SaveChanges();
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction(MVC.Actions.Projects.Index);
         }
 
         [HttpGet]
@@ -75,7 +100,7 @@ namespace CalcWin.Controllers
                 db.SaveChanges();
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction(MVC.Actions.Projects.Index);
         }
     }
 }

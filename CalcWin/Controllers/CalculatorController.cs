@@ -4,10 +4,8 @@ using CalcWin.Views.Calculator;
 using System.Linq;
 using System.Collections.Generic;
 using System;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Calculator.Models;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.EntityFrameworkCore;
 
 namespace CalcWin.Controllers
 {
@@ -45,31 +43,7 @@ namespace CalcWin.Controllers
                 Wine = new Wine()
             };
 
-            return View(viewModel);
-        }
-        
-        [HttpGet]
-        [Authorize]
-        public IActionResult Open(int projectId)
-        {
-            if (projectId > 0)
-            {
-                CalculatorViewModel viewModel = new CalculatorViewModel();
-
-                WineProject wineProject = db.Projects
-                    .Include(x => x.Flavor)
-                    .Include(x => x.Ingredients)
-                    .ThenInclude(x => x.Fruit)
-                    .First(x => x.Id == projectId);
-
-                viewModel.Ingredients = wineProject.Ingredients;
-                viewModel.SelectedFlavor = wineProject.Flavor.Id;
-                viewModel.SelectedAlcoholQuantity = wineProject.AlcoholQuantity;
-
-                return RedirectToAction("Open", "Calculator", viewModel);
-            }
-
-            return View("Index");
+            return View(MVC.Views.Calculator.Index, viewModel);
         }
 
         [HttpPost]
@@ -103,7 +77,7 @@ namespace CalcWin.Controllers
                 db.SaveChanges();
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction(MVC.Actions.Calculator.Index);
         }
 
         //public IActionResult AddFruits()
