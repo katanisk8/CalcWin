@@ -20,6 +20,7 @@
         {
             public const string Index = "Index";
             public const string Add = "Add";
+            public const string Calculate = "Calculate";
         }
 
         public static class Projects

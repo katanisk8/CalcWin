@@ -5,6 +5,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System;
 using Calculator.Models;
+using Calculator.BussinesLogic;
 using Microsoft.AspNetCore.Authorization;
 
 namespace CalcWin.Controllers
@@ -75,6 +76,21 @@ namespace CalcWin.Controllers
 
                 db.Projects.Add(wineProject);
                 db.SaveChanges();
+            }
+
+            return RedirectToAction(MVC.Actions.Calculator.Index);
+        }
+
+        [HttpPost]
+        [Authorize]
+        public IActionResult Calculate(CalculatorViewModel model)
+        {
+            if (model != null)
+            {
+                List<Ingredient> ingredients = model.Ingredients.Where(x => x.Quantity > 0).ToList();
+                Flavor flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
+
+                Calculations.CalculateWine(ingredients, flavor, model.SelectedAlcoholQuantity);
             }
 
             return RedirectToAction(MVC.Actions.Calculator.Index);
