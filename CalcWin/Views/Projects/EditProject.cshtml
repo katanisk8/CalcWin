@@ -1,4 +1,4 @@
-﻿@model Calculator.Models.WineProject
+﻿@model CalcWin.Views.Projects.EditProjectViewModel
 @{
     ViewData["Title"] = "EditProject";
     Layout = "~/Views/Shared/_Layout.cshtml";
@@ -39,10 +39,18 @@
                             i++;
                         }
                     </td>
-                    <td><input name="Flavor.Name" placeholder="@Model.Flavor.Name" class="form-control input-sm" /></td>
+                    <td>
+                        <select id="FlavorId" name="SelectedFlavor" class="form-control">
+                            @foreach (var flavor in Model.Flavors)
+                            {
+                                <option id="@flavor.Id" value="@flavor.Id">@flavor.Name</option>
+                            }
+                        </select>
+
+                    <input name="Flavor.Name" placeholder="@Model.Flavor.Name" class="form-control input-sm" /></td>
                     <td><input name="AlcoholQuantity" placeholder="@Model.AlcoholQuantity" class="form-control input-sm" /></td>
                     <td>
-                        <input asp-for="Date" class="form-control" />
+                        <input disabled="disabled" asp-for="Date" class="form-control" />
                         <span asp-validation-for="Date" class="text-danger"></span>
                     </td>
                 </tr>

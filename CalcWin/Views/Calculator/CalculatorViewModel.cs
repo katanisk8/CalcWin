@@ -14,6 +14,7 @@ namespace CalcWin.Views.Calculator
         public string Name { get; set; }
         public int SelectedFlavor { get; set; }
         public double SelectedAlcoholQuantity { get; set; }
+        public double JuiceCorretion { get; set; }
 
         // Calculation results
         public Result Result { get; set; }

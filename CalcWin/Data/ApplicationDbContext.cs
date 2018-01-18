@@ -21,5 +21,6 @@ namespace CalcWin.Data
         public virtual DbSet<Flavor> Flavors { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
         public virtual DbSet<WineProject> Projects { get; set; }
+        public virtual DbSet<Supplement> Supplement { get; set; }
     }
 }

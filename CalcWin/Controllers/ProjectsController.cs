@@ -23,6 +23,7 @@ namespace CalcWin.Controllers
         public IActionResult Index()
         {
             ProjectsViewModel viewModel = new ProjectsViewModel();
+
             viewModel.Projects = db.Projects
                 .Include(x => x.Flavor)
                 .Include(x => x.Ingredients)
@@ -62,12 +63,15 @@ namespace CalcWin.Controllers
         {
             if (ProjectId > 0)
             {
-                WineProject model = new WineProject();
-                model = db.Projects
+                EditProjectViewModel model = new EditProjectViewModel();
+
+                model.WineProject = db.Projects
                     .Include(x => x.Flavor)
                     .Include(x => x.Ingredients)
                     .ThenInclude(x => x.Fruit)
                     .First(x => x.Id == ProjectId);
+
+                model.Flavors = db.Flavors.ToList();
 
                 return View(MVC.Views.Projects.EditProject, model);
             }

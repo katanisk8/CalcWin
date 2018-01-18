@@ -1,12 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using CalcWin.Data;
 using CalcWin.Views.Calculator;
-using System.Linq;
-using System.Collections.Generic;
-using System;
-using Calculator.Models;
-using Calculator.BussinesLogic;
+using CalcWin.BusinessLogic;
 using Microsoft.AspNetCore.Authorization;
+using System.Linq;
 
 namespace CalcWin.Controllers
 {
@@ -14,35 +11,15 @@ namespace CalcWin.Controllers
     {
         private readonly ApplicationDbContext db;
 
-        public CalculatorController(ApplicationDbContext context)
+        public CalculatorController(ApplicationDbContext dbContext)
         {
-            db = context;
+            db = dbContext;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            CalculatorViewModel viewModel = new CalculatorViewModel();
-            List<Ingredient> fruits = new List<Ingredient>();
-
-            foreach (var fruit in db.Fruits.ToList())
-            {
-                fruits.Add(
-                    new Ingredient
-                    {
-                        Fruit = fruit
-                    }
-                );
-            }
-
-            viewModel.Ingredients = fruits;
-            viewModel.Flavors = db.Flavors.ToList();
-            viewModel.Result = new Result
-            {
-                Mixture = new Mixture(),
-                Recipe = new Recipe { Ingredients = new List<Ingredient>() },
-                Wine = new Wine()
-            };
+            CalculatorViewModel viewModel = new CalculatorLogic(db).PrepareStartData();
 
             return View(MVC.Views.Calculator.Index, viewModel);
         }
@@ -51,32 +28,7 @@ namespace CalcWin.Controllers
         [Authorize]
         public IActionResult Add(CalculatorViewModel model)
         {
-            if (model != null)
-            {
-                WineProject wineProject = new WineProject();
-                List<Ingredient> ingredients = new List<Ingredient>();
-
-                wineProject.User = User.Claims.First().Value;
-
-                foreach (var ingredient in model.Ingredients)
-                {
-                    if (ingredient.Quantity > 0)
-                    {
-                        ingredient.Fruit = db.Fruits.First(x => x.Id == ingredient.Fruit.Id);
-                        ingredient.Project = wineProject;
-                        ingredients.Add(ingredient);
-                    }
-                }
-
-                wineProject.Ingredients = ingredients;
-                wineProject.Name = model.Name;
-                wineProject.Flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
-                wineProject.AlcoholQuantity = model.SelectedAlcoholQuantity;
-                wineProject.Date = DateTime.Now;
-
-                db.Projects.Add(wineProject);
-                db.SaveChanges();
-            }
+            new CalculatorLogic(db).AddWineProject(User.Claims.First().Value, model);
 
             return RedirectToAction(MVC.Actions.Calculator.Index);
         }
@@ -85,13 +37,7 @@ namespace CalcWin.Controllers
         [Authorize]
         public IActionResult Calculate(CalculatorViewModel model)
         {
-            if (model != null)
-            {
-                List<Ingredient> ingredients = model.Ingredients.Where(x => x.Quantity > 0).ToList();
-                Flavor flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
-
-                Calculations.CalculateWine(ingredients, flavor, model.SelectedAlcoholQuantity);
-            }
+            CalculatorViewModel viewModel = new CalculatorLogic(db).PrepareWineResult(model);
 
             return RedirectToAction(MVC.Actions.Calculator.Index);
         }

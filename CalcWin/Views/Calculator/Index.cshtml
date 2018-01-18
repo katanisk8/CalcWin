@@ -33,45 +33,44 @@
                 <div class="well well-result">
                     <div class="row content">
                         <div class="col-sm-6">
-                            <div class="well well-result" id="parameters" disabled="true">
-                                <h4>Wine</h4>
-                                <div class="form-horizontal">
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">Alcohol Quantity:</label>
-                                        <div class="col-sm-8">
-                                            <div class="input-group">
-                                                <span class="input-group-addon"><i class="fa fa-percent"></i></span>
-                                                <input type="number" id="alcoholQuantity" name="SelectedAlcoholQuantity" value="SelectedAlcoholQuantity" class="form-control" placeholder="Quantity" min="0" max="20" step="0.1">
-                                            </div>
+                            <h4>Wine</h4>
+                            <div class="form-horizontal">
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Alcohol Quantity:</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon"><i class="fa fa-percent"></i></span>
+                                            <input type="number" id="alcoholQuantity" name="SelectedAlcoholQuantity" value="SelectedAlcoholQuantity" class="form-control" placeholder="Quantity" min="0" max="20" step="0.1">
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">Mixture corretion:</label>
-                                        <div class="col-sm-8">
-                                            <div class="input-group">
-                                                <span class="input-group-addon">
-                                                    <input type="checkbox" id="mixtureCorretionCheckbox" aria-label="...">
-                                                </span>
-                                                <input type="number" id="mixtureCorretionQuantity" name="mixtureCorretionQuantity" class="form-control" placeholder="Quantity" min="0" disabled>
-                                            </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Mixture corretion:</label>
+                                    <div class="col-sm-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <input type="checkbox" id="mixtureCorretionCheckbox" aria-label="...">
+                                            </span>
+                                            <input type="number" id="mixtureCorretionQuantity" name="mixtureCorretionQuantity" class="form-control" placeholder="Quantity" min="0" disabled>
                                         </div>
                                     </div>
-                                    <div class="form-group">
-                                        <label class="col-sm-4 control-label">Flavor:</label>
-                                        <div class="col-sm-8">
-                                            <select id="FlavorId" name="SelectedFlavor" class="form-control">
-                                                @foreach (var flavor in Model.Flavors)
-                                                {
-                                                    <option id="@flavor.Id" value="@flavor.Id">@flavor.Name</option>
-                                                }
-                                            </select>
-                                        </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-4 control-label">Flavor:</label>
+                                    <div class="col-sm-8">
+                                        <select id="FlavorId" name="SelectedFlavor" class="form-control">
+                                            @foreach (var flavor in Model.Flavors)
+                                            {
+                                                <option id="@flavor.Id" value="@flavor.Id">@flavor.Name</option>
+                                            }
+                                        </select>
                                     </div>
-                                    <button type="submit" asp-controller="Calculator" asp-action="@MVC.Actions.Calculator.Calculate" class="btn btn-success btn-block">Save</button>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-sm-6">
+                        <div class="col-sm-3 well well-result">
+                        </div>
+                        <div class="col-sm-3">
                             <div class="well well-result">
                                 <h4>Options</h4>
                                 <a asp-controller="Calculator" asp-action="@MVC.Actions.Calculator.Index" class="btn btn-info btn-block">New</a>
