@@ -42,7 +42,7 @@ namespace CalcWin.BusinessLogic
 
         public void AddWineProject(string userId, CalculatorViewModel model)
         {
-            if (model != null)
+            if (validation.ValidateAddWineProject(model))
             {
                 WineProject wineProject = new WineProject();
                 List<Ingredient> ingredients = new List<Ingredient>();
