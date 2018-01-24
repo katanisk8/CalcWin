@@ -78,11 +78,18 @@ namespace CalcWin.BusinessLogic
             Flavor flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
             double selectedAlcoholQuantity = model.SelectedAlcoholQuantity;
             double juiceCorretion = model.JuiceCorretion;
-            //Supplements suplements = db.Supplement
+            Supplements suplements = GetUserSupplementsOrDefault();
 
 
          }
          return model; //Calculations.CalculateWine(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion,); ;
+      }
+
+      private Supplements GetUserSupplementsOrDefault()
+      {
+         Supplements supplements = new Supplements();
+
+         supplements.Water = 
       }
 
       private CalculatorViewModel CreateCalculatorViewModel()
