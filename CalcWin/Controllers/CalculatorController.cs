@@ -19,15 +19,8 @@ namespace CalcWin.Controllers
       [HttpGet]
       public IActionResult Index()
       {
-         if (ModelState.IsValid)
-         {
-            CalculatorViewModel viewModel = _calculatorLogic.PrepareStartData();
-            return View(MVC.Views.Calculator.Index, viewModel);
-         }
-         else
-         {
-            return View(MVC.Views.Calculator.Index);
-         }
+         CalculatorViewModel viewModel = _calculatorLogic.PrepareStartData();
+         return View(MVC.Views.Calculator.Index, viewModel);
       }
 
       [HttpPost]
@@ -46,12 +39,11 @@ namespace CalcWin.Controllers
       }
 
       [HttpPost]
-      [Authorize]
       public IActionResult Calculate(CalculatorViewModel model)
       {
          if (ModelState.IsValid)
          {
-            CalculatorViewModel viewModel = _calculatorLogic.CalculateWineResult(model);
+            CalculatorViewModel viewModel = _calculatorLogic.CalculateWineResult(User, model);
             return RedirectToAction(MVC.Actions.Calculator.Index);
          }
          else

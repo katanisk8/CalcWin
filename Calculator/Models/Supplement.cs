@@ -16,7 +16,7 @@ namespace Calculator.Models
         public WineProject WineProject { get; set; }
 
         [Required]
-        public double Name { get; set; }
+        public string Name { get; set; }
 
         [Required]
         public double Price { get; set; }
