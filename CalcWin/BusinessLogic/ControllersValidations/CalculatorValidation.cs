@@ -10,5 +10,11 @@ namespace CalcWin.BusinessLogic.ControllersValidations
       {
          return true;
       }
-    }
+
+
+      public bool ValidateCalculateWineResult(CalculatorViewModel model)
+      {
+         return true;
+      }
+   }
 }

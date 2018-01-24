@@ -4,39 +4,29 @@ using CalcWin.Views.Calculator;
 using CalcWin.BusinessLogic;
 using Microsoft.AspNetCore.Authorization;
 using System.Linq;
-using System;
-using CalcWin.Models;
-using System.Diagnostics;
 
 namespace CalcWin.Controllers
 {
    public class CalculatorController : Controller
    {
-      private readonly ApplicationDbContext db;
+      private readonly CalculatorLogic _calculatorLogic;
 
-      public CalculatorController(ApplicationDbContext dbContext)
+      public CalculatorController(CalculatorLogic calculatorLogic)
       {
-         db = dbContext;
+         _calculatorLogic = calculatorLogic;
       }
 
       [HttpGet]
       public IActionResult Index()
       {
-         try
+         if (ModelState.IsValid)
          {
-            if (ModelState.IsValid)
-            {
-               CalculatorViewModel viewModel = new CalculatorLogic(db).PrepareStartData();
-               return View(MVC.Views.Calculator.Index, viewModel);
-            }
-            else
-            {
-               return View(MVC.Views.Calculator.Index);
-            }
+            CalculatorViewModel viewModel = _calculatorLogic.PrepareStartData();
+            return View(MVC.Views.Calculator.Index, viewModel);
          }
-         catch (Exception)
+         else
          {
-            return View(MVC.Views.Shared.Error, new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(MVC.Views.Calculator.Index);
          }
       }
 
@@ -44,21 +34,14 @@ namespace CalcWin.Controllers
       [Authorize]
       public IActionResult Add(CalculatorViewModel model)
       {
-         try
+         if (ModelState.IsValid)
          {
-            if (ModelState.IsValid)
-            {
-               new CalculatorLogic(db).AddWineProject(User.Claims.First().Value, model);
-               return RedirectToAction(MVC.Actions.Calculator.Index);
-            }
-            else
-            {
-               return View(MVC.Views.Calculator.Index);
-            }
+            _calculatorLogic.AddWineProject(User.Claims.First().Value, model);
+            return RedirectToAction(MVC.Actions.Calculator.Index);
          }
-         catch (Exception)
+         else
          {
-            return View(MVC.Views.Shared.Error, new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(MVC.Views.Calculator.Index);
          }
       }
 
@@ -66,21 +49,14 @@ namespace CalcWin.Controllers
       [Authorize]
       public IActionResult Calculate(CalculatorViewModel model)
       {
-         try
+         if (ModelState.IsValid)
          {
-            if (ModelState.IsValid)
-            {
-               CalculatorViewModel viewModel = new CalculatorLogic(db).PrepareWineResult(model);
-               return RedirectToAction(MVC.Actions.Calculator.Index);
-            }
-            else
-            {
-               return View(MVC.Views.Calculator.Index);
-            }
+            CalculatorViewModel viewModel = _calculatorLogic.CalculateWineResult(model);
+            return RedirectToAction(MVC.Actions.Calculator.Index);
          }
-         catch (Exception)
+         else
          {
-            return View(MVC.Views.Shared.Error, new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(MVC.Views.Calculator.Index);
          }
       }
 

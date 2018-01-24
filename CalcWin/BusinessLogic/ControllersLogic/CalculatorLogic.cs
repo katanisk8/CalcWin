@@ -21,8 +21,7 @@ namespace CalcWin.BusinessLogic
 
       public CalculatorViewModel PrepareStartData()
       {
-         CalculatorViewModel viewModel = new CalculatorViewModel { Result = new Result { Mixture = new Mixture(), Recipe = new Recipe { Ingredients = new List<Ingredient>() }, Wine = new Wine() } };
-
+         CalculatorViewModel viewModel = CreateCalculatorViewModel();
          List<Ingredient> fruits = new List<Ingredient>();
 
          foreach (var fruit in db.Fruits.ToList())
@@ -71,9 +70,9 @@ namespace CalcWin.BusinessLogic
          }
       }
 
-      public CalculatorViewModel PrepareWineResult(CalculatorViewModel model)
+      public CalculatorViewModel CalculateWineResult(CalculatorViewModel model)
       {
-         if (model != null)
+         if (validation.ValidateCalculateWineResult(model))
          {
             List<Ingredient> ingredients = model.Ingredients.Where(x => x.Quantity > 0).ToList();
             Flavor flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
@@ -84,6 +83,16 @@ namespace CalcWin.BusinessLogic
 
          }
          return model; //Calculations.CalculateWine(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion,); ;
+      }
+
+      private CalculatorViewModel CreateCalculatorViewModel()
+      {
+         return new CalculatorViewModel
+         {
+            Ingredients = new List<Ingredient>(),
+            Flavors = new List<Flavor>(),
+            Result = new Result()
+         };
       }
    }
 }
