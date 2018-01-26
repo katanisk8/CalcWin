@@ -13,6 +13,7 @@ namespace Calculator.Models
             Mixture = new Mixture();
             Recipe = new Recipe();
             Wine = new Wine();
+            Recipe.Ingredients = new List<Ingredient>();
         }
     }
 
