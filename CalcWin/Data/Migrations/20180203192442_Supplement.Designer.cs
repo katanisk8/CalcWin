@@ -11,9 +11,10 @@ using System;
 namespace CalcWin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180203192442_Supplement")]
+    partial class Supplement
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -118,11 +119,9 @@ namespace CalcWin.Migrations
 
                     b.Property<int>("Type");
 
-                    b.Property<int?>("WineProjectId");
+                    b.Property<string>("WineProject");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("WineProjectId");
 
                     b.ToTable("Supplement");
                 });
@@ -333,13 +332,6 @@ namespace CalcWin.Migrations
                         .WithMany("Ingredients")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("Calculator.Models.Supplement", b =>
-                {
-                    b.HasOne("Calculator.Models.WineProject", "WineProject")
-                        .WithMany()
-                        .HasForeignKey("WineProjectId");
                 });
 
             modelBuilder.Entity("Calculator.Models.WineProject", b =>

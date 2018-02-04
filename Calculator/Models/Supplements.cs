@@ -8,4 +8,13 @@
         public Supplement Yeast { get; set; }
         public Supplement YeastFood { get; set; }
     }
+
+    public enum SupplementType
+    {
+        Water,
+        Sugar,
+        Acid,
+        Yeast,
+        YeastFood
+    }
 }
