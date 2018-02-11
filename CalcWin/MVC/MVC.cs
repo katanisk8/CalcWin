@@ -1,4 +1,6 @@
-﻿namespace MVC
+﻿using CalcWin.Controllers;
+
+namespace MVC
 {
    public static class Views
    {
@@ -15,7 +17,7 @@
 
       public static class Shared
       {
-         public const string Error = "~/Views/Calculator/Error.cshtml";
+         public const string Error = "~/Views/Shared/Error.cshtml";
       }
    }
 
@@ -23,18 +25,18 @@
    {
       public static class Calculator
       {
-         public const string Index = "Index";
-         public const string Add = "Add";
-         public const string Calculate = "Calculate";
+         public const string Index = nameof(CalculatorController.Index);
+         public const string Add = nameof(CalculatorController.Add);
+         public const string Calculate = nameof(CalculatorController.Calculate);
       }
 
       public static class Projects
       {
-         public const string Index = "Index";
-         public const string Open = "Open";
-         public const string Edit = "Edit";
-         public const string Update = "Update";
-         public const string Delete = "Delete";
+         public const string Index = nameof(ProjectsController.Index);
+         public const string Open = nameof(ProjectsController.Open);
+         public const string Edit = nameof(ProjectsController.Edit);
+         public const string Update = nameof(ProjectsController.Update);
+         public const string Delete = nameof(ProjectsController.Delete);
       }
    }
 }

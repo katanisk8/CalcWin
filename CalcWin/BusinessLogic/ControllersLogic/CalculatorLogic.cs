@@ -73,6 +73,7 @@ namespace CalcWin.BusinessLogic
                 double juiceCorretion = model.JuiceCorretion;
                 Supplements suplements = GetUserSupplementsOrDefault(user);
 
+                model.Flavors = db.Flavors.ToList();
                 model.Result = Calculations.CalculateWine(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
 
                 return model;
