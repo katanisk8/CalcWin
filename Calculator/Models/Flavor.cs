@@ -19,7 +19,6 @@ namespace Calculator.Models
         public string Name { get; set; }
 
         [Required]
-        [Range(0, 10)]
         public double Acidity { get; set; }
     }
 }

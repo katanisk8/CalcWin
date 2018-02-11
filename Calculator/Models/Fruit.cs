@@ -23,15 +23,12 @@ namespace Calculator.Models
         public string Name { get; set; }
 
         [Required]
-        [Range(1, 200)]
         public double Sugar { get; set; }
 
         [Required]
-        [Range(1, 50)]
         public double Acid { get; set; }
 
         [Required]
-        [Range(1, 100)]
         public double Price { get; set; }
         
         public string Image { get; set; }

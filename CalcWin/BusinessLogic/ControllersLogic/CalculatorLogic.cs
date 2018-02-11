@@ -74,12 +74,46 @@ namespace CalcWin.BusinessLogic
                 Supplements suplements = GetUserSupplementsOrDefault(user);
 
                 model.Flavors = db.Flavors.ToList();
-                model.Result = Calculations.CalculateWine(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
+                Result result = Calculations.CalculateWine(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
+                model.Result = RoundResultValues(result);
 
                 return model;
             }
 
             return model;
+        }
+
+        private Result RoundResultValues(Result result)
+        {
+            Result roundedResult = new Result();
+
+            // Mixture 
+            roundedResult.Mixture.FruitsQuantity = Math.Round(result.Mixture.FruitsQuantity, 2);
+            roundedResult.Mixture.FruitsMixture = Math.Round(result.Mixture.FruitsMixture, 2);
+            roundedResult.Mixture.SugarInMixture = Math.Round(result.Mixture.SugarInMixture, 2);
+            roundedResult.Mixture.AcidInMixture = Math.Round(result.Mixture.AcidInMixture, 2);
+            roundedResult.Mixture.JuiceQuantity = Math.Round(result.Mixture.JuiceQuantity, 2);
+            roundedResult.Mixture.SugarInJuice = Math.Round(result.Mixture.SugarInJuice, 2);
+            roundedResult.Mixture.AcidInJuice = Math.Round(result.Mixture.AcidInJuice, 2);
+
+            // Recipe
+            roundedResult.Recipe.Ingredients = result.Recipe.Ingredients;
+            roundedResult.Recipe.Water = Math.Round(result.Recipe.Water, 2);
+            roundedResult.Recipe.Acid = Math.Round(result.Recipe.Acid, 2);
+            roundedResult.Recipe.Sugar = Math.Round(result.Recipe.Sugar, 2);
+            roundedResult.Recipe.YeastFood = Math.Round(result.Recipe.YeastFood, 2);
+            roundedResult.Recipe.Yeast = Math.Round(result.Recipe.Yeast, 2);
+            roundedResult.Recipe.SuplementsCost = Math.Round(result.Recipe.SuplementsCost, 2);
+
+            // Wine
+            roundedResult.Wine.AlcoholQuantity = Math.Round(result.Wine.AlcoholQuantity, 2);
+            roundedResult.Wine.Flavor = result.Wine.Flavor;
+            roundedResult.Wine.Color = result.Wine.Color;
+            roundedResult.Wine.Quantity = Math.Round(result.Wine.Quantity, 2);
+            roundedResult.Wine.TotalCost = Math.Round(result.Wine.TotalCost, 2);
+            roundedResult.Wine.CostPerLiter = Math.Round(result.Wine.CostPerLiter, 2);
+
+            return roundedResult;
         }
 
         private Supplements GetUserSupplementsOrDefault(ClaimsPrincipal user)
