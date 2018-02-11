@@ -18,6 +18,11 @@ namespace CalcWin.Controllers
         {
             return View();
         }
+        
+        public IActionResult Supplements()
+        {
+            return View();
+        }
 
         public IActionResult AdminSettings()
         {
