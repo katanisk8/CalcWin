@@ -1,0 +1,8 @@
+﻿@using CalcWin.Views.Settings
+
+<ul class="nav nav-pills nav-stacked">
+    <li class="@SettingsNavPages.IndexNavClass(ViewContext)"><a asp-action="Index">General</a></li>
+    <li class="@SettingsNavPages.FruitsNavClass(ViewContext)"><a asp-action="Fruits">Frutis</a></li>
+    <li class="@SettingsNavPages.SupplementsNavClass(ViewContext)"><a asp-action="Supplements">Supplements</a></li>
+    <li class="@SettingsNavPages.AdminSettingsNavClass(ViewContext)"><a asp-action="AdminSettings">Admin Settings</a></li>
+</ul>

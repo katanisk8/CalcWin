@@ -48,7 +48,6 @@ namespace MVC
         public static class Settings
         {
             public const string Index = nameof(SettingsController.Index);
-            public const string General = nameof(SettingsController.General);
             public const string Fruits = nameof(SettingsController.Fruits);
             public const string Supplements = nameof(SettingsController.Supplements);
             public const string AdminSettings = nameof(SettingsController.AdminSettings);

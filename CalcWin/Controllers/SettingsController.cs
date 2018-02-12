@@ -1,4 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
+using CalcWin.Models;
+using CalcWin.Models.SettingsViewModels;
 
 namespace CalcWin.Controllers
 {
@@ -8,12 +10,7 @@ namespace CalcWin.Controllers
         {
             return View();
         }
-
-        public IActionResult General()
-        {
-            return View();
-        }
-
+        
         public IActionResult Fruits()
         {
             return View();
