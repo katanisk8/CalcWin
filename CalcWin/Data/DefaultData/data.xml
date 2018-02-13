@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CalcWin version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Fruits>
+    <Fruit name="Apple" sugar="100" acid="10.5" price="1.87" />
+    <Fruit name="Grape Light" sugar="155" acid="8" price="4.83" />
+    <Fruit name="Grape Dark" sugar="155" acid="8" price="4.83" />
+    <Fruit name="Gooseberry" sugar="70" acid="19" price="3.5" />
+    <Fruit name="Whortleberry" sugar="55" acid="10" price="9" />
+    <Fruit name="Cowberry" sugar="70" acid="21" price="15.5" />
+    <Fruit name="Cherry" sugar="100" acid="4" price="9" />
+    <Fruit name="Pear" sugar="100" acid="3" price="3" />
+    <Fruit name="Strawberry" sugar="45" acid="10" price="5" />
+    <Fruit name="Bramble" sugar="60" acid="11" price="15.5" />
+    <Fruit name="Raspberry" sugar="100" acid="15" price="6" />
+    <Fruit name="Whitecurrant" sugar="70" acid="24" price="9" />
+    <Fruit name="Redcurrant" sugar="60" acid="24" price="15" />
+    <Fruit name="Blackcurrant" sugar="85" acid="30" price="4" />
+    <Fruit name="Cherry" sugar="100" acid="13" price="3" />
+    <Fruit name="Wild Strawberry" sugar="60" acid="20" price="21" />
+    <Fruit name="Greengage" sugar="90" acid="15" price="2" />
+    <Fruit name="Plum" sugar="100" acid="8" price="5" />
+    <Fruit name="Raisin" sugar="70" acid="12" price="10" />
+    <Fruit name="Cranberry" sugar="80" acid="11" price="19.99" />
+  </Fruits>
+  <Flavors>
+    <Flavor name="Sweet" acid="6" />
+    <Flavor name="Medium Sweet" acid="7" />
+    <Flavor name="Medium Dry" acid="9" />
+    <Flavor name="Dry" acid="10" />
+  </Flavors>
+  <Supplements>
+    <Sugar type="0" name="Sugar" price="2.5" factor="1" />
+    <Acid type="1" name="Acid" price="11.5" factor="1" />
+    <Water type="2" name="Water" price="0.01015" factor="1" />
+    <Yeast type="3" name="Yeast" price="385" factor="0.28" />
+    <YeastFood type="4" name="Yeast Food" price="385" factor="0.28" />
+  </Supplements>
+</CalcWin>

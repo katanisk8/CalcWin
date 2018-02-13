@@ -15,6 +15,33 @@ namespace CalcWin.Controllers
         {
             db = context;
         }
+        
+        public IActionResult RemoveAppData()
+        {
+            foreach (var fruit in db.Fruits)
+            {
+                db.Fruits.Remove(fruit);
+            }
+
+            foreach (var supplement in db.Supplement)
+            {
+                db.Supplement.Remove(supplement);
+            }
+
+            foreach (var project in db.Projects)
+            {
+                db.Projects.Remove(project);
+            }
+
+            foreach (var flavor in db.Flavors)
+            {
+                db.Flavors.Remove(flavor);
+            }
+
+            db.SaveChanges();
+
+            return RedirectToAction(MVC.Actions.Calculator.Index);
+        }
 
         public IActionResult AddSupplements()
         {
