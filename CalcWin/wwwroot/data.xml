@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<CalcWin version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <Fruits>
+    <Fruit id="jablka" name="Jabłka" sugar="100" acid="10.5" price="1.87" />
+    <Fruit id="winjasne" name="Winogrona Jasne" sugar="155" acid="8" price="4.83" />
+    <Fruit id="winciemne" name="Winogrona Ciemne" sugar="155" acid="8" price="4.83" />
+    <Fruit id="agrest" name="Agrest" sugar="70" acid="19" price="3.5" />
+    <Fruit id="czarnejagody" name="Czarne Jagody" sugar="55" acid="10" price="9" />
+    <Fruit id="czerwoneborowki" name="Czewrone Borówki" sugar="70" acid="21" price="15.5" />
+    <Fruit id="czeresnie" name="Czereśnie" sugar="100" acid="4" price="9" />
+    <Fruit id="gruszki" name="Gruszki" sugar="100" acid="3" price="3" />
+    <Fruit id="truskawki" name="Truskawki" sugar="45" acid="10" price="5" />
+    <Fruit id="jezyny" name="Jeżyny" sugar="60" acid="11" price="15.5" />
+    <Fruit id="maliny" name="Maliny" sugar="100" acid="15" price="6" />
+    <Fruit id="bialeporzeczki" name="Białe Porzeczki" sugar="70" acid="24" price="9" />
+    <Fruit id="czerwoneporzeczki" name="Czerwone Porzeczki" sugar="60" acid="24" price="15" />
+    <Fruit id="czarneporzeczki" name="Czarne Porzeczki" sugar="85" acid="30" price="4" />
+    <Fruit id="wisnie" name="Wiśnie" sugar="100" acid="13" price="3" />
+    <Fruit id="poziomki" name="Poziomki" sugar="60" acid="20" price="21" />
+    <Fruit id="renklody" name="Renklody" sugar="90" acid="15" price="2" />
+    <Fruit id="wegierki" name="Węgierki" sugar="100" acid="8" price="5" />
+    <Fruit id="rodzynki" name="Rodzynki" sugar="70" acid="12" price="10" />
+    <Fruit id="zurawina" name="Żurawina" sugar="80" acid="11" price="19.99" />
+  </Fruits>
+
+  <Supplements>
+    <Sugar type="0" name="Sugar" price="2.5" />
+    <CitricAcid type="1" name="Acid" price="11.5" />
+    <Water type="2" name="Water" price="0.01015" />
+    <Yeast type="3" name="Yeast" price="385" factor="0.28" />
+    <YeastFood type="4" name="Yeast Food" price="385" factor="0.28" />
+  </Supplements>
+
+  <Flavors>
+    <Flavor id="slodkie" name="Słodkie" acidQuantity="6" />
+    <Flavor id="polslodkie" name="Półsłodkie" acidQuantity="7" />
+    <Flavor id="polwytrawne" name="Półwytrawne" acidQuantity="9" />
+    <Flavor id="wytrawne" name="Wytrawne" acidQuantity="10" />
+  </Flavors>
+
+</CalcWin>

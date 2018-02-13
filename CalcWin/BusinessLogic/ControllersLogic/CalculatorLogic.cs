@@ -8,7 +8,7 @@ using CalcWin.BusinessLogic.ControllersValidations;
 using System.Security.Claims;
 using Calculator.BussinesLogic;
 
-namespace CalcWin.BusinessLogic
+namespace CalcWin.BusinessLogic.ControllersLogic
 {
     public class CalculatorLogic
     {

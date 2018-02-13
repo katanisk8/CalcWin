@@ -1,41 +1,16 @@
 ﻿using System;
-using System.IO;
 using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
-using CalcWin.Models;
 
 namespace CalcWin.Data.DefaultData
 {
     public static class GenerateDefaultData
     {
         private static string dataFilePath;
-
-        static GenerateDefaultData()
+        
+        public static T LoadXml<T>(string filePath) where T : DataFile
         {
-            var folder = Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]);
-            dataFilePath = Path.Combine(folder, "data.xml");
-        }
-
-        public static DataFile ImportData()
-        {
-            return LoadXml<DataFile>(dataFilePath);
-        }
-
-        private static string GetLoadPath()
-        {
-            
-
-            return null;
-        }
-
-
-
-        private static T LoadXml<T>(string filePath) where T : DataFile
-        {
-            if (!File.Exists(filePath))
-                throw new FileNotFoundException(filePath);
-            
             var xrs = new XmlReaderSettings
             {
                 ConformanceLevel = ConformanceLevel.Document,

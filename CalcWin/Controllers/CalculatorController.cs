@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using CalcWin.Data;
 using CalcWin.Views.Calculator;
-using CalcWin.BusinessLogic;
 using Microsoft.AspNetCore.Authorization;
 using System.Linq;
+using CalcWin.BusinessLogic.ControllersLogic;
 
 namespace CalcWin.Controllers
 {

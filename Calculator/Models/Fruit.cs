@@ -1,8 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Serialization;
 
 namespace Calculator.Models
 {
+    [Serializable]
     public class Fruit
     {
         [Key]
@@ -16,19 +19,16 @@ namespace Calculator.Models
 
         public Fruit Parent { get; set; }
 
-        [Required]
-        [Display(Name = "Fruit")]
-        [StringLength(20, ErrorMessage = "Fruit name cannot be longer than 20 characters.")]
-        [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$")]
+        [XmlAttribute("name")]
         public string Name { get; set; }
 
-        [Required]
+        [XmlAttribute("sugar")]
         public double Sugar { get; set; }
 
-        [Required]
+        [XmlAttribute("acid")]
         public double Acid { get; set; }
 
-        [Required]
+        [XmlAttribute("price")]
         public double Price { get; set; }
         
         public string Image { get; set; }

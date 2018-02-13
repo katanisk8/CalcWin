@@ -1,5 +1,8 @@
-﻿namespace Calculator.Models
+﻿using System;
+
+namespace Calculator.Models
 {
+    [Serializable]
     public class Supplements
     {
         public Supplement Water { get; set; }

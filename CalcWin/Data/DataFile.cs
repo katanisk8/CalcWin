@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 
-namespace CalcWin.Models
+namespace CalcWin.Data
 {
     [Serializable]
-    [XmlRoot("WineCalculator")]
+    [XmlRoot("CalcWin")]
     public class DataFile
     {
         [XmlAttribute("version")]
@@ -19,7 +19,7 @@ namespace CalcWin.Models
         public List<Flavor> Flavors { get; set; }
 
         [XmlElement]
-        public Supplements Suplements { get; set; }
+        public Supplements Supplements { get; set; }
 
 
         public DataFile()
@@ -27,7 +27,7 @@ namespace CalcWin.Models
             Version = "2.1";
             Fruits = new List<Fruit>();
             Flavors = new List<Flavor>();
-            Suplements = new Supplements();
+            Supplements = new Supplements();
         }
     }
 }

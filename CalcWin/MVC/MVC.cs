@@ -51,6 +51,7 @@ namespace MVC
             public const string Fruits = nameof(SettingsController.Fruits);
             public const string Supplements = nameof(SettingsController.Supplements);
             public const string AdminSettings = nameof(SettingsController.AdminSettings);
+            public const string DefaultData = nameof(SettingsController.DefaultData);
         }
     }
 }

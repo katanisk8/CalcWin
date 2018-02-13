@@ -1,8 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Serialization;
 
 namespace Calculator.Models
 {
+    [Serializable]
     public class Flavor
     {
         [Key]
@@ -12,13 +15,10 @@ namespace Calculator.Models
         [Timestamp]
         public byte[] Timestamp { get; set; }
 
-        [Required]
-        [Display(Name = "Flavor")]
-        [StringLength(20, ErrorMessage = "Flavor name cannot be longer than 20 characters.")]
-        [RegularExpression(@"^[A-Z]+[a-zA-Z''-'\s]*$")]
+        [XmlAttribute("name")]
         public string Name { get; set; }
 
-        [Required]
+        [XmlAttribute("acidQuantity")]
         public double Acidity { get; set; }
     }
 }

@@ -1,8 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Serialization;
 
 namespace Calculator.Models
 {
+    [Serializable]
     public class Supplement
     {
         [Key]
@@ -11,18 +14,20 @@ namespace Calculator.Models
 
         [Timestamp]
         public byte[] Timestamp { get; set; }
-        
-        public WineProject WineProject { get; set; }
 
-        [Required]
+        [XmlIgnore]
+        public WineProject WineProject { get; set; }
+        
+        [XmlAttribute("type")]
         public int Type { get; set; }
 
-        [Required]
+        [XmlAttribute("name")]
         public string Name { get; set; }
 
-        [Required]
+        [XmlAttribute("price")]
         public double Price { get; set; }
 
+        [XmlAttribute("factor")]
         public double Factor { get; set; }
     }
 }
