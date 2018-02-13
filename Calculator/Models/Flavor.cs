@@ -18,7 +18,7 @@ namespace Calculator.Models
         [XmlAttribute("name")]
         public string Name { get; set; }
 
-        [XmlAttribute("acidQuantity")]
+        [XmlAttribute("acid")]
         public double Acidity { get; set; }
     }
 }

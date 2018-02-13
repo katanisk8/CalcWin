@@ -7,9 +7,7 @@ namespace CalcWin.Data.DefaultData
 {
     public static class GenerateDefaultData
     {
-        private static string dataFilePath;
-        
-        public static T LoadXml<T>(string filePath) where T : DataFile
+        public static T LoadXml<T>(string filePath) where T : DefaultData
         {
             var xrs = new XmlReaderSettings
             {
@@ -32,7 +30,7 @@ namespace CalcWin.Data.DefaultData
             }
         }
 
-        private static void SaveXml<T>(T xml, string filePath) where T : DataFile
+        private static void SaveXml<T>(T xml, string filePath) where T : DefaultData
         {
             var xws = new XmlWriterSettings
             {
