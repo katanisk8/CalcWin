@@ -1,4 +1,4 @@
-@model AdminSettingsViewModel
+@model DefaultDataViewModel
 @{
     ViewData["Title"] = "Admin Settings";
     ViewData.AddActivePage(SettingsNavPages.AdminSettings);
@@ -14,12 +14,12 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            <form role="form">
+                            <form role="form" method="post" asp-action="DefaultData" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label>Default application data</label>
-                                    <input type="file">
+                                    <input asp-for="File" />
                                 </div>
-                                <button type="submit" class="btn btn-default">Load</button>
+                                <button type="submit"  class="btn btn-default">Load</button>
                                 <button type="reset" class="btn btn-default">Reset</button>
                             </form>
                         </div>

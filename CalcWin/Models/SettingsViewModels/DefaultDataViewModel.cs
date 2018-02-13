@@ -2,7 +2,8 @@
 
 namespace CalcWin.Models.SettingsViewModels
 {
-   public class AdminSettingsViewModel
+   public class DefaultDataViewModel
    {
+      public IFormFile File { get; set; }
    }
 }

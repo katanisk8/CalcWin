@@ -4,26 +4,31 @@ using CalcWin.Models.SettingsViewModels;
 
 namespace CalcWin.Controllers
 {
-    public class SettingsController : Controller
-    {
-        public IActionResult Index()
-        {
-            return View();
-        }
-        
-        public IActionResult Fruits()
-        {
-            return View();
-        }
-        
-        public IActionResult Supplements()
-        {
-            return View();
-        }
+   public class SettingsController : Controller
+   {
+      public IActionResult Index()
+      {
+         return View();
+      }
 
-        public IActionResult AdminSettings()
-        {
-            return View();
-        }
-    }
+      public IActionResult Fruits()
+      {
+         return View();
+      }
+
+      public IActionResult Supplements()
+      {
+         return View();
+      }
+
+      public IActionResult AdminSettings(AdminSettingsViewModel model)
+      {
+         return View();
+      }
+
+      public IActionResult DefaultData(DefaultDataViewModel model)
+      {
+         return View();
+      }
+   }
 }
