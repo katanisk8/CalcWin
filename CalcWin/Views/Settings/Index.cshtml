@@ -1,7 +1,7 @@
 @model CalcWin.Models.SettingsViewModels.IndexViewModel
 @{
-    ViewData["Title"] = "Settings";
-    //ViewData.AddActivePage(SettingsNavPages.Index);
+   ViewData["Title"] = "Settings";
+   SettingsNavPages.AddActivePage(ViewData, SettingsNavPages.Index); 
 }
 
 <h2>General</h2>
