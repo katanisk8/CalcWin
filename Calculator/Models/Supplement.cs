@@ -16,7 +16,7 @@ namespace Calculator.Models
         public byte[] Timestamp { get; set; }
 
         [XmlIgnore]
-        public WineProject WineProject { get; set; }
+        public IdentityUser User { get; set; }
         
         [XmlAttribute("type")]
         public int Type { get; set; }

@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<CalcWin version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<CalcWin version="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Fruits>
     <Fruit name="Apple" sugar="100" acid="10.5" price="1.87" />
     <Fruit name="Grape Light" sugar="155" acid="8" price="4.83" />

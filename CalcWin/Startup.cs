@@ -30,11 +30,7 @@ namespace CalcWin
 
             services.AddTransient<CalculatorLogic, CalculatorLogic>();
             services.AddTransient<SettingsLogic, SettingsLogic>();
-
-            services.AddSingleton<IFileProvider>(
-            new PhysicalFileProvider(
-                Path.Combine(Directory.GetCurrentDirectory(), "wwwroot")));
-
+         
             services.AddIdentity<ApplicationUser, IdentityRole>()
              .AddEntityFrameworkStores<ApplicationDbContext>()
              .AddDefaultTokenProviders();

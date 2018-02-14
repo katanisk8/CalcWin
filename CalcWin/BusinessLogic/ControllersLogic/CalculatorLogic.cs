@@ -122,11 +122,11 @@ namespace CalcWin.BusinessLogic.ControllersLogic
 
             if (user.Identity.IsAuthenticated)
             {
-                supplements.Water = db.Supplement.First(x => x.WineProject.User == user.Claims.First().Value && x.Type == (int)SupplementType.Water);
-                supplements.Sugar = db.Supplement.First(x => x.WineProject.User == user.Claims.First().Value && x.Type == (int)SupplementType.Sugar);
-                supplements.Acid = db.Supplement.First(x => x.WineProject.User == user.Claims.First().Value && x.Type == (int)SupplementType.Acid);
-                supplements.Yeast = db.Supplement.First(x => x.WineProject.User == user.Claims.First().Value && x.Type == (int)SupplementType.Yeast);
-                supplements.YeastFood = db.Supplement.First(x => x.WineProject.User == user.Claims.First().Value && x.Type == (int)SupplementType.YeastFood);
+                supplements.Water = db.Supplement.First(x => x.Type == (int)SupplementType.Water);
+                supplements.Sugar = db.Supplement.First(x => x.Type == (int)SupplementType.Sugar);
+                supplements.Acid = db.Supplement.First(x => x.Type == (int)SupplementType.Acid);
+                supplements.Yeast = db.Supplement.First(x => x.Type == (int)SupplementType.Yeast);
+                supplements.YeastFood = db.Supplement.First(x => x.Type == (int)SupplementType.YeastFood);
 
                 return supplements;
             }
