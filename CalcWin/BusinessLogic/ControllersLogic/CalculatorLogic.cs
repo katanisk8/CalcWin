@@ -5,18 +5,22 @@ using Calculator.Models;
 using CalcWin.Views.Calculator;
 using System.Collections.Generic;
 using CalcWin.BusinessLogic.ControllersValidations;
-using System.Security.Claims;
 using Calculator.BussinesLogic;
+using Microsoft.AspNetCore.Identity;
+using CalcWin.Models;
+using System.Threading.Tasks;
 
 namespace CalcWin.BusinessLogic.ControllersLogic
 {
     public class CalculatorLogic
     {
         private readonly ApplicationDbContext db;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public CalculatorLogic(ApplicationDbContext context)
+        public CalculatorLogic(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             db = context;
+            _userManager = userManager;
         }
 
         public CalculatorViewModel PrepareStartData()
@@ -61,7 +65,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             }
         }
 
-        public CalculatorViewModel CalculateWineResult(ClaimsPrincipal user, CalculatorViewModel model)
+        public CalculatorViewModel CalculateWineResult(CalculatorViewModel model)
         {
             CalculatorValidation validation = new CalculatorValidation();
 
@@ -71,16 +75,113 @@ namespace CalcWin.BusinessLogic.ControllersLogic
                 Flavor flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
                 double selectedAlcoholQuantity = model.SelectedAlcoholQuantity;
                 double juiceCorretion = model.JuiceCorretion;
-                Supplements suplements = GetUserSupplementsOrDefault(user);
+                Supplements suplements = GetDefaultSupplements();
+
+                Result result = Calculations.CalculateWine(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
 
                 model.Flavors = db.Flavors.ToList();
-                Result result = Calculations.CalculateWine(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
                 model.Result = RoundResultValues(result);
 
                 return model;
             }
 
             return model;
+        }
+
+        public CalculatorViewModel CalculateWineResultForSavedProject(WineProject project, CalculatorViewModel model)
+        {
+            CalculatorValidation validation = new CalculatorValidation();
+
+            if (validation.ValidateCalculateWineResult(model))
+            {
+                List<Ingredient> ingredients = GetIngredientsFromModel(model.Ingredients);
+                Flavor flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
+                double selectedAlcoholQuantity = model.SelectedAlcoholQuantity;
+                double juiceCorretion = model.JuiceCorretion;
+                Supplements suplements = GetProjectSupplementsOrDefault(project.Id);
+
+                Result result = Calculations.CalculateWine(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
+
+                model.Flavors = db.Flavors.ToList();
+                model.Result = RoundResultValues(result);
+
+                return model;
+            }
+
+            return model;
+        }
+
+        private Supplements GetProjectSupplementsOrDefault(int projectId)
+        {
+            if (CheckIfExistSupplementsForProjectId(projectId))
+            {
+                return GetSupplementsByProjectId(projectId);
+            }
+            else
+            {
+                return GetDefaultSupplements();
+            }
+        }
+
+        private Supplements GetDefaultSupplements()
+        {
+            WineProject defaultProject = db.Projects.First(x => x.User == "546e166a-4738-4ce3-bae8-faef91c91d8c");            
+            return GetSupplementsByProjectId(defaultProject.Id);
+        }
+
+        private Supplements GetSupplementsByProjectId(int projectId)
+        {
+            Supplements supplements = new Supplements();
+
+            supplements.Water = db.Supplement.First(x => x.Type == (int)SupplementType.Water && x.Project.Id == projectId);
+            supplements.Sugar = db.Supplement.First(x => x.Type == (int)SupplementType.Sugar && x.Project.Id == projectId);
+            supplements.Acid = db.Supplement.First(x => x.Type == (int)SupplementType.Acid && x.Project.Id == projectId);
+            supplements.Yeast = db.Supplement.First(x => x.Type == (int)SupplementType.Yeast && x.Project.Id == projectId);
+            supplements.YeastFood = db.Supplement.First(x => x.Type == (int)SupplementType.YeastFood && x.Project.Id == projectId);
+
+            return supplements;
+        }
+
+        private bool CheckIfExistSupplementsForProjectId(int projectId)
+        {
+            if (db.Supplement.Any(x => x.Type == (int)SupplementType.Water && x.Project.Id == projectId) &&
+                db.Supplement.Any(x => x.Type == (int)SupplementType.Sugar && x.Project.Id == projectId) &&
+                db.Supplement.Any(x => x.Type == (int)SupplementType.Acid && x.Project.Id == projectId) &&
+                db.Supplement.Any(x => x.Type == (int)SupplementType.Yeast && x.Project.Id == projectId) &&
+                db.Supplement.Any(x => x.Type == (int)SupplementType.YeastFood && x.Project.Id == projectId))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        private CalculatorViewModel GetInstanceCalculatorViewModel()
+        {
+            return new CalculatorViewModel
+            {
+                Ingredients = new List<Ingredient>(),
+                Flavors = new List<Flavor>(),
+                Result = new Result()
+            };
+        }
+
+        private List<Ingredient> GetIngredientsFromModel(IEnumerable<Ingredient> items)
+        {
+            List<Ingredient> ingredients = new List<Ingredient>();
+
+            foreach (var ingredient in items)
+            {
+                if (ingredient.Quantity > 0)
+                {
+                    ingredient.Fruit = db.Fruits.First(x => x.Id == ingredient.Fruit.Id);
+                    ingredients.Add(ingredient);
+                }
+            }
+
+            return ingredients;
         }
 
         private Result RoundResultValues(Result result)
@@ -114,58 +215,6 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             roundedResult.Wine.CostPerLiter = Math.Round(result.Wine.CostPerLiter, 2);
 
             return roundedResult;
-        }
-
-        private Supplements GetUserSupplementsOrDefault(ClaimsPrincipal user)
-        {
-            Supplements supplements = new Supplements();
-
-            if (user.Identity.IsAuthenticated)
-            {
-                supplements.Water = db.Supplement.First(x => x.Type == (int)SupplementType.Water);
-                supplements.Sugar = db.Supplement.First(x => x.Type == (int)SupplementType.Sugar);
-                supplements.Acid = db.Supplement.First(x => x.Type == (int)SupplementType.Acid);
-                supplements.Yeast = db.Supplement.First(x => x.Type == (int)SupplementType.Yeast);
-                supplements.YeastFood = db.Supplement.First(x => x.Type == (int)SupplementType.YeastFood);
-
-                return supplements;
-            }
-            else
-            {
-                supplements.Water = new Supplement { Name = "Water", Price = 0.5, Factor = 1 };
-                supplements.Sugar = new Supplement { Name = "Sugar", Price = 0.5, Factor = 1 };
-                supplements.Acid = new Supplement { Name = "Acid", Price = 0.5, Factor = 1 };
-                supplements.Yeast = new Supplement { Name = "Yeast", Price = 0.5, Factor = 1 };
-                supplements.YeastFood = new Supplement { Name = "Yeast Food", Price = 0.5, Factor = 1 };
-
-                return supplements;
-            }
-        }
-
-        private CalculatorViewModel GetInstanceCalculatorViewModel()
-        {
-            return new CalculatorViewModel
-            {
-                Ingredients = new List<Ingredient>(),
-                Flavors = new List<Flavor>(),
-                Result = new Result()
-            };
-        }
-
-        private List<Ingredient> GetIngredientsFromModel(IEnumerable<Ingredient> items)
-        {
-            List<Ingredient> ingredients = new List<Ingredient>();
-            
-            foreach (var ingredient in items)
-            {
-                if (ingredient.Quantity > 0)
-                {
-                    ingredient.Fruit = db.Fruits.First(x => x.Id == ingredient.Fruit.Id);
-                    ingredients.Add(ingredient);
-                }
-            }
-
-            return ingredients;
         }
     }
 }

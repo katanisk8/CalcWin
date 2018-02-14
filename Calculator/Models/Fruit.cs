@@ -17,8 +17,6 @@ namespace Calculator.Models
         
         public string User { get; set; }
 
-        public Fruit Parent { get; set; }
-
         [XmlAttribute("name")]
         public string Name { get; set; }
 

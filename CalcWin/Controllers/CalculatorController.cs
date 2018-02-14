@@ -42,7 +42,7 @@ namespace CalcWin.Controllers
         {
             if (ModelState.IsValid || true)
             {
-                CalculatorViewModel viewModel = _calculatorLogic.CalculateWineResult(User, model);
+                CalculatorViewModel viewModel = _calculatorLogic.CalculateWineResult(model);
                 return View(MVC.Views.Calculator.Index, viewModel);
             }
             else
