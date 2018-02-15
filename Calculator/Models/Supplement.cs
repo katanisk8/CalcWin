@@ -14,8 +14,8 @@ namespace Calculator.Models
 
         [Timestamp]
         public byte[] Timestamp { get; set; }
-
-        [XmlIgnore]
+        
+        [XmlElement]
         public WineProject Project { get; set; }
         
         [XmlAttribute("type")]

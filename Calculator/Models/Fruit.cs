@@ -14,7 +14,8 @@ namespace Calculator.Models
 
         [Timestamp]
         public byte[] Timestamp { get; set; }
-        
+
+        [XmlAttribute("user")]
         public string User { get; set; }
 
         [XmlAttribute("name")]

@@ -124,9 +124,8 @@ namespace CalcWin.BusinessLogic.ControllersLogic
         }
 
         private Supplements GetDefaultSupplements()
-        {
-            WineProject defaultProject = db.Projects.First(x => x.User == "546e166a-4738-4ce3-bae8-faef91c91d8c");            
-            return GetSupplementsByProjectId(defaultProject.Id);
+        {         
+            return GetSupplementsByProjectId(-1);
         }
 
         private Supplements GetSupplementsByProjectId(int projectId)

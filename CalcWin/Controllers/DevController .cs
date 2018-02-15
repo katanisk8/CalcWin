@@ -20,19 +20,20 @@ namespace CalcWin.Controllers
         {
             foreach (var fruit in db.Fruits)
             {
-                db.Fruits.Remove(fruit);
+                if (fruit.User == "-1")
+                {
+                    db.Fruits.Remove(fruit);
+                }
             }
 
             foreach (var supplement in db.Supplement)
             {
-                db.Supplement.Remove(supplement);
+                if (supplement.Project.Id == -1)
+                {
+                    db.Supplement.Remove(supplement);
+                }
             }
-
-            foreach (var project in db.Projects)
-            {
-                db.Projects.Remove(project);
-            }
-
+            
             foreach (var flavor in db.Flavors)
             {
                 db.Flavors.Remove(flavor);
@@ -40,7 +41,7 @@ namespace CalcWin.Controllers
 
             db.SaveChanges();
 
-            return RedirectToAction(MVC.Actions.Calculator.Index);
+            return RedirectToAction(MVC.Actions.Calculator.Index, nameof(MVC.Actions.Calculator));
         }
 
         public IActionResult AddSupplements()
