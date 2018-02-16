@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace Calculator.Models
 {
     [Serializable]
-    public class Flavor
+    public class Flavor : ICalcWinElement
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

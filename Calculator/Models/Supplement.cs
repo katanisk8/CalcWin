@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace Calculator.Models
 {
     [Serializable]
-    public class Supplement
+    public class Supplement : ICalcWinElement
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
