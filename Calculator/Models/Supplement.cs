@@ -15,7 +15,7 @@ namespace Calculator.Models
         [Timestamp]
         public byte[] Timestamp { get; set; }
         
-        [XmlElement]
+        [XmlIgnore]
         public WineProject Project { get; set; }
         
         [XmlAttribute("type")]
@@ -29,5 +29,8 @@ namespace Calculator.Models
 
         [XmlAttribute("factor")]
         public double Factor { get; set; }
+
+        [XmlAttribute("isDefault")]
+        public bool IsDefault { get; set; }
     }
 }

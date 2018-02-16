@@ -15,7 +15,7 @@ namespace CalcWin.Controllers
         {
             db = context;
         }
-        
+
         public IActionResult RemoveAppData()
         {
             foreach (var fruit in db.Fruits)
@@ -33,10 +33,34 @@ namespace CalcWin.Controllers
                     db.Supplement.Remove(supplement);
                 }
             }
-            
+
             foreach (var flavor in db.Flavors)
             {
                 db.Flavors.Remove(flavor);
+            }
+
+            db.SaveChanges();
+
+            return RedirectToAction(MVC.Actions.Calculator.Index, nameof(MVC.Actions.Calculator));
+        }
+
+        public IActionResult RemoveEverythik()
+        {
+            foreach (var fruit in db.Fruits)
+            {
+                db.Fruits.Remove(fruit);
+            }
+            foreach (var supplement in db.Supplement)
+            {
+                db.Supplement.Remove(supplement);
+            }
+            foreach (var flavor in db.Flavors)
+            {
+                db.Flavors.Remove(flavor);
+            }
+            foreach (var project in db.Projects)
+            {
+                db.Projects.Remove(project);
             }
 
             db.SaveChanges();

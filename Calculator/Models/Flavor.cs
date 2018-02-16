@@ -20,5 +20,8 @@ namespace Calculator.Models
 
         [XmlAttribute("acid")]
         public double Acidity { get; set; }
+
+        [XmlAttribute("isDefault")]
+        public bool IsDefault { get; set; }
     }
 }

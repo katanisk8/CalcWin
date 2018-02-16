@@ -8,7 +8,6 @@ using CalcWin.BusinessLogic.ControllersValidations;
 using Calculator.BussinesLogic;
 using Microsoft.AspNetCore.Identity;
 using CalcWin.Models;
-using System.Threading.Tasks;
 
 namespace CalcWin.BusinessLogic.ControllersLogic
 {
@@ -124,8 +123,16 @@ namespace CalcWin.BusinessLogic.ControllersLogic
         }
 
         private Supplements GetDefaultSupplements()
-        {         
-            return GetSupplementsByProjectId(-1);
+        {
+            Supplements supplements = new Supplements();
+
+            supplements.Water = db.Supplement.First(x => x.Type == (int)SupplementType.Water && x.IsDefault == true);
+            supplements.Sugar = db.Supplement.First(x => x.Type == (int)SupplementType.Sugar && x.IsDefault == true);
+            supplements.Acid = db.Supplement.First(x => x.Type == (int)SupplementType.Acid && x.IsDefault == true);
+            supplements.Yeast = db.Supplement.First(x => x.Type == (int)SupplementType.Yeast && x.IsDefault == true);
+            supplements.YeastFood = db.Supplement.First(x => x.Type == (int)SupplementType.YeastFood && x.IsDefault == true);
+
+            return supplements;
         }
 
         private Supplements GetSupplementsByProjectId(int projectId)

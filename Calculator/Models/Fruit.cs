@@ -29,11 +29,17 @@ namespace Calculator.Models
 
         [XmlAttribute("price")]
         public double Price { get; set; }
-        
+
+        [XmlIgnore]
         public string Image { get; set; }
 
+        [XmlIgnore]
         public string Description { get; set; }
 
+        [XmlIgnore]
         public string Link { get; set; }
+
+        [XmlAttribute("isDefault")]
+        public bool IsDefault { get; set; }
     }
 }
