@@ -29,6 +29,7 @@ namespace CalcWin
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddTransient<CalculatorLogic, CalculatorLogic>();
+            services.AddTransient<ProjectLogic, ProjectLogic>();
             services.AddTransient<SettingsLogic, SettingsLogic>();
          
             services.AddIdentity<ApplicationUser, IdentityRole>()

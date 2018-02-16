@@ -1,34 +1,26 @@
-using System.Linq;
 using Microsoft.AspNetCore.Mvc;
-using CalcWin.Data;
-using Microsoft.EntityFrameworkCore;
-using Calculator.Models;
 using CalcWin.Views.Projects;
 using Microsoft.AspNetCore.Authorization;
 using CalcWin.Views.Calculator;
+using CalcWin.BusinessLogic.ControllersLogic;
+using Calculator.Models;
 
 namespace CalcWin.Controllers
 {
     public class ProjectsController : Controller
     {
-        private readonly ApplicationDbContext db;
+        private readonly ProjectLogic _projectLogic;
 
-        public ProjectsController(ApplicationDbContext context)
+        public ProjectsController(ProjectLogic projectLogic)
         {
-            db = context;
+            _projectLogic = projectLogic;
         }
 
         [HttpGet]
         [Authorize]
         public IActionResult Index()
         {
-            ProjectsViewModel viewModel = new ProjectsViewModel();
-
-            viewModel.Projects = db.Projects
-                .Include(x => x.Flavor)
-                .Include(x => x.Ingredients)
-                .ThenInclude(x => x.Fruit)
-                .ToList();
+            ProjectsViewModel viewModel = _projectLogic.LoadProjects();
 
             return View(MVC.Views.Projects.Index, viewModel);
         }
@@ -37,59 +29,34 @@ namespace CalcWin.Controllers
         [Authorize]
         public IActionResult Open(int projectId)
         {
-            if (projectId > 0)
-            {
-                CalculatorViewModel viewModel = new CalculatorViewModel();
+            CalculatorViewModel viewModel = _projectLogic.OpenProject(projectId);
 
-                WineProject wineProject = db.Projects
-                    .Include(x => x.Flavor)
-                    .Include(x => x.Ingredients)
-                    .ThenInclude(x => x.Fruit)
-                    .First(x => x.Id == projectId);
-
-                viewModel.Ingredients = wineProject.Ingredients;
-                viewModel.SelectedFlavor = wineProject.Flavor.Id;
-                viewModel.SelectedAlcoholQuantity = wineProject.AlcoholQuantity;
-
-                return RedirectToAction(MVC.Actions.Projects.Index, viewModel);
-            }
-
-            return View(MVC.Views.Projects.Index);
+            return View(MVC.Views.Calculator.Index, viewModel);
         }
 
         [HttpGet]
         [Authorize]
-        public IActionResult Edit(int ProjectId)
+        public IActionResult Edit(int projectId)
         {
-            if (ProjectId > 0)
+            if (projectId > 0)
             {
-                EditProjectViewModel model = new EditProjectViewModel();
-
-                model.WineProject = db.Projects
-                    .Include(x => x.Flavor)
-                    .Include(x => x.Ingredients)
-                    .ThenInclude(x => x.Fruit)
-                    .First(x => x.Id == ProjectId);
-
-                model.Flavors = db.Flavors.ToList();
-
-                return View(MVC.Views.Projects.EditProject, model);
+                EditProjectViewModel viewModel = _projectLogic.EditProject(projectId);
+                return View(MVC.Views.Projects.EditProject, viewModel);
             }
 
-            return View(MVC.Views.Projects.Index);
+            return View(MVC.Views.Projects.EditProject);
         }
 
         [HttpPost]
         [Authorize]
-        public IActionResult Update(WineProject wineProject)
+        public IActionResult Update(EditProjectViewModel model)
         {
-            if (wineProject != null)
+            if (model.WineProject != null)
             {
-                //db.Projects.Update(wineProject);
-                //db.SaveChanges();
+                _projectLogic.Update(model.WineProject);
             }
 
-            return RedirectToAction(MVC.Actions.Projects.Index);
+            return View(MVC.Views.Projects.EditProject);
         }
 
         [HttpGet]
@@ -98,10 +65,7 @@ namespace CalcWin.Controllers
         {
             if (projectId > 0)
             {
-                WineProject wineProject = db.Projects.First(x => x.Id == projectId);
-
-                db.Projects.Remove(wineProject);
-                db.SaveChanges();
+                _projectLogic.DeleteProject(projectId);
             }
 
             return RedirectToAction(MVC.Actions.Projects.Index);
