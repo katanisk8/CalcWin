@@ -3,6 +3,7 @@ using CalcWin.Data.DefaultData;
 using System;
 using System.Collections.Generic;
 using Calculator.Models;
+using System.Linq;
 
 namespace CalcWin.BusinessLogic.ControllersLogic
 {
@@ -17,11 +18,18 @@ namespace CalcWin.BusinessLogic.ControllersLogic
 
         public void LoadDefaultData(byte[] file)
         {
-            var defaultData = GenerateDefaultData.LoadXml<DefaultData>(file);
-
-            if (CheckIfDefaultDataAlreadyExist(defaultData))
+            try
             {
-                SaveDefaultData(defaultData);
+                var defaultData = GenerateDefaultData.LoadXml<DefaultData>(file);
+
+                if (CheckIfDefaultDataAlreadyExist(defaultData))
+                {
+                    SaveDefaultData(defaultData);
+                }
+            }
+            catch (Exception ex)
+            {
+                
             }
         }
 
@@ -38,7 +46,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
         {
             foreach (var fruit in fruits)
             {
-                var item = db.Fruits.Find(fruit.Name, fruit.IsDefault);
+                var item = db.Fruits.First(x => x.Name == fruit.Name && x.IsDefault == fruit.IsDefault);
                     
                 ThrowExceptionIfItemExist(item);
             }
@@ -48,7 +56,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
         {
             foreach (var flavor in flavors)
             {
-                var item = db.Flavors.Find(flavor.Name, flavor.IsDefault);
+                var item = db.Fruits.First(x => x.Name == flavor.Name && x.IsDefault == flavor.IsDefault);
 
                 ThrowExceptionIfItemExist(item);
             }
@@ -56,22 +64,19 @@ namespace CalcWin.BusinessLogic.ControllersLogic
 
         private void CheckIfSupplementsExist(Supplements supplements)
         {
-            Dictionary<string, bool> sup = new Dictionary<string, bool>();
-            
-            S
-            var water = db.Supplement.Find(sup);
+            var water = db.Supplement.First(x => x.Type == (int)SupplementType.Water && x.IsDefault == true);
             ThrowExceptionIfItemExist(water);
 
-            var sugar = db.Supplement.Find(supplements.Sugar.Name, supplements.Sugar.IsDefault);
+            var sugar = db.Supplement.First(x => x.Type == (int)SupplementType.Sugar && x.IsDefault == true);
             ThrowExceptionIfItemExist(sugar);
 
-            var acid = db.Supplement.Find(supplements.Acid.Name, supplements.Acid.IsDefault);
+            var acid = db.Supplement.First(x => x.Type == (int)SupplementType.Acid && x.IsDefault == true);
             ThrowExceptionIfItemExist(acid);
 
-            var yeastFood = db.Supplement.Find(supplements.YeastFood.Name, supplements.YeastFood.IsDefault);
+            var yeastFood = db.Supplement.First(x => x.Type == (int)SupplementType.YeastFood && x.IsDefault == true);
             ThrowExceptionIfItemExist(yeastFood);
 
-            var yeast = db.Supplement.Find(supplements.Yeast.Name, supplements.Yeast.IsDefault);
+            var yeast = db.Supplement.First(x => x.Type == (int)SupplementType.Yeast && x.IsDefault == true);
             ThrowExceptionIfItemExist(yeast);
         }
 
