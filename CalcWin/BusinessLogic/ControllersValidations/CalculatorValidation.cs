@@ -1,20 +1,18 @@
 ﻿using CalcWin.Views.Calculator;
 using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace CalcWin.BusinessLogic.ControllersValidations
 {
-    public class CalculatorValidation : ValidationAttribute
-    {
-      public bool ValidateAddWineProject(CalculatorViewModel model)
-      {
-         return true;
-      }
+    public class CalculatorValidation
+    {        
+        internal void ValidateModelToCalculateWine(CalculatorViewModel model)
+        {
+            throw new NotImplementedException("lol");
+        }
 
-
-      public bool ValidateCalculateWineResult(CalculatorViewModel model)
-      {
-         return true;
-      }
-   }
+        internal void ValidateModelToAddWineProject(CalculatorViewModel model)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

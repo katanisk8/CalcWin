@@ -1,19 +1,24 @@
 using Microsoft.AspNetCore.Mvc;
-using CalcWin.Views.Projects;
 using Microsoft.AspNetCore.Authorization;
 using CalcWin.Views.Calculator;
 using CalcWin.BusinessLogic.ControllersLogic;
-using Calculator.Models;
+using CalcWin.BusinessLogic.ControllersValidations;
+using CalcWin.Models.ProjectsViewModel;
+using System;
 
 namespace CalcWin.Controllers
 {
     public class ProjectsController : Controller
     {
         private readonly ProjectLogic _projectLogic;
+        private readonly ProjectsValidation _validator;
 
-        public ProjectsController(ProjectLogic projectLogic)
+        public ProjectsController(
+            ProjectLogic projectLogic,
+            ProjectsValidation validator)
         {
             _projectLogic = projectLogic;
+            _validator = validator;
         }
 
         [HttpGet]
@@ -29,19 +34,33 @@ namespace CalcWin.Controllers
         [Authorize]
         public IActionResult Open(int projectId)
         {
-            CalculatorViewModel viewModel = _projectLogic.OpenProject(projectId);
+            try
+            {
+                _validator.ValidateOpenProjectId(projectId);
+                CalculatorViewModel viewModel = _projectLogic.OpenProject(projectId);
+                return View(MVC.Views.Calculator.Index, viewModel);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("Error", ex.Message);
+            }
 
-            return View(MVC.Views.Calculator.Index, viewModel);
+            return View(MVC.Views.Calculator.Index);
         }
 
         [HttpGet]
         [Authorize]
         public IActionResult Edit(int projectId)
         {
-            if (projectId > 0)
+            try
             {
+                _validator.ValidateEditProjectId(projectId);
                 EditProjectViewModel viewModel = _projectLogic.EditProject(projectId);
                 return View(MVC.Views.Projects.EditProject, viewModel);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("Error", ex.Message);
             }
 
             return View(MVC.Views.Projects.EditProject);
@@ -51,9 +70,14 @@ namespace CalcWin.Controllers
         [Authorize]
         public IActionResult Update(EditProjectViewModel model)
         {
-            if (model.WineProject != null)
+            try
             {
+                _validator.ValidateModelToUpdate(model);
                 _projectLogic.Update(model.WineProject);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("Error", ex.Message);
             }
 
             return View(MVC.Views.Projects.EditProject);
@@ -63,9 +87,14 @@ namespace CalcWin.Controllers
         [Authorize]
         public IActionResult Delete(int projectId)
         {
-            if (projectId > 0)
+            try
             {
+                _validator.ValidateDeleteProjectId(projectId);
                 _projectLogic.DeleteProject(projectId);
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("Error", ex.Message);
             }
 
             return RedirectToAction(MVC.Actions.Projects.Index);

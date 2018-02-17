@@ -9,6 +9,10 @@
     padding-right: 0px;
 }
 
+.settings-content {
+    padding: 20px;
+}
+
 /* Set widths on the form inputs since otherwise they're 100% wide */
 input,
 select,

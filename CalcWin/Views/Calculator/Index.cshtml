@@ -5,7 +5,12 @@
 
 <form class="form-buttons" method="post">
     <div class="row content content-calculator text-center">
-        <div asp-validation-summary="All" class="text-danger"></div>
+        @if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
+        {
+            <div class="alert alert-danger">
+                <strong>Error!</strong>@ViewData.ModelState["Error"].Errors.First().ErrorMessage
+            </div>
+        }
         <div class="col-sm-3">
             <div class="well well-result">
                 <h2>Fruits</h2>

@@ -1,7 +1,7 @@
 ﻿using Calculator.Models;
 using System.Collections.Generic;
 
-namespace CalcWin.Views.Projects
+namespace CalcWin.Models.ProjectsViewModel
 {
     public class EditProjectViewModel
     {

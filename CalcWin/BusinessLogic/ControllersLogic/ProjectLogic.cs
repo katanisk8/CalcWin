@@ -4,8 +4,8 @@ using Calculator.Models;
 using CalcWin.Views.Calculator;
 using Microsoft.AspNetCore.Identity;
 using CalcWin.Models;
-using CalcWin.Views.Projects;
 using Microsoft.EntityFrameworkCore;
+using CalcWin.Models.ProjectsViewModel;
 
 namespace CalcWin.BusinessLogic.ControllersLogic
 {
@@ -14,7 +14,8 @@ namespace CalcWin.BusinessLogic.ControllersLogic
         private readonly ApplicationDbContext db;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public ProjectLogic(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public ProjectLogic(ApplicationDbContext context, 
+            UserManager<ApplicationUser> userManager)
         {
             db = context;
             _userManager = userManager;

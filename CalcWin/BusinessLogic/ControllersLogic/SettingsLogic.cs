@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using Calculator.Models;
 using System.Linq;
+using CalcWin.Models.SettingsViewModels;
+using System.IO;
 
 namespace CalcWin.BusinessLogic.ControllersLogic
 {
@@ -16,30 +18,27 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             db = context;
         }
 
-        public void LoadDefaultData(byte[] file)
+        public void LoadDefaultData(DefaultDataViewModel model)
         {
-            try
+            byte[] fileBytes = new byte[] { };
+            
+            using (var ms = new MemoryStream())
             {
-                var defaultData = GenerateDefaultData.LoadXml<DefaultData>(file);
+                model.File.CopyTo(ms);
+                fileBytes = ms.ToArray();
+            }
 
-                if (CheckIfDefaultDataAlreadyExist(defaultData))
-                {
-                    SaveDefaultData(defaultData);
-                }
-            }
-            catch (Exception ex)
-            {
-                
-            }
+            DefaultData defaultData = GenerateDefaultData.LoadXml<DefaultData>(fileBytes);
+
+            CheckIfDefaultDataAlreadyExist(defaultData);
+            SaveDefaultData(defaultData);
         }
 
-        private bool CheckIfDefaultDataAlreadyExist(DefaultData defaultData)
+        private void CheckIfDefaultDataAlreadyExist(DefaultData defaultData)
         {
             CheckIfFruitsExist(defaultData.Fruits);
             CheckIfFlavorsExist(defaultData.Flavors);
             CheckIfSupplementsExist(defaultData.Supplements);
-
-            return true;
         }
 
         private void CheckIfFruitsExist(List<Fruit> fruits)
@@ -47,7 +46,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             foreach (var fruit in fruits)
             {
                 var item = db.Fruits.First(x => x.Name == fruit.Name && x.IsDefault == fruit.IsDefault);
-                    
+
                 ThrowExceptionIfItemExist(item);
             }
         }

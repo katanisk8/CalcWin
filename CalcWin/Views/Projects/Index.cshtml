@@ -12,7 +12,15 @@
     ViewData["Title"] = "Projects";
 }
 
-<form class="container" method="get">
+<form class="container" method="get">>
+    <div class="row content content-calculator text-center">
+        @if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
+        {
+            <div class="alert alert-danger">
+                <strong>Error!</strong>@ViewData.ModelState["Error"].Errors.First().ErrorMessage
+            </div>
+        }
+    </div>
     <div class="well well-projects text-center col-sm-3">
         <h4>Options</h4>
         <a asp-controller="Calculator" class="btn btn-info btn-block">New</a>

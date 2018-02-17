@@ -5,6 +5,14 @@
 }
 
 <form class="container" method="post">
+    <div class="row content content-calculator text-center">
+        @if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
+        {
+            <div class="alert alert-danger">
+                <strong>Error!</strong>@ViewData.ModelState["Error"].Errors.First().ErrorMessage
+            </div>
+        }
+    </div>
     <div class="well well-projects text-center col-sm-2">
         <h4>Options</h4>
         <button type="submit" asp-controller="Projects" asp-action="@MVC.Actions.Projects.Update" class="btn btn-warning btn-block">Save</button>

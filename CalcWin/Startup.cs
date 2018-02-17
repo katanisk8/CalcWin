@@ -10,6 +10,7 @@ using CalcWin.Services;
 using CalcWin.BusinessLogic.ControllersLogic;
 using Microsoft.Extensions.FileProviders;
 using System.IO;
+using CalcWin.BusinessLogic.ControllersValidations;
 
 namespace CalcWin
 {
@@ -31,7 +32,11 @@ namespace CalcWin
             services.AddTransient<CalculatorLogic, CalculatorLogic>();
             services.AddTransient<ProjectLogic, ProjectLogic>();
             services.AddTransient<SettingsLogic, SettingsLogic>();
-         
+
+            services.AddTransient<CalculatorValidation, CalculatorValidation>();
+            services.AddTransient<ProjectsValidation, ProjectsValidation>();
+            services.AddTransient<SettingsValidation, SettingsValidation>();
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
              .AddEntityFrameworkStores<ApplicationDbContext>()
              .AddDefaultTokenProviders();

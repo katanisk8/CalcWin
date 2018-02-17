@@ -16,7 +16,9 @@ namespace CalcWin.BusinessLogic.ControllersLogic
         private readonly ApplicationDbContext db;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public CalculatorLogic(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public CalculatorLogic(
+            ApplicationDbContext context,
+            UserManager<ApplicationUser> userManager)
         {
             db = context;
             _userManager = userManager;
@@ -45,67 +47,48 @@ namespace CalcWin.BusinessLogic.ControllersLogic
 
         public void AddWineProject(string userId, CalculatorViewModel model)
         {
-            CalculatorValidation validation = new CalculatorValidation();
+            WineProject wineProject = new WineProject();
+            List<Ingredient> ingredients = new List<Ingredient>();
 
-            if (validation.ValidateAddWineProject(model))
-            {
-                WineProject wineProject = new WineProject();
-                List<Ingredient> ingredients = new List<Ingredient>();
+            wineProject.User = userId;
+            wineProject.Ingredients = GetIngredientsFromModel(model.Ingredients);
+            wineProject.Name = model.Name;
+            wineProject.Flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
+            wineProject.AlcoholQuantity = model.SelectedAlcoholQuantity;
+            wineProject.Date = DateTime.Now;
 
-                wineProject.User = userId;
-                wineProject.Ingredients = GetIngredientsFromModel(model.Ingredients);
-                wineProject.Name = model.Name;
-                wineProject.Flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
-                wineProject.AlcoholQuantity = model.SelectedAlcoholQuantity;
-                wineProject.Date = DateTime.Now;
-
-                db.Projects.Add(wineProject);
-                db.SaveChanges();
-            }
+            db.Projects.Add(wineProject);
+            db.SaveChanges();
         }
 
         public CalculatorViewModel CalculateWineResult(CalculatorViewModel model)
         {
-            CalculatorValidation validation = new CalculatorValidation();
+            List<Ingredient> ingredients = GetIngredientsFromModel(model.Ingredients);
+            Flavor flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
+            double selectedAlcoholQuantity = model.SelectedAlcoholQuantity;
+            double juiceCorretion = model.JuiceCorretion;
+            Supplements suplements = GetDefaultSupplements();
 
-            if (validation.ValidateCalculateWineResult(model))
-            {
-                List<Ingredient> ingredients = GetIngredientsFromModel(model.Ingredients);
-                Flavor flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
-                double selectedAlcoholQuantity = model.SelectedAlcoholQuantity;
-                double juiceCorretion = model.JuiceCorretion;
-                Supplements suplements = GetDefaultSupplements();
+            Result result = Calculations.CalculateWine(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
 
-                Result result = Calculations.CalculateWine(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
-
-                model.Flavors = db.Flavors.ToList();
-                model.Result = RoundResultValues(result);
-
-                return model;
-            }
+            model.Flavors = db.Flavors.ToList();
+            model.Result = RoundResultValues(result);
 
             return model;
         }
 
         public CalculatorViewModel CalculateWineResultForSavedProject(WineProject project, CalculatorViewModel model)
         {
-            CalculatorValidation validation = new CalculatorValidation();
+            List<Ingredient> ingredients = GetIngredientsFromModel(model.Ingredients);
+            Flavor flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
+            double selectedAlcoholQuantity = model.SelectedAlcoholQuantity;
+            double juiceCorretion = model.JuiceCorretion;
+            Supplements suplements = GetProjectSupplementsOrDefault(project.Id);
 
-            if (validation.ValidateCalculateWineResult(model))
-            {
-                List<Ingredient> ingredients = GetIngredientsFromModel(model.Ingredients);
-                Flavor flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
-                double selectedAlcoholQuantity = model.SelectedAlcoholQuantity;
-                double juiceCorretion = model.JuiceCorretion;
-                Supplements suplements = GetProjectSupplementsOrDefault(project.Id);
+            Result result = Calculations.CalculateWine(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
 
-                Result result = Calculations.CalculateWine(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
-
-                model.Flavors = db.Flavors.ToList();
-                model.Result = RoundResultValues(result);
-
-                return model;
-            }
+            model.Flavors = db.Flavors.ToList();
+            model.Result = RoundResultValues(result);
 
             return model;
         }
