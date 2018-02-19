@@ -27,7 +27,7 @@ namespace CalcWin.Data.DefaultData
                var obj = (T)serialiser.Deserialize(reader);
 
                if (obj.Version != "3.0")
-                  throw new NotSupportedException("Wersja pliku '" + obj.Version + "' nie jest obslugiwana.");
+                  throw new NotSupportedException(String.Format("Version {0} is unsupported", obj.Version));
 
                return obj;
             }

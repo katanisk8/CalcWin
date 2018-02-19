@@ -8,7 +8,7 @@
         @if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
         {
             <div class="alert alert-danger">
-                <strong>Error!</strong>@ViewData.ModelState["Error"].Errors.First().ErrorMessage
+                @ViewData.ModelState["Error"].Errors.First().ErrorMessage
             </div>
         }
         <div class="col-sm-3">

@@ -50,7 +50,8 @@ namespace CalcWin.Controllers
                 ModelState.AddModelError("Error", ex.Message);
             }
 
-            return RedirectToAction(MVC.Actions.Calculator.Index);
+            CalculatorViewModel newModel = _calculatorLogic.PrepareStartData();
+            return View(MVC.Views.Calculator.Index, newModel);
         }
 
         [HttpPost]
