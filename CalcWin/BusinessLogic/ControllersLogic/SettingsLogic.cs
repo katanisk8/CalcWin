@@ -21,7 +21,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
         public void LoadDefaultData(DefaultDataViewModel model)
         {
             byte[] fileBytes = new byte[] { };
-            
+
             using (var ms = new MemoryStream())
             {
                 model.File.CopyTo(ms);
@@ -30,82 +30,69 @@ namespace CalcWin.BusinessLogic.ControllersLogic
 
             DefaultData defaultData = GenerateDefaultData.LoadXml<DefaultData>(fileBytes);
 
-            CheckIfDefaultDataAlreadyExist(defaultData);
             SaveDefaultData(defaultData);
-        }
-
-        private void CheckIfDefaultDataAlreadyExist(DefaultData defaultData)
-        {
-            CheckIfFruitsExist(defaultData.Fruits);
-            CheckIfFlavorsExist(defaultData.Flavors);
-            CheckIfSupplementsExist(defaultData.Supplements);
-        }
-
-        private void CheckIfFruitsExist(List<Fruit> fruits)
-        {
-            foreach (var fruit in fruits)
-            {
-                var item = db.Fruits.First(x => x.Name == fruit.Name && x.IsDefault == fruit.IsDefault);
-
-                ThrowExceptionIfItemExist(item);
-            }
-        }
-
-        private void CheckIfFlavorsExist(List<Flavor> flavors)
-        {
-            foreach (var flavor in flavors)
-            {
-                var item = db.Fruits.First(x => x.Name == flavor.Name && x.IsDefault == flavor.IsDefault);
-
-                ThrowExceptionIfItemExist(item);
-            }
-        }
-
-        private void CheckIfSupplementsExist(Supplements supplements)
-        {
-            var water = db.Supplement.First(x => x.Type == (int)SupplementType.Water && x.IsDefault == true);
-            ThrowExceptionIfItemExist(water);
-
-            var sugar = db.Supplement.First(x => x.Type == (int)SupplementType.Sugar && x.IsDefault == true);
-            ThrowExceptionIfItemExist(sugar);
-
-            var acid = db.Supplement.First(x => x.Type == (int)SupplementType.Acid && x.IsDefault == true);
-            ThrowExceptionIfItemExist(acid);
-
-            var yeastFood = db.Supplement.First(x => x.Type == (int)SupplementType.YeastFood && x.IsDefault == true);
-            ThrowExceptionIfItemExist(yeastFood);
-
-            var yeast = db.Supplement.First(x => x.Type == (int)SupplementType.Yeast && x.IsDefault == true);
-            ThrowExceptionIfItemExist(yeast);
-        }
-
-        private void ThrowExceptionIfItemExist(ICalcWinElement element)
-        {
-            if (element != null)
-            {
-                throw new Exception(string.Format("{0} already exist", element.Name));
-            }
         }
 
         private void SaveDefaultData(DefaultData defaultData)
         {
             foreach (var fruit in defaultData.Fruits)
             {
-                db.Fruits.Add(fruit);
+                if (CheckIfFruitAlreadyExist(fruit) == false)
+                {
+                    db.Fruits.Add(fruit);
+                }
             }
 
             foreach (var flavor in defaultData.Flavors)
             {
-                db.Flavors.Add(flavor);
+                if (CheckIfFlavorAlreadyExist(flavor) == false)
+                {
+                    db.Flavors.Add(flavor);
+                }
             }
 
-            db.Supplement.Add(defaultData.Supplements.Water);
-            db.Supplement.Add(defaultData.Supplements.Sugar);
-            db.Supplement.Add(defaultData.Supplements.Acid);
-            db.Supplement.Add(defaultData.Supplements.Yeast);
-            db.Supplement.Add(defaultData.Supplements.YeastFood);
+            CheckAndAddSupplements(defaultData.Supplements);
 
             db.SaveChanges();
+        }
+
+        private void CheckAndAddSupplements(Supplements supplements)
+        {
+            if (CheckIfSupplementExist(supplements.Water) == false)
+            {
+                db.Supplement.Add(supplements.Water);
+            }
+            if (CheckIfSupplementExist(supplements.Sugar) == false)
+            {
+                db.Supplement.Add(supplements.Sugar);
+            }
+            if (CheckIfSupplementExist(supplements.Acid) == false)
+            {
+                db.Supplement.Add(supplements.Acid);
+            }
+            if (CheckIfSupplementExist(supplements.Yeast) == false)
+            {
+                db.Supplement.Add(supplements.Yeast);
+            }
+            if (CheckIfSupplementExist(supplements.YeastFood) == false)
+            {
+                db.Supplement.Add(supplements.YeastFood);
+            }
+        }
+
+        private bool CheckIfFruitAlreadyExist(Fruit fruit)
+        {
+            return db.Fruits.Any(x => x.Name == fruit.Name && x.IsDefault == true);
+        }
+
+        private bool CheckIfFlavorAlreadyExist(Flavor flavor)
+        {
+            return db.Flavors.Any(x => x.Name == flavor.Name && x.IsDefault == true);
+        }
+
+        private bool CheckIfSupplementExist(Supplement supplement)
+        {
+            return db.Supplement.Any(x => x.Type == supplement.Type && x.IsDefault == true);
         }
     }
 }
