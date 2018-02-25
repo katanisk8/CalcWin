@@ -16,7 +16,7 @@ namespace CalcWin.Controllers
             db = context;
         }
 
-        public IActionResult RemoveEverythik()
+        public IActionResult RemoveEverythig()
         {
             foreach (var fruit in db.Fruits)
             {
@@ -25,6 +25,10 @@ namespace CalcWin.Controllers
             foreach (var supplement in db.Supplement)
             {
                 db.Supplement.Remove(supplement);
+            }
+            foreach (var supplementType in db.SupplementType)
+            {
+                db.SupplementType.Remove(supplementType);
             }
             foreach (var flavor in db.Flavors)
             {

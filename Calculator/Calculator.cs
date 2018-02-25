@@ -7,14 +7,14 @@ namespace Calculator.BussinesLogic
 {
     public static class Calculations
     {
-        public static Result CalculateWine(List<Ingredient> listElements, Flavor selectedFlavor, double expectedAlcohol, double juiceCorretion, Supplements suplements)
+        public static Result CalculateWine(List<Ingredient> listElements, Flavor selectedFlavor, double expectedAlcohol, double juiceCorretion, List<Supplement> supplements)
         {
-            var result = CalculateHelper(listElements, selectedFlavor, expectedAlcohol, suplements);
+            var result = CalculateHelper(listElements, selectedFlavor, expectedAlcohol, supplements);
 
             if (juiceCorretion > 0)
             {
                 var correctedList = CorrectComponentts(result, juiceCorretion);
-                return CalculateHelper(correctedList, selectedFlavor, expectedAlcohol, suplements);
+                return CalculateHelper(correctedList, selectedFlavor, expectedAlcohol, supplements);
             }
 
             return result;
@@ -38,12 +38,17 @@ namespace Calculator.BussinesLogic
         }
 
 
-        private static Result CalculateHelper(List<Ingredient> listElements, Flavor selectedFlavor, double expectedAlcohol, Supplements suplements)
+        private static Result CalculateHelper(List<Ingredient> listElements, Flavor selectedFlavor, double expectedAlcohol, List<Supplement> supplements)
         {
             if (listElements == null || !listElements.Any())
                 throw new ArgumentException(nameof(listElements));
 
             Result result = new Result();
+            Supplement sugar = supplements.First(x => x.Parameters.Type == 0);
+            Supplement acid = supplements.First(x => x.Parameters.Type == 1);
+            Supplement water = supplements.First(x => x.Parameters.Type == 2);
+            Supplement yeast = supplements.First(x => x.Parameters.Type == 3);
+            Supplement yeastFood = supplements.First(x => x.Parameters.Type == 4);
 
             double sugarSum = 0;
             double acidSum = 0;
@@ -115,16 +120,16 @@ namespace Calculator.BussinesLogic
             double sugarInFinalJuice = sugarSum / juiceQuantity;
             double acidInFinalJuice = acidSum / juiceQuantity;
 
-            double yeastfoodQuantity = juiceQuantity * suplements.YeastFood.Factor;
-            double yeastQuantity = juiceQuantity * suplements.Yeast.Factor;
+            double yeastfoodQuantity = juiceQuantity * yeastFood.Factor;
+            double yeastQuantity = juiceQuantity * yeast.Factor;
 
             double wineQuantity = (grapeQuantity + waterQuantity + sugarVolume) * 0.9;
 
-            double suplementsCost = (sugarQuantity * suplements.Sugar.Price) +
-                                    (acidQuantity / 1000 * suplements.Acid.Price) +
-                                    (waterQuantity * suplements.Water.Price) +
-                                    (yeastfoodQuantity / 1000 * suplements.YeastFood.Price) +
-                                    (yeastQuantity / 1000 * suplements.Yeast.Price);
+            double suplementsCost = (sugarQuantity * sugar.Price) +
+                                    (acidQuantity / 1000 * acid.Price) +
+                                    (waterQuantity * water.Price) +
+                                    (yeastfoodQuantity / 1000 * yeastFood.Price) +
+                                    (yeastQuantity / 1000 * yeast.Price);
 
             // Juice 
             result.Mixture.FruitsMixture = grapeQuantity;

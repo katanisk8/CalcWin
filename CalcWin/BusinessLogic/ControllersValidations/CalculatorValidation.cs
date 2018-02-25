@@ -43,7 +43,7 @@ namespace CalcWin.BusinessLogic.ControllersValidations
 
         private void CheckIngredients(IEnumerable<Ingredient> ingredients)
         {
-            if (ingredients.Any(x => x.Quantity > 0))
+            if (ingredients.Any(x => x.Quantity > 0) == false)
             {
                 throw new Exception("Please choose fruits");
             }

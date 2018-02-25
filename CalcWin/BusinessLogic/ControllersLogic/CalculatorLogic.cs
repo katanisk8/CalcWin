@@ -4,7 +4,6 @@ using CalcWin.Data;
 using Calculator.Models;
 using CalcWin.Views.Calculator;
 using System.Collections.Generic;
-using CalcWin.BusinessLogic.ControllersValidations;
 using Calculator.BussinesLogic;
 using Microsoft.AspNetCore.Identity;
 using CalcWin.Models;
@@ -67,7 +66,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             Flavor flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
             double selectedAlcoholQuantity = model.SelectedAlcoholQuantity;
             double juiceCorretion = model.JuiceCorretion;
-            Supplements suplements = GetDefaultSupplements();
+            List<Supplement> suplements = GetDefaultSupplements();
 
             Result result = Calculations.CalculateWine(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
 
@@ -83,7 +82,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             Flavor flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
             double selectedAlcoholQuantity = model.SelectedAlcoholQuantity;
             double juiceCorretion = model.JuiceCorretion;
-            Supplements suplements = GetProjectSupplementsOrDefault(project.Id);
+            List<Supplement> suplements = GetProjectSupplementsOrDefault(project.Id);
 
             Result result = Calculations.CalculateWine(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
 
@@ -93,7 +92,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             return model;
         }
 
-        private Supplements GetProjectSupplementsOrDefault(int projectId)
+        private List<Supplement> GetProjectSupplementsOrDefault(int projectId)
         {
             if (CheckIfExistSupplementsForProjectId(projectId))
             {
@@ -105,39 +104,49 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             }
         }
 
-        private Supplements GetDefaultSupplements()
+        private List<Supplement> GetDefaultSupplements()
         {
-            Supplements supplements = new Supplements();
+            List<Supplement> supplements = new List<Supplement>();
 
-            supplements.Water = db.Supplement.First(x => x.Type == (int)SupplementType.Water && x.IsDefault == true);
-            supplements.Sugar = db.Supplement.First(x => x.Type == (int)SupplementType.Sugar && x.IsDefault == true);
-            supplements.Acid = db.Supplement.First(x => x.Type == (int)SupplementType.Acid && x.IsDefault == true);
-            supplements.Yeast = db.Supplement.First(x => x.Type == (int)SupplementType.Yeast && x.IsDefault == true);
-            supplements.YeastFood = db.Supplement.First(x => x.Type == (int)SupplementType.YeastFood && x.IsDefault == true);
+            var queryResult = from supplement in db.Supplement
+                              join supplementType in db.SupplementType on supplement.Parameters.Id equals supplementType.Id
+                              where supplementType.IsDefault == true
+                              select new { Supplement = supplement, SupplementType = supplementType };
+
+            foreach (var item in queryResult)
+            {
+                item.Supplement.Parameters = item.SupplementType;
+                supplements.Add(item.Supplement);
+            }
 
             return supplements;
         }
 
-        private Supplements GetSupplementsByProjectId(int projectId)
+        private List<Supplement> GetSupplementsByProjectId(int projectId)
         {
-            Supplements supplements = new Supplements();
+            List<Supplement> supplements = new List<Supplement>();
 
-            supplements.Water = db.Supplement.First(x => x.Type == (int)SupplementType.Water && x.Project.Id == projectId);
-            supplements.Sugar = db.Supplement.First(x => x.Type == (int)SupplementType.Sugar && x.Project.Id == projectId);
-            supplements.Acid = db.Supplement.First(x => x.Type == (int)SupplementType.Acid && x.Project.Id == projectId);
-            supplements.Yeast = db.Supplement.First(x => x.Type == (int)SupplementType.Yeast && x.Project.Id == projectId);
-            supplements.YeastFood = db.Supplement.First(x => x.Type == (int)SupplementType.YeastFood && x.Project.Id == projectId);
+            var queryResult = from supplement in db.Supplement
+                              join supplementType in db.SupplementType on supplement.Parameters.Id equals supplementType.Id
+                              where supplement.Project.Id == projectId
+                              select new { Supplement = supplement, SupplementType = supplementType };
+
+            foreach (var item in queryResult)
+            {
+                item.Supplement.Parameters = item.SupplementType;
+                supplements.Add(item.Supplement);
+            }
 
             return supplements;
         }
 
         private bool CheckIfExistSupplementsForProjectId(int projectId)
         {
-            if (db.Supplement.Any(x => x.Type == (int)SupplementType.Water && x.Project.Id == projectId) &&
-                db.Supplement.Any(x => x.Type == (int)SupplementType.Sugar && x.Project.Id == projectId) &&
-                db.Supplement.Any(x => x.Type == (int)SupplementType.Acid && x.Project.Id == projectId) &&
-                db.Supplement.Any(x => x.Type == (int)SupplementType.Yeast && x.Project.Id == projectId) &&
-                db.Supplement.Any(x => x.Type == (int)SupplementType.YeastFood && x.Project.Id == projectId))
+            if (db.Supplement.Any(x => x.Parameters.Type == 0 && x.Project.Id == projectId) &&
+                db.Supplement.Any(x => x.Parameters.Type == 1 && x.Project.Id == projectId) &&
+                db.Supplement.Any(x => x.Parameters.Type == 2 && x.Project.Id == projectId) &&
+                db.Supplement.Any(x => x.Parameters.Type == 3 && x.Project.Id == projectId) &&
+                db.Supplement.Any(x => x.Parameters.Type == 4 && x.Project.Id == projectId))
             {
                 return true;
             }

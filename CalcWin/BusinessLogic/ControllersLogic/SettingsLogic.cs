@@ -51,35 +51,18 @@ namespace CalcWin.BusinessLogic.ControllersLogic
                 }
             }
 
-            CheckAndAddSupplements(defaultData.Supplements);
+            foreach (var supplement in defaultData.Supplements)
+            {
+                if (CheckIfSupplementAlreadyExist(supplement) == false)
+                {
+                    db.Supplement.Add(supplement);
 
+                    CheckAndAddSupplementType(supplement.Parameters);
+                }
+            }
             db.SaveChanges();
         }
-
-        private void CheckAndAddSupplements(Supplements supplements)
-        {
-            if (CheckIfSupplementExist(supplements.Water) == false)
-            {
-                db.Supplement.Add(supplements.Water);
-            }
-            if (CheckIfSupplementExist(supplements.Sugar) == false)
-            {
-                db.Supplement.Add(supplements.Sugar);
-            }
-            if (CheckIfSupplementExist(supplements.Acid) == false)
-            {
-                db.Supplement.Add(supplements.Acid);
-            }
-            if (CheckIfSupplementExist(supplements.Yeast) == false)
-            {
-                db.Supplement.Add(supplements.Yeast);
-            }
-            if (CheckIfSupplementExist(supplements.YeastFood) == false)
-            {
-                db.Supplement.Add(supplements.YeastFood);
-            }
-        }
-
+        
         private bool CheckIfFruitAlreadyExist(Fruit fruit)
         {
             return db.Fruits.Any(x => x.Name == fruit.Name && x.IsDefault == true);
@@ -90,9 +73,17 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             return db.Flavors.Any(x => x.Name == flavor.Name && x.IsDefault == true);
         }
 
-        private bool CheckIfSupplementExist(Supplement supplement)
+        private bool CheckIfSupplementAlreadyExist(Supplement supplement)
         {
-            return db.Supplement.Any(x => x.Type == supplement.Type && x.IsDefault == true);
+            return db.Supplement.Any(x => x.Parameters.Type == supplement.Parameters.Type && x.Parameters.IsDefault == true);
+        }
+
+        private void CheckAndAddSupplementType(SupplementType parameters)
+        {
+            if (db.SupplementType.Any(x => x.Type == parameters.Type || x.Name == parameters.Name) == false)
+            {
+                db.SupplementType.Add(parameters);
+            }
         }
     }
 }
