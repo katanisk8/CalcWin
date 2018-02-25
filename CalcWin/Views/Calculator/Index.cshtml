@@ -46,7 +46,7 @@
                                     <div class="col-sm-8">
                                         <div class="input-group">
                                             <span class="input-group-addon"><i class="fa fa-percent"></i></span>
-                                            <input type="number" id="alcoholQuantity" name="SelectedAlcoholQuantity" value="SelectedAlcoholQuantity" class="form-control" placeholder="Quantity" min="0" max="20" step="0.1">
+                                            <input asp-for="SelectedAlcoholQuantity" class="form-control" placeholder="Quantity" min="0" max="20" step="0.1" />
                                         </div>
                                     </div>
                                 </div>
@@ -64,12 +64,7 @@
                                 <div class="form-group">
                                     <label class="col-sm-4 control-label">Flavor:</label>
                                     <div class="col-sm-8">
-                                        <select id="FlavorId" name="SelectedFlavor" class="form-control">
-                                            @foreach (var flavor in Model.Flavors)
-                                            {
-                                                <option id="@flavor.Id" value="@flavor.Id">@flavor.Name</option>
-                                            }
-                                        </select>
+                                        <select asp-for="SelectedFlavor" asp-items="@Model.Flavors" class="form-control"></select>
                                     </div>
                                 </div>
                             </div>

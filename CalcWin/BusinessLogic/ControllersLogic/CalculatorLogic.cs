@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using Calculator.BussinesLogic;
 using Microsoft.AspNetCore.Identity;
 using CalcWin.Models;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace CalcWin.BusinessLogic.ControllersLogic
 {
@@ -39,7 +40,6 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             }
 
             viewModel.Ingredients = fruits;
-            viewModel.Flavors = db.Flavors.ToList();
 
             return viewModel;
         }
@@ -60,7 +60,12 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             db.SaveChanges();
         }
 
-        public CalculatorViewModel CalculateWineResult(CalculatorViewModel model)
+        internal void FillMissingItemsInModel(CalculatorViewModel model)
+        {
+            model.Flavors = new SelectList(db.Flavors, "Id", "Name");
+        }
+
+        public void CalculateWineResult(CalculatorViewModel model)
         {
             List<Ingredient> ingredients = GetIngredientsFromModel(model.Ingredients);
             Flavor flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
@@ -70,10 +75,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
 
             Result result = Calculations.CalculateWine(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
 
-            model.Flavors = db.Flavors.ToList();
             model.Result = RoundResultValues(result);
-
-            return model;
         }
 
         public CalculatorViewModel CalculateWineResultForSavedProject(WineProject project, CalculatorViewModel model)
@@ -86,7 +88,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
 
             Result result = Calculations.CalculateWine(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
 
-            model.Flavors = db.Flavors.ToList();
+            model.Flavors = new SelectList(db.Flavors, "Id", "Name");
             model.Result = RoundResultValues(result);
 
             return model;
@@ -161,7 +163,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             return new CalculatorViewModel
             {
                 Ingredients = new List<Ingredient>(),
-                Flavors = new List<Flavor>(),
+                Flavors = new SelectList(db.Flavors, "Id", "Name"),
                 Result = new Result()
             };
         }

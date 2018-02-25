@@ -9,10 +9,10 @@ namespace CalcWin.Views.Calculator
    {
       // Start data
       public IEnumerable<Ingredient> Ingredients { get; set; }
-      public IEnumerable<Flavor> Flavors { get; set; }
+      public SelectList Flavors { get; set; }
 
-      // Wine Project
-      public string Name { get; set; }
+        // Wine Project
+        public string Name { get; set; }
       public int SelectedFlavor { get; set; }
       public double SelectedAlcoholQuantity { get; set; }
       public double JuiceCorretion { get; set; }
