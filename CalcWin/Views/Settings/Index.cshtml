@@ -1,7 +1,13 @@
 @model CalcWin.Models.SettingsViewModels.IndexViewModel
 @{
    ViewData["Title"] = "Settings";
-   SettingsNavPages.AddActivePage(ViewData, SettingsNavPages.Index); 
+   SettingsNavPages.AddActiveePage(ViewData, SettingsNavPages.Index); 
 }
 
 <h2>General</h2>
+@if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
+{
+    <div class="alert alert-danger">
+        @ViewData.ModelState["Error"].Errors.First().ErrorMessage
+    </div>
+}

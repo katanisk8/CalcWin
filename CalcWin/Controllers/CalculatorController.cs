@@ -60,8 +60,9 @@ namespace CalcWin.Controllers
             try
             {
                 _validator.ValidateModelToCalculateWine(model);
-                CalculatorViewModel viewModel = _calculatorLogic.CalculateWineResult(model);
-                return View(MVC.Views.Calculator.Index, viewModel);
+                _calculatorLogic.CalculateWineResult(model);
+                _calculatorLogic.FillMissingItemsInModel(model);
+                return View(MVC.Views.Calculator.Index, model);
             }
             catch (Exception ex)
             {

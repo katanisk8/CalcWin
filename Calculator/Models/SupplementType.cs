@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 namespace Calculator.Models
 {
     [Serializable]
-    public class Supplement : ICalcWinElement
+    public class SupplementType
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -14,20 +14,14 @@ namespace Calculator.Models
 
         [Timestamp]
         public byte[] Timestamp { get; set; }
-        
-        [XmlIgnore]
-        public WineProject Project { get; set; }
-        
-        [XmlElement]
-        public SupplementType Parameters { get; set; }
+                
+        [XmlAttribute("type")]
+        public int Type { get; set; }
 
         [XmlAttribute("name")]
         public string Name { get; set; }
-
-        [XmlAttribute("price")]
-        public double Price { get; set; }
-
-        [XmlAttribute("factor")]
-        public double Factor { get; set; }
+        
+        [XmlAttribute("isDefault")]
+        public bool IsDefault { get; set; }
     }
 }

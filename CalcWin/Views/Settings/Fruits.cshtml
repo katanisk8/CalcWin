@@ -1,8 +1,14 @@
 @model FruitsViewModel
 @{
     ViewData["Title"] = "Frutis";
-    ViewData.AddActivePage(SettingsNavPages.Fruits);
+    ViewData.AddActiveePage(SettingsNavPages.Fruits);
 }
 
 
 <h2>Fruits</h2>
+@if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
+{
+    <div class="alert alert-danger">
+        @ViewData.ModelState["Error"].Errors.First().ErrorMessage
+    </div>
+}

@@ -18,7 +18,7 @@ namespace CalcWin.Data.DefaultData
         [XmlArray]
         public List<Flavor> Flavors { get; set; }
 
-        [XmlElement]
-        public Supplements Supplements { get; set; }
+        [XmlArray]
+        public List<Supplement> Supplements { get; set; }
     }
 }

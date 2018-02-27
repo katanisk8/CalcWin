@@ -52,7 +52,7 @@ namespace CalcWin.Controllers
                 ModelState.AddModelError("Error", ex.Message);
             }
 
-            return View(MVC.Actions.Settings.AdminSettings);
+            return RedirectToAction(MVC.Actions.Calculator.Index, MVC.Controllers.Calculator);
         }
     }
 }

@@ -1,13 +1,16 @@
 @model DefaultDataViewModel
 @{
     ViewData["Title"] = "Admin Settings";
-    ViewData.AddActivePage(SettingsNavPages.AdminSettings);
+    ViewData.AddActiveePage(SettingsNavPages.AdminSettings);
 }
 
-
-
-
 <div id="page-wrapper">
+    @if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
+    {
+        <div class="alert alert-danger">
+            @ViewData.ModelState["Error"].Errors.First().ErrorMessage
+        </div>
+    }
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">

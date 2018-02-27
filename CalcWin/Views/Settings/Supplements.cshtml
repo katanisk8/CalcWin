@@ -1,8 +1,14 @@
 @model SupplementsViewModel
 @{
     ViewData["Title"] = "Supplements";
-    ViewData.AddActivePage(SettingsNavPages.Supplements);
+    ViewData.AddActiveePage(SettingsNavPages.Supplements);
 }
 
 
 <h2>Supplements</h2>
+@if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
+{
+    <div class="alert alert-danger">
+        @ViewData.ModelState["Error"].Errors.First().ErrorMessage
+    </div>
+}

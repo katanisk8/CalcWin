@@ -23,6 +23,6 @@ namespace CalcWin.Views.Settings
             return string.Equals(activePage, page, StringComparison.OrdinalIgnoreCase) ? "active" : null;
         }
 
-        public static void AddActivePage(this ViewDataDictionary viewData, string activePage) => viewData[ActivePageKey] = activePage;
+        public static void AddActiveePage(this ViewDataDictionary viewData, string activePage) => viewData[ActivePageKey] = activePage;
     }
 }
