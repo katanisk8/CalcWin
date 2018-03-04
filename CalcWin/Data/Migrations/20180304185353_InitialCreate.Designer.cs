@@ -11,8 +11,8 @@ using System;
 namespace CalcWin.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180216053925_isDefault")]
-    partial class isDefault
+    [Migration("20180304185353_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -26,11 +26,15 @@ namespace CalcWin.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<double>("Acidity");
+                    b.Property<double>("Acid");
 
                     b.Property<bool>("IsDefault");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("NormalizedName")
+                        .IsRequired();
 
                     b.Property<byte[]>("Timestamp")
                         .IsConcurrencyToken()
@@ -48,15 +52,13 @@ namespace CalcWin.Migrations
 
                     b.Property<double>("Acid");
 
-                    b.Property<string>("Description");
-
-                    b.Property<string>("Image");
-
                     b.Property<bool>("IsDefault");
 
-                    b.Property<string>("Link");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
-                    b.Property<string>("Name");
+                    b.Property<string>("NormalizedName")
+                        .IsRequired();
 
                     b.Property<double>("Price");
 
@@ -80,9 +82,33 @@ namespace CalcWin.Migrations
 
                     b.Property<int>("FruitId");
 
-                    b.Property<int?>("ProjectId");
-
                     b.Property<double>("Quantity");
+
+                    b.Property<byte[]>("Timestamp")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
+
+                    b.Property<int>("WineProjectId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FruitId");
+
+                    b.HasIndex("WineProjectId");
+
+                    b.ToTable("Ingredients");
+                });
+
+            modelBuilder.Entity("Calculator.Models.NormalizedName", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Item")
+                        .IsRequired();
+
+                    b.Property<string>("Name")
+                        .IsRequired();
 
                     b.Property<byte[]>("Timestamp")
                         .IsConcurrencyToken()
@@ -90,11 +116,7 @@ namespace CalcWin.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FruitId");
-
-                    b.HasIndex("ProjectId");
-
-                    b.ToTable("Ingredients");
+                    b.ToTable("NormalizedNames");
                 });
 
             modelBuilder.Entity("Calculator.Models.Supplement", b =>
@@ -106,23 +128,25 @@ namespace CalcWin.Migrations
 
                     b.Property<bool>("IsDefault");
 
-                    b.Property<string>("Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
+
+                    b.Property<string>("NormalizedName")
+                        .IsRequired();
 
                     b.Property<double>("Price");
-
-                    b.Property<int?>("ProjectId");
 
                     b.Property<byte[]>("Timestamp")
                         .IsConcurrencyToken()
                         .ValueGeneratedOnAddOrUpdate();
 
-                    b.Property<int>("Type");
+                    b.Property<int?>("WineProjectId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProjectId");
+                    b.HasIndex("WineProjectId");
 
-                    b.ToTable("Supplement");
+                    b.ToTable("Supplements");
                 });
 
             modelBuilder.Entity("Calculator.Models.WineProject", b =>
@@ -151,10 +175,10 @@ namespace CalcWin.Migrations
 
                     b.HasIndex("FlavorId");
 
-                    b.ToTable("Projects");
+                    b.ToTable("WineProjects");
                 });
 
-            modelBuilder.Entity("CalcWin.Models.ApplicationUser", b =>
+            modelBuilder.Entity("CalcWin.Models.User.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -320,16 +344,17 @@ namespace CalcWin.Migrations
                         .HasForeignKey("FruitId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Calculator.Models.WineProject", "Project")
+                    b.HasOne("Calculator.Models.WineProject", "WineProject")
                         .WithMany("Ingredients")
-                        .HasForeignKey("ProjectId");
+                        .HasForeignKey("WineProjectId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Calculator.Models.Supplement", b =>
                 {
-                    b.HasOne("Calculator.Models.WineProject", "Project")
+                    b.HasOne("Calculator.Models.WineProject", "WineProject")
                         .WithMany()
-                        .HasForeignKey("ProjectId");
+                        .HasForeignKey("WineProjectId");
                 });
 
             modelBuilder.Entity("Calculator.Models.WineProject", b =>
@@ -350,7 +375,7 @@ namespace CalcWin.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("CalcWin.Models.ApplicationUser")
+                    b.HasOne("CalcWin.Models.User.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -358,7 +383,7 @@ namespace CalcWin.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("CalcWin.Models.ApplicationUser")
+                    b.HasOne("CalcWin.Models.User.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -371,7 +396,7 @@ namespace CalcWin.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("CalcWin.Models.ApplicationUser")
+                    b.HasOne("CalcWin.Models.User.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -379,7 +404,7 @@ namespace CalcWin.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("CalcWin.Models.ApplicationUser")
+                    b.HasOne("CalcWin.Models.User.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

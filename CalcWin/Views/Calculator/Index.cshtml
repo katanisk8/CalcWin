@@ -5,7 +5,7 @@
 
 <form class="form-buttons" method="post">
     <div class="row content content-calculator text-center">
-        @if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
+       @if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"] != null && ViewData.ModelState["Error"].Errors.Count > 0)
         {
             <div class="alert alert-danger">
                 @ViewData.ModelState["Error"].Errors.First().ErrorMessage

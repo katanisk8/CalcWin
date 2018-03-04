@@ -17,11 +17,11 @@ namespace CalcWin.Data
             base.OnModelCreating(builder);
         }
 
+        public virtual DbSet<WineProject> WineProjects { get; set; }
         public virtual DbSet<Fruit> Fruits { get; set; }
         public virtual DbSet<Flavor> Flavors { get; set; }
-        public virtual DbSet<Ingredient> Ingredients { get; set; }
-        public virtual DbSet<WineProject> WineProjects { get; set; }
         public virtual DbSet<Supplement> Supplements { get; set; }
+        public virtual DbSet<Ingredient> Ingredients { get; set; }
         public virtual DbSet<NormalizedName> NormalizedNames { get; set; }
     }
 }

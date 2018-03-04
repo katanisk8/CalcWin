@@ -16,7 +16,7 @@ namespace CalcWin.Controllers
             db = context;
         }
 
-        public IActionResult RemoveEverythig()
+        public IActionResult RemoveDefaultData()
         {
             foreach (var fruit in db.Fruits)
             {
@@ -29,6 +29,14 @@ namespace CalcWin.Controllers
             foreach (var flavor in db.Flavors)
             {
                 db.Flavors.Remove(flavor);
+            }
+            foreach (var normalizedName in db.NormalizedNames)
+            {
+                db.NormalizedNames.Remove(normalizedName);
+            }
+            foreach (var ingredient in db.Ingredients)
+            {
+                db.Ingredients.Remove(ingredient);
             }
             foreach (var project in db.WineProjects)
             {

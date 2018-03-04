@@ -48,7 +48,7 @@ namespace Calculator.BussinesLogic
             Supplement acid = supplements.First(x => x.NormalizedName == "Acid");
             Supplement water = supplements.First(x => x.NormalizedName == "Water");
             Supplement yeast = supplements.First(x => x.NormalizedName == "Yeast");
-            Supplement yeastFood = supplements.First(x => x.NormalizedName == "YeastFood");
+            Supplement yeastFood = supplements.First(x => x.NormalizedName == "Yeast Food");
 
             double sugarSum = 0;
             double acidSum = 0;

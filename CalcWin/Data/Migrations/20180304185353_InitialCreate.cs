@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace CalcWin.Migrations
 {
-    public partial class InitialModels : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -54,8 +54,10 @@ namespace CalcWin.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Acidity = table.Column<double>(type: "float", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Acid = table.Column<double>(type: "float", nullable: false),
+                    IsDefault = table.Column<bool>(type: "bit", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NormalizedName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Timestamp = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
                 },
                 constraints: table =>
@@ -70,11 +72,9 @@ namespace CalcWin.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Acid = table.Column<double>(type: "float", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Link = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    ParentId = table.Column<int>(type: "int", nullable: true),
+                    IsDefault = table.Column<bool>(type: "bit", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NormalizedName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     Sugar = table.Column<double>(type: "float", nullable: false),
                     Timestamp = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true),
@@ -83,12 +83,21 @@ namespace CalcWin.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Fruits", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Fruits_Fruits_ParentId",
-                        column: x => x.ParentId,
-                        principalTable: "Fruits",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "NormalizedNames",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Item = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Timestamp = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_NormalizedNames", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -198,7 +207,7 @@ namespace CalcWin.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Projects",
+                name: "WineProjects",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -212,9 +221,9 @@ namespace CalcWin.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Projects", x => x.Id);
+                    table.PrimaryKey("PK_WineProjects", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Projects_Flavors_FlavorId",
+                        name: "FK_WineProjects_Flavors_FlavorId",
                         column: x => x.FlavorId,
                         principalTable: "Flavors",
                         principalColumn: "Id",
@@ -228,9 +237,9 @@ namespace CalcWin.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     FruitId = table.Column<int>(type: "int", nullable: false),
-                    ProjectId = table.Column<int>(type: "int", nullable: false),
                     Quantity = table.Column<double>(type: "float", nullable: false),
-                    Timestamp = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true)
+                    Timestamp = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true),
+                    WineProjectId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -242,11 +251,36 @@ namespace CalcWin.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Ingredients_Projects_ProjectId",
-                        column: x => x.ProjectId,
-                        principalTable: "Projects",
+                        name: "FK_Ingredients_WineProjects_WineProjectId",
+                        column: x => x.WineProjectId,
+                        principalTable: "WineProjects",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Supplements",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Factor = table.Column<double>(type: "float", nullable: false),
+                    IsDefault = table.Column<bool>(type: "bit", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NormalizedName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    Timestamp = table.Column<byte[]>(type: "rowversion", rowVersion: true, nullable: true),
+                    WineProjectId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Supplements", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Supplements_WineProjects_WineProjectId",
+                        column: x => x.WineProjectId,
+                        principalTable: "WineProjects",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -289,23 +323,23 @@ namespace CalcWin.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Fruits_ParentId",
-                table: "Fruits",
-                column: "ParentId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Ingredients_FruitId",
                 table: "Ingredients",
                 column: "FruitId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Ingredients_ProjectId",
+                name: "IX_Ingredients_WineProjectId",
                 table: "Ingredients",
-                column: "ProjectId");
+                column: "WineProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Projects_FlavorId",
-                table: "Projects",
+                name: "IX_Supplements_WineProjectId",
+                table: "Supplements",
+                column: "WineProjectId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_WineProjects_FlavorId",
+                table: "WineProjects",
                 column: "FlavorId");
         }
 
@@ -330,6 +364,12 @@ namespace CalcWin.Migrations
                 name: "Ingredients");
 
             migrationBuilder.DropTable(
+                name: "NormalizedNames");
+
+            migrationBuilder.DropTable(
+                name: "Supplements");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -339,7 +379,7 @@ namespace CalcWin.Migrations
                 name: "Fruits");
 
             migrationBuilder.DropTable(
-                name: "Projects");
+                name: "WineProjects");
 
             migrationBuilder.DropTable(
                 name: "Flavors");

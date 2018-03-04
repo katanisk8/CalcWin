@@ -59,7 +59,7 @@ namespace CalcWin.BusinessLogic.ControllersValidations
 
         private void CheckAlcoholQuantity(double selectedAlcoholQuantity)
         {
-            if (selectedAlcoholQuantity < 0)
+            if (selectedAlcoholQuantity <= 0)
             {
                 throw new Exception("Please set alcohol quantity");
             }
