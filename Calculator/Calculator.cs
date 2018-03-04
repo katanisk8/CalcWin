@@ -44,11 +44,11 @@ namespace Calculator.BussinesLogic
                 throw new ArgumentException(nameof(listElements));
 
             Result result = new Result();
-            Supplement sugar = supplements.First(x => x.Parameters.Type == 0);
-            Supplement acid = supplements.First(x => x.Parameters.Type == 1);
-            Supplement water = supplements.First(x => x.Parameters.Type == 2);
-            Supplement yeast = supplements.First(x => x.Parameters.Type == 3);
-            Supplement yeastFood = supplements.First(x => x.Parameters.Type == 4);
+            Supplement sugar = supplements.First(x => x.NormalizedName == "Sugar");
+            Supplement acid = supplements.First(x => x.NormalizedName == "Acid");
+            Supplement water = supplements.First(x => x.NormalizedName == "Water");
+            Supplement yeast = supplements.First(x => x.NormalizedName == "Yeast");
+            Supplement yeastFood = supplements.First(x => x.NormalizedName == "YeastFood");
 
             double sugarSum = 0;
             double acidSum = 0;
@@ -91,7 +91,7 @@ namespace Calculator.BussinesLogic
 
             // Expected final quantity
             double esq = ExpectedSugarQuantity(expectedAlcohol);
-            double eaq = selectedFlavor.Acidity;
+            double eaq = selectedFlavor.Acid;
 
             double acidQuantity = 0;
 

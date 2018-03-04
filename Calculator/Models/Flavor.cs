@@ -16,12 +16,19 @@ namespace Calculator.Models
         public byte[] Timestamp { get; set; }
 
         [XmlAttribute("name")]
+        [Required]
         public string Name { get; set; }
 
-        [XmlAttribute("acid")]
-        public double Acidity { get; set; }
+        [XmlAttribute("normalizedName")]
+        [Required]
+        public string NormalizedName { get; set; }
 
         [XmlAttribute("isDefault")]
+        [Required]
         public bool IsDefault { get; set; }
+
+        [XmlAttribute("acid")]
+        [Required]
+        public double Acid { get; set; }
     }
 }

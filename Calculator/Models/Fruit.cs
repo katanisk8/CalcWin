@@ -19,27 +19,27 @@ namespace Calculator.Models
         public string User { get; set; }
 
         [XmlAttribute("name")]
+        [Required]
         public string Name { get; set; }
 
+        [XmlAttribute("normalizedName")]
+        [Required]
+        public string NormalizedName { get; set; }
+
+        [XmlAttribute("isDefault")]
+        [Required]
+        public bool IsDefault { get; set; }
+
         [XmlAttribute("sugar")]
+        [Required]
         public double Sugar { get; set; }
 
         [XmlAttribute("acid")]
+        [Required]
         public double Acid { get; set; }
 
         [XmlAttribute("price")]
+        [Required]
         public double Price { get; set; }
-
-        [XmlIgnore]
-        public string Image { get; set; }
-
-        [XmlIgnore]
-        public string Description { get; set; }
-
-        [XmlIgnore]
-        public string Link { get; set; }
-
-        [XmlAttribute("isDefault")]
-        public bool IsDefault { get; set; }
     }
 }

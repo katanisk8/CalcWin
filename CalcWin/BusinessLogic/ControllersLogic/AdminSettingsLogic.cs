@@ -53,9 +53,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             {
                 if (CheckIfSupplementAlreadyExist(supplement) == false)
                 {
-                    db.Supplement.Add(supplement);
-
-                    CheckAndAddSupplementType(supplement.Parameters);
+                    db.Supplements.Add(supplement);
                 }
             }
             db.SaveChanges();
@@ -73,15 +71,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
 
         private bool CheckIfSupplementAlreadyExist(Supplement supplement)
         {
-            return db.Supplement.Any(x => x.Parameters.Type == supplement.Parameters.Type && x.Parameters.IsDefault == true);
-        }
-
-        private void CheckAndAddSupplementType(SupplementType parameters)
-        {
-            if (db.SupplementType.Any(x => x.Type == parameters.Type || x.Name == parameters.Name) == false)
-            {
-                db.SupplementType.Add(parameters);
-            }
+            return db.Supplements.Any(x => x.NormalizedName == supplement.NormalizedName && x.IsDefault == true);
         }
     }
 }

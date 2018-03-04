@@ -20,7 +20,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
         {
             ProjectsViewModel viewModel = new ProjectsViewModel();
 
-            viewModel.Projects = db.Projects.Where(x => x.User == userId)
+            viewModel.Projects = db.WineProjects.Where(x => x.User == userId)
                 .Include(x => x.Flavor)
                 .Include(x => x.Ingredients)
                 .ThenInclude(x => x.Fruit)
@@ -33,7 +33,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
         {
             CalculatorViewModel viewModel = new CalculatorViewModel();
 
-            WineProject wineProject = db.Projects
+            WineProject wineProject = db.WineProjects
                 .Include(x => x.Flavor)
                 .Include(x => x.Ingredients)
                 .ThenInclude(x => x.Fruit)
@@ -46,39 +46,39 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             return viewModel;
         }
 
-        internal EditProjectViewModel EditProject(int projectId)
+        internal EditProjectViewModel EditProject(int wineProjectId)
         {
             EditProjectViewModel model = new EditProjectViewModel();
 
-            model.WineProject = db.Projects
+            model.WineProject = db.WineProjects
                 .Include(x => x.Flavor)
                 .Include(x => x.Ingredients)
                 .ThenInclude(x => x.Fruit)
-                .First(x => x.Id == projectId);
+                .First(x => x.Id == wineProjectId);
 
             model.Flavors = db.Flavors.ToList();
 
             return model;
         }
 
-        internal void DeleteProject(int projectId)
+        internal void DeleteProject(int wineProjectId)
         {
-            var projectIngerdients = db.Ingredients.Where(x => x.Project.Id == projectId);
+            var projectIngerdients = db.Ingredients.Where(x => x.WineProject.Id == wineProjectId);
 
             foreach (var ingerdient in projectIngerdients.ToList())
             {
                 db.Ingredients.Remove(ingerdient);
             }
 
-            WineProject project = db.Projects.First(x => x.Id == projectId);
+            WineProject wineProject = db.WineProjects.First(x => x.Id == wineProjectId);
 
-            db.Projects.Remove(project);
+            db.WineProjects.Remove(wineProject);
             db.SaveChanges();
         }
         
         internal void Update(WineProject project)
         {
-            db.Projects.Update(project);
+            db.WineProjects.Update(project);
             db.SaveChanges();
         }
     }

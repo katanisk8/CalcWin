@@ -56,7 +56,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             wineProject.AlcoholQuantity = model.SelectedAlcoholQuantity;
             wineProject.Date = DateTime.Now;
 
-            db.Projects.Add(wineProject);
+            db.WineProjects.Add(wineProject);
             db.SaveChanges();
         }
 
@@ -94,11 +94,11 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             return model;
         }
 
-        private List<Supplement> GetProjectSupplementsOrDefault(int projectId)
+        private List<Supplement> GetProjectSupplementsOrDefault(int wineProjectId)
         {
-            if (CheckIfExistSupplementsForProjectId(projectId))
+            if (CheckIfExistSupplementsForWineProjectId(wineProjectId))
             {
-                return GetSupplementsByProjectId(projectId);
+                return GetSupplementsByWineProjectId(wineProjectId);
             }
             else
             {
@@ -108,47 +108,25 @@ namespace CalcWin.BusinessLogic.ControllersLogic
 
         private List<Supplement> GetDefaultSupplements()
         {
-            List<Supplement> supplements = new List<Supplement>();
-
-            var queryResult = from supplement in db.Supplement
-                              join supplementType in db.SupplementType on supplement.Parameters.Id equals supplementType.Id
-                              where supplementType.IsDefault == true
-                              select new { Supplement = supplement, SupplementType = supplementType };
-
-            foreach (var item in queryResult)
-            {
-                item.Supplement.Parameters = item.SupplementType;
-                supplements.Add(item.Supplement);
-            }
+            List<Supplement> supplements = db.Supplements.Where(x => x.IsDefault == true).ToList();
 
             return supplements;
         }
 
-        private List<Supplement> GetSupplementsByProjectId(int projectId)
+        private List<Supplement> GetSupplementsByWineProjectId(int wineProjectId)
         {
-            List<Supplement> supplements = new List<Supplement>();
-
-            var queryResult = from supplement in db.Supplement
-                              join supplementType in db.SupplementType on supplement.Parameters.Id equals supplementType.Id
-                              where supplement.Project.Id == projectId
-                              select new { Supplement = supplement, SupplementType = supplementType };
-
-            foreach (var item in queryResult)
-            {
-                item.Supplement.Parameters = item.SupplementType;
-                supplements.Add(item.Supplement);
-            }
+            List<Supplement> supplements = db.Supplements.Where(x => x.WineProject.Id == wineProjectId).ToList();
 
             return supplements;
         }
 
-        private bool CheckIfExistSupplementsForProjectId(int projectId)
+        private bool CheckIfExistSupplementsForWineProjectId(int wineProjectId)
         {
-            if (db.Supplement.Any(x => x.Parameters.Type == 0 && x.Project.Id == projectId) &&
-                db.Supplement.Any(x => x.Parameters.Type == 1 && x.Project.Id == projectId) &&
-                db.Supplement.Any(x => x.Parameters.Type == 2 && x.Project.Id == projectId) &&
-                db.Supplement.Any(x => x.Parameters.Type == 3 && x.Project.Id == projectId) &&
-                db.Supplement.Any(x => x.Parameters.Type == 4 && x.Project.Id == projectId))
+            if (db.Supplements.Any(x => x.NormalizedName == "Sugar" && x.WineProject.Id == wineProjectId) &&
+                db.Supplements.Any(x => x.NormalizedName == "Acid" && x.WineProject.Id == wineProjectId) &&
+                db.Supplements.Any(x => x.NormalizedName == "Water" && x.WineProject.Id == wineProjectId) &&
+                db.Supplements.Any(x => x.NormalizedName == "Yeast" && x.WineProject.Id == wineProjectId) &&
+                db.Supplements.Any(x => x.NormalizedName == "YeastFood" && x.WineProject.Id == wineProjectId))
             {
                 return true;
             }

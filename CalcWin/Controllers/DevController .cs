@@ -22,21 +22,17 @@ namespace CalcWin.Controllers
             {
                 db.Fruits.Remove(fruit);
             }
-            foreach (var supplement in db.Supplement)
+            foreach (var supplement in db.Supplements)
             {
-                db.Supplement.Remove(supplement);
-            }
-            foreach (var supplementType in db.SupplementType)
-            {
-                db.SupplementType.Remove(supplementType);
+                db.Supplements.Remove(supplement);
             }
             foreach (var flavor in db.Flavors)
             {
                 db.Flavors.Remove(flavor);
             }
-            foreach (var project in db.Projects)
+            foreach (var project in db.WineProjects)
             {
-                db.Projects.Remove(project);
+                db.WineProjects.Remove(project);
             }
 
             db.SaveChanges();

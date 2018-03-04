@@ -20,5 +20,8 @@ namespace CalcWin.Data.DefaultData
 
         [XmlArray]
         public List<Supplement> Supplements { get; set; }
+
+        [XmlArray]
+        public List<NormalizedName> NormalizedNames { get; set; }
     }
 }

@@ -16,15 +16,22 @@ namespace Calculator.Models
         public byte[] Timestamp { get; set; }
         
         [XmlIgnore]
-        public WineProject Project { get; set; }
+        public WineProject WineProject { get; set; }
         
-        [XmlElement]
-        public SupplementType Parameters { get; set; }
-
         [XmlAttribute("name")]
+        [Required]
         public string Name { get; set; }
 
+        [XmlAttribute("normalizedName")]
+        [Required]
+        public string NormalizedName { get; set; }
+
+        [XmlAttribute("isDefault")]
+        [Required]
+        public bool IsDefault { get; set; }
+
         [XmlAttribute("price")]
+        [Required]
         public double Price { get; set; }
 
         [XmlAttribute("factor")]

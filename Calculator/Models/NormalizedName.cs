@@ -1,12 +1,10 @@
-﻿using System;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Serialization;
 
 namespace Calculator.Models
 {
-    [Serializable]
-    public class SupplementType
+    public class NormalizedName
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -14,14 +12,13 @@ namespace Calculator.Models
 
         [Timestamp]
         public byte[] Timestamp { get; set; }
-                
-        [XmlAttribute("type")]
-        public int Type { get; set; }
+
+        [XmlAttribute("item")]
+        [Required]
+        public string Item { get; set; }
 
         [XmlAttribute("name")]
+        [Required]
         public string Name { get; set; }
-        
-        [XmlAttribute("isDefault")]
-        public bool IsDefault { get; set; }
     }
 }

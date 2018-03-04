@@ -11,8 +11,9 @@ namespace Calculator.Models
 
         [Timestamp]
         public byte[] Timestamp { get; set; }
-        
-        public WineProject Project { get; set; }
+
+        [Required]
+        public WineProject WineProject { get; set; }
 
         [Required]
         public Fruit Fruit { get; set; }

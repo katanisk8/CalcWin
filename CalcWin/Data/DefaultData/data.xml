@@ -1,48 +1,69 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <CalcWin version="3.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Fruits>
-    <Fruit name="Apple" sugar="100" acid="10.5" price="1.87" isDefault="true" />
-    <Fruit name="Grape Light" sugar="155" acid="8" price="4.83" isDefault="true" />
-    <Fruit name="Grape Dark" sugar="155" acid="8" price="4.83" isDefault="true" />
-    <Fruit name="Gooseberry" sugar="70" acid="19" price="3.5" isDefault="true" />
-    <Fruit name="Whortleberry" sugar="55" acid="10" price="9" isDefault="true" />
-    <Fruit name="Cowberry" sugar="70" acid="21" price="15.5" isDefault="true" />
-    <Fruit name="Cherry" sugar="100" acid="4" price="9" isDefault="true" />
-    <Fruit name="Pear" sugar="100" acid="3" price="3" isDefault="true" />
-    <Fruit name="Strawberry" sugar="45" acid="10" price="5" isDefault="true" />
-    <Fruit name="Bramble" sugar="60" acid="11" price="15.5" isDefault="true" />
-    <Fruit name="Raspberry" sugar="100" acid="15" price="6" isDefault="true" />
-    <Fruit name="Whitecurrant" sugar="70" acid="24" price="9" isDefault="true" />
-    <Fruit name="Redcurrant" sugar="60" acid="24" price="15" isDefault="true" />
-    <Fruit name="Blackcurrant" sugar="85" acid="30" price="4" isDefault="true" />
-    <Fruit name="Cherry" sugar="100" acid="13" price="3" isDefault="true" />
-    <Fruit name="Wild Strawberry" sugar="60" acid="20" price="21" isDefault="true" />
-    <Fruit name="Greengage" sugar="90" acid="15" price="2" isDefault="true" />
-    <Fruit name="Plum" sugar="100" acid="8" price="5" isDefault="true" />
-    <Fruit name="Raisin" sugar="70" acid="12" price="10" isDefault="true" />
-    <Fruit name="Cranberry" sugar="80" acid="11" price="19.99" isDefault="true" />
+    <Fruit name="Apple" normalizedName="Apple" isDefault="true" sugar="100" acid="10.5" price="1.87" />
+    <Fruit name="Grape Light" normalizedName="Grape Light" isDefault="true" sugar="155" acid="8" price="4.83" />
+    <Fruit name="Grape Dark" normalizedName="Grape Dark" isDefault="true" sugar="155" acid="8" price="4.83" />
+    <Fruit name="Gooseberry" normalizedName="Gooseberry" isDefault="true" sugar="70" acid="19" price="3.5" />
+    <Fruit name="Whortleberry" normalizedName="Whortleberry" isDefault="true" sugar="55" acid="10" price="9" />
+    <Fruit name="Cowberry" normalizedName="Cowberry" isDefault="true" sugar="70" acid="21" price="15.5" />
+    <Fruit name="Cherry" normalizedName="Cherry" isDefault="true" sugar="100" acid="4" price="9" />
+    <Fruit name="Pear" normalizedName="Pear" isDefault="true" sugar="100" acid="3" price="3" />
+    <Fruit name="Strawberry" normalizedName="Strawberry" isDefault="true" sugar="45" acid="10" price="5" />
+    <Fruit name="Bramble" normalizedName="Bramble" isDefault="true" sugar="60" acid="11" price="15.5" />
+    <Fruit name="Raspberry" normalizedName="Raspberry" isDefault="true" sugar="100" acid="15" price="6" />
+    <Fruit name="Whitecurrant" normalizedName="Whitecurrant" isDefault="true" sugar="70" acid="24" price="9" />
+    <Fruit name="Redcurrant" normalizedName="Redcurrant" isDefault="true" sugar="60" acid="24" price="15" />
+    <Fruit name="Blackcurrant" normalizedName="Blackcurrant" isDefault="true" sugar="85" acid="30" price="4" />
+    <Fruit name="Cherry" normalizedName="Cherry" isDefault="true" sugar="100" acid="13" price="3" />
+    <Fruit name="Wild Strawberry" normalizedName="Wild Strawberry" isDefault="true" sugar="60" acid="20" price="21" />
+    <Fruit name="Greengage" normalizedName="Greengage" isDefault="true" sugar="90" acid="15" price="2" />
+    <Fruit name="Plum" normalizedName="Plum" isDefault="true" sugar="100" acid="8" price="5" />
+    <Fruit name="Raisin" normalizedName="Raisin" isDefault="true" sugar="70" acid="12" price="10" />
+    <Fruit name="Cranberry" normalizedName="Cranberry" isDefault="true" sugar="80" acid="11" price="19.99" />
   </Fruits>
   <Flavors>
-    <Flavor name="Sweet" acid="6" isDefault="true" />
-    <Flavor name="Medium Sweet" acid="7" isDefault="true" />
-    <Flavor name="Medium Dry" acid="9" isDefault="true" />
-    <Flavor name="Dry" acid="10" isDefault="true" />
+    <Flavor name="Sweet" normalizedName="Sweet" isDefault="true" acid="6" />
+    <Flavor name="Medium Sweet" normalizedName="Medium Sweet" isDefault="true" acid="7" />
+    <Flavor name="Medium Dry" normalizedName="Medium Dry" isDefault="true" acid="9" />
+    <Flavor name="Dry" normalizedName="Dry" isDefault="true" acid="10" />
   </Flavors>
   <Supplements>
-    <Supplement name="Sugar" price="2.5" factor="1">
-      <Parameters type="0" name="Sugar" isDefault="true" />
-    </Supplement>
-    <Supplement name="Acid" price="11.5" factor="1">
-      <Parameters type="1" name="Acid" isDefault="true" />
-    </Supplement>
-    <Supplement name="Water" price="0.01015" factor="1">
-      <Parameters type="2" name="Water" isDefault="true" />
-    </Supplement>
-    <Supplement name="Yeast" price="385" factor="0.28">
-      <Parameters type="3" name="Yeast" isDefault="true" />
-    </Supplement>
-    <Supplement name="Yeast Food" price="385" factor="0.28">
-      <Parameters type="4" name="YeastFood" isDefault="true" />
-    </Supplement>
+    <Supplement name="Sugar" normalizedName="Sugar" isDefault="true" price="2.5" factor="1" />
+    <Supplement name="Acid" normalizedName="Acid" isDefault="true" price="11.5" factor="1" />
+    <Supplement name="Water" normalizedName="Water" isDefault="true" price="0.01015" factor="1" />
+    <Supplement name="Yeast" normalizedName="Yeast" isDefault="true" price="385" factor="0.28" />
+    <Supplement name="Yeast Food" normalizedName="Yeast Food" isDefault="true" price="385" factor="0.28" />
   </Supplements>
+  <NormalizedNames>
+    <NormalizedName item="Fruit" name="Apple" />
+    <NormalizedName item="Fruit" name="Grape Light" />
+    <NormalizedName item="Fruit" name="Grape Dark" />
+    <NormalizedName item="Fruit" name="Gooseberry" />
+    <NormalizedName item="Fruit" name="Whortleberry" />
+    <NormalizedName item="Fruit" name="Cowberry" />
+    <NormalizedName item="Fruit" name="Cherry" />
+    <NormalizedName item="Fruit" name="Pear" />
+    <NormalizedName item="Fruit" name="Strawberry" />
+    <NormalizedName item="Fruit" name="Bramble" />
+    <NormalizedName item="Fruit" name="Raspberry" />
+    <NormalizedName item="Fruit" name="Whitecurrant" />
+    <NormalizedName item="Fruit" name="Redcurrant" />
+    <NormalizedName item="Fruit" name="Blackcurrant" />
+    <NormalizedName item="Fruit" name="Cherry" />
+    <NormalizedName item="Fruit" name="Wild Strawberry" />
+    <NormalizedName item="Fruit" name="Greengage" />
+    <NormalizedName item="Fruit" name="Plum" />
+    <NormalizedName item="Fruit" name="Raisin" />
+    <NormalizedName item="Fruit" name="Cranberry" />
+    <NormalizedName item="Flavor" name="Sweet" />
+    <NormalizedName item="Flavor" name="Medium Sweet" />
+    <NormalizedName item="Flavor" name="Medium Dry" />
+    <NormalizedName item="Flavor" name="Dry" />
+    <NormalizedName item="Supplement" name="Sugar" />
+    <NormalizedName item="Supplement" name="Acid" />
+    <NormalizedName item="Supplement" name="Water" />
+    <NormalizedName item="Supplement" name="Yeast" />
+    <NormalizedName item="Supplement" name="Yeast Food" />
+  </NormalizedNames>
 </CalcWin>
