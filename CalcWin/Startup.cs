@@ -5,12 +5,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using CalcWin.Data;
-using CalcWin.Models;
 using CalcWin.Services;
 using CalcWin.BusinessLogic.ControllersLogic;
-using Microsoft.Extensions.FileProviders;
-using System.IO;
 using CalcWin.BusinessLogic.ControllersValidations;
+using CalcWin.Models.User;
 
 namespace CalcWin
 {

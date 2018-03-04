@@ -42,7 +42,6 @@ namespace CalcWin.Controllers
             db.SaveChanges();
 
             return RedirectToAction(MVC.Actions.Calculator.Index, nameof(MVC.Actions.Calculator));
-        }
-        
+        }        
     }
 }

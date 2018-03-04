@@ -8,9 +8,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using CalcWin.Models;
 using CalcWin.Models.ManageViewModels;
 using CalcWin.Services;
+using CalcWin.Models.User;
 
 namespace CalcWin.Controllers
 {

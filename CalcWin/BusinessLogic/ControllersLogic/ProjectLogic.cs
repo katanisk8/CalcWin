@@ -2,8 +2,6 @@
 using CalcWin.Data;
 using Calculator.Models;
 using CalcWin.Views.Calculator;
-using Microsoft.AspNetCore.Identity;
-using CalcWin.Models;
 using Microsoft.EntityFrameworkCore;
 using CalcWin.Models.ProjectsViewModel;
 

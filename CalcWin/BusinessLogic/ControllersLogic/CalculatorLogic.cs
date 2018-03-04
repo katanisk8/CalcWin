@@ -6,8 +6,8 @@ using CalcWin.Views.Calculator;
 using System.Collections.Generic;
 using Calculator.BussinesLogic;
 using Microsoft.AspNetCore.Identity;
-using CalcWin.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using CalcWin.Models.User;
 
 namespace CalcWin.BusinessLogic.ControllersLogic
 {

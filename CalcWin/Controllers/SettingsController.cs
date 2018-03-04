@@ -1,8 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using CalcWin.Models.SettingsViewModels;
 using CalcWin.BusinessLogic.ControllersLogic;
-using System.IO;
-using System;
 using CalcWin.BusinessLogic.ControllersValidations;
 
 namespace CalcWin.Controllers

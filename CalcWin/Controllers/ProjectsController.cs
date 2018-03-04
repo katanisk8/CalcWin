@@ -5,8 +5,8 @@ using CalcWin.BusinessLogic.ControllersLogic;
 using CalcWin.BusinessLogic.ControllersValidations;
 using CalcWin.Models.ProjectsViewModel;
 using System;
-using CalcWin.Models;
 using Microsoft.AspNetCore.Identity;
+using CalcWin.Models.User;
 
 namespace CalcWin.Controllers
 {
