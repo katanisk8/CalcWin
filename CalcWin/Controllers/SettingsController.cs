@@ -34,25 +34,5 @@ namespace CalcWin.Controllers
         {
             return View();
         }
-
-        public IActionResult AdminSettings(AdminSettingsViewModel model)
-        {
-            return View();
-        }
-
-        public IActionResult DefaultData(DefaultDataViewModel model)
-        {
-            try
-            {
-                _validator.ValidateModelToLoadDefaultData(model);
-                _settingsLogic.LoadDefaultData(model);
-            }
-            catch (Exception ex)
-            {
-                ModelState.AddModelError("Error", ex.Message);
-            }
-
-            return RedirectToAction(MVC.Actions.Calculator.Index, MVC.Controllers.Calculator);
-        }
     }
 }

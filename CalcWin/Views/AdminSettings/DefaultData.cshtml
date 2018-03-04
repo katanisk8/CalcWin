@@ -1,7 +1,7 @@
-@model DefaultDataViewModel
+@model CalcWin.Models.AdminSettingsViewModels.DefaultDataViewModel
 @{
     ViewData["Title"] = "Admin Settings";
-    ViewData.AddActiveePage(SettingsNavPages.AdminSettings);
+    AdminSettingsNavPages.AddActiveAdminSettingsPage(ViewData, AdminSettingsNavPages.DefaultData);
 }
 
 <div id="page-wrapper">
@@ -20,7 +20,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-6">
-                            <form role="form" method="post" asp-action="DefaultData" enctype="multipart/form-data">
+                            <form role="form" method="post" asp-action="LoadDefaultData" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label>Default application data</label>
                                     <input asp-for="File" />

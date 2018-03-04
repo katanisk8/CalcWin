@@ -5,6 +5,8 @@ using CalcWin.BusinessLogic.ControllersLogic;
 using CalcWin.BusinessLogic.ControllersValidations;
 using CalcWin.Models.ProjectsViewModel;
 using System;
+using CalcWin.Models;
+using Microsoft.AspNetCore.Identity;
 
 namespace CalcWin.Controllers
 {
@@ -12,20 +14,23 @@ namespace CalcWin.Controllers
     {
         private readonly ProjectLogic _projectLogic;
         private readonly ProjectsValidation _validator;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public ProjectsController(
             ProjectLogic projectLogic,
-            ProjectsValidation validator)
+            ProjectsValidation validator,
+            UserManager<ApplicationUser> userManager)
         {
             _projectLogic = projectLogic;
             _validator = validator;
+            _userManager = userManager;
         }
 
         [HttpGet]
         [Authorize]
         public IActionResult Index()
         {
-            ProjectsViewModel viewModel = _projectLogic.LoadProjects();
+            ProjectsViewModel viewModel = _projectLogic.LoadProjects(_userManager.GetUserId(User));
 
             return View(MVC.Views.Projects.Index, viewModel);
         }

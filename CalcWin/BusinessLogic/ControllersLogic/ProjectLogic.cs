@@ -12,20 +12,17 @@ namespace CalcWin.BusinessLogic.ControllersLogic
     public class ProjectLogic
     {
         private readonly ApplicationDbContext db;
-        private readonly UserManager<ApplicationUser> _userManager;
 
-        public ProjectLogic(ApplicationDbContext context, 
-            UserManager<ApplicationUser> userManager)
+        public ProjectLogic(ApplicationDbContext context)
         {
             db = context;
-            _userManager = userManager;
         }
 
-        internal ProjectsViewModel LoadProjects()
+        internal ProjectsViewModel LoadProjects(string userId)
         {
             ProjectsViewModel viewModel = new ProjectsViewModel();
 
-            viewModel.Projects = db.Projects
+            viewModel.Projects = db.Projects.Where(x => x.User == userId)
                 .Include(x => x.Flavor)
                 .Include(x => x.Ingredients)
                 .ThenInclude(x => x.Fruit)

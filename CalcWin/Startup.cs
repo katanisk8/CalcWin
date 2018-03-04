@@ -32,10 +32,12 @@ namespace CalcWin
             services.AddTransient<CalculatorLogic, CalculatorLogic>();
             services.AddTransient<ProjectLogic, ProjectLogic>();
             services.AddTransient<SettingsLogic, SettingsLogic>();
+            services.AddTransient<AdminSettingsLogic, AdminSettingsLogic>();
 
             services.AddTransient<CalculatorValidation, CalculatorValidation>();
             services.AddTransient<ProjectsValidation, ProjectsValidation>();
             services.AddTransient<SettingsValidation, SettingsValidation>();
+            services.AddTransient<AdminSettingsValidation, AdminSettingsValidation>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
              .AddEntityFrameworkStores<ApplicationDbContext>()

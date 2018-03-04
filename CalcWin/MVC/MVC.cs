@@ -15,6 +15,17 @@ namespace MVC
             public const string EditProject = "~/Views/Projects/EditProject.cshtml";
         }
 
+        public static class Settings
+        {
+            public const string Index = "~/Views/Settings/Index.cshtml";
+        }
+
+        public static class AdminSettings
+        {
+            public const string Index = "~/Views/AdminSettings/Index.cshtml";
+            public const string DefaultData = "~/Views/AdminSettings/DefaultData.cshtml";
+        }
+
         public static class Shared
         {
             public const string Error = "~/Views/Shared/Error.cshtml";
@@ -50,8 +61,12 @@ namespace MVC
             public const string Index = nameof(SettingsController.Index);
             public const string Fruits = nameof(SettingsController.Fruits);
             public const string Supplements = nameof(SettingsController.Supplements);
-            public const string AdminSettings = nameof(SettingsController.AdminSettings);
-            public const string DefaultData = nameof(SettingsController.DefaultData);
+        }
+
+        public static class AdminSettings
+        {
+            public const string Index = nameof(AdminSettingsController.Index);
+            public const string DefaultData = nameof(AdminSettingsController.DefaultData);
         }
     }
     public static class Controllers
@@ -60,5 +75,6 @@ namespace MVC
         public const string Calculator = nameof(Actions.Calculator);
         public const string Projects = nameof(Actions.Projects);
         public const string Settings = nameof(Actions.Settings);
+        public const string AdminSettings = nameof(Actions.AdminSettings);
     }
 }

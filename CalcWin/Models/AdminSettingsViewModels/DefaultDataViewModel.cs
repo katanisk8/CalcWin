@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace CalcWin.Models.SettingsViewModels
+namespace CalcWin.Models.AdminSettingsViewModels
 {
    public class DefaultDataViewModel
    {
