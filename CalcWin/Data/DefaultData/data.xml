@@ -66,4 +66,10 @@
     <NormalizedName item="Supplement" name="Yeast" />
     <NormalizedName item="Supplement" name="Yeast Food" />
   </NormalizedNames>
+  <AspNetRoles>
+    <AspNetRole name="Admin" normalizedName="Admin" />
+    <AspNetRole name="Developer" normalizedName="Developer" />
+    <AspNetRole name="User" normalizedName="User" />
+    <AspNetRole name="Guest" normalizedName="Guest" />
+  </AspNetRoles>
 </CalcWin>
