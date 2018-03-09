@@ -23,5 +23,6 @@ namespace CalcWin.Data
         public virtual DbSet<Supplement> Supplements { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
         public virtual DbSet<NormalizedName> NormalizedNames { get; set; }
+        public DbSet<CalcWin.Models.User.ApplicationUser> ApplicationUser { get; set; }
     }
 }

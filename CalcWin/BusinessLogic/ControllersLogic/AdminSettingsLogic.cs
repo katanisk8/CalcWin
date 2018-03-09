@@ -5,6 +5,7 @@ using Calculator.Models;
 using CalcWin.Data.DefaultData;
 using CalcWin.Models.AdminSettingsViewModels;
 using System;
+using System.Collections.Generic;
 using CalcWin.Models.User;
 using Microsoft.AspNetCore.Identity;
 
@@ -32,6 +33,13 @@ namespace CalcWin.BusinessLogic.ControllersLogic
          DefaultData defaultData = GenerateDefaultData.LoadXml<DefaultData>(fileBytes);
 
          SaveDefaultData(defaultData);
+      }
+
+      public UsersViewModel GetUserList()
+      {
+         UsersViewModel viewModel = new UsersViewModel();
+         viewModel.Users = db.Users.ToList();
+         return viewModel;
       }
 
       private void SaveDefaultData(DefaultData defaultData)
@@ -68,20 +76,15 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             }
          }
 
-         foreach (var aspNetRole in defaultData.AspNetRoles)
+         foreach (var role in defaultData.Roles)
          {
-            if (CheckIfAspNetRoleAlreadyExist(aspNetRole) == false)
+            if (CheckIfAspNetRoleAlreadyExist(role) == false)
             {
-               db.Roles.Add(aspNetRole);
+               db.Roles.Add(role);
             }
          }
 
          db.SaveChanges();
-      }
-
-      private bool CheckIfAspNetRoleAlreadyExist(Role aspNetRole)
-      {
-         throw new NotImplementedException();
       }
 
       private bool CheckIfFruitAlreadyExist(Fruit fruit)
@@ -103,5 +106,11 @@ namespace CalcWin.BusinessLogic.ControllersLogic
       {
          return db.NormalizedNames.Any(x => x.Name == normalizedName.Name);
       }
+
+      private bool CheckIfAspNetRoleAlreadyExist(IdentityRole role)
+      {
+         return db.Roles.Any(x => x.NormalizedName == role.NormalizedName);
+      }
+
    }
 }

@@ -67,8 +67,8 @@
     <NormalizedName item="Supplement" name="Yeast Food" />
   </NormalizedNames>
   <AspNetRoles>
-    <AspNetRole name="Admin" normalizedName="Admin" />
-    <AspNetRole name="Developer" normalizedName="Developer" />
+    <AspNetRole name="Admin" normalizedName="Administrator" />
+    <AspNetRole name="Dev" normalizedName="Developer" />
     <AspNetRole name="User" normalizedName="User" />
     <AspNetRole name="Guest" normalizedName="Guest" />
   </AspNetRoles>
