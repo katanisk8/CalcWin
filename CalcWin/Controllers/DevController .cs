@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using CalcWin.Data;
-using Calculator.Models;
+using Calculator.Model;
 using System.Collections.Generic;
 using System;
 
@@ -9,41 +9,41 @@ namespace CalcWin.Controllers
 {
     public class DevController : Controller
     {
-        private readonly ApplicationDbContext db;
+        private readonly ApplicationDbContext _db;
 
         public DevController(ApplicationDbContext context)
         {
-            db = context;
+            _db = context;
         }
 
         public IActionResult RemoveDefaultData()
         {
-            foreach (var fruit in db.Fruits)
+            foreach (var fruit in _db.Fruits)
             {
-                db.Fruits.Remove(fruit);
+                _db.Fruits.Remove(fruit);
             }
-            foreach (var supplement in db.Supplements)
+            foreach (var supplement in _db.Supplements)
             {
-                db.Supplements.Remove(supplement);
+                _db.Supplements.Remove(supplement);
             }
-            foreach (var flavor in db.Flavors)
+            foreach (var flavor in _db.Flavors)
             {
-                db.Flavors.Remove(flavor);
+                _db.Flavors.Remove(flavor);
             }
-            foreach (var normalizedName in db.NormalizedNames)
+            foreach (var normalizedName in _db.NormalizedNames)
             {
-                db.NormalizedNames.Remove(normalizedName);
+                _db.NormalizedNames.Remove(normalizedName);
             }
-            foreach (var ingredient in db.Ingredients)
+            foreach (var ingredient in _db.Ingredients)
             {
-                db.Ingredients.Remove(ingredient);
+                _db.Ingredients.Remove(ingredient);
             }
-            foreach (var project in db.WineProjects)
+            foreach (var project in _db.WineProjects)
             {
-                db.WineProjects.Remove(project);
+                _db.WineProjects.Remove(project);
             }
 
-            db.SaveChanges();
+            _db.SaveChanges();
 
             return RedirectToAction(MVC.Actions.Calculator.Index, nameof(MVC.Actions.Calculator));
         }        

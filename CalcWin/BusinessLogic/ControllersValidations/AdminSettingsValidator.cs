@@ -3,9 +3,9 @@ using CalcWin.Models.AdminSettingsViewModels;
 
 namespace CalcWin.BusinessLogic.ControllersValidations
 {
-    public class AdminSettingsValidation
+    public class AdminSettingsValidator : IAdminSettingsValidator
     {
-        internal void ValidateModelToLoadDefaultData(DefaultDataViewModel model)
+        public void ValidateModelToLoadDefaultData(DefaultDataViewModel model)
         {
             if (model == null || model.File == null)
             {

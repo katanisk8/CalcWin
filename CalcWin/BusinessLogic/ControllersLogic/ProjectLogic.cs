@@ -1,26 +1,26 @@
 ﻿using System.Linq;
 using CalcWin.Data;
-using Calculator.Models;
+using Calculator.Model;
 using CalcWin.Views.Calculator;
 using Microsoft.EntityFrameworkCore;
 using CalcWin.Models.ProjectsViewModel;
 
 namespace CalcWin.BusinessLogic.ControllersLogic
 {
-    public class ProjectLogic
+    public class ProjectLogic : IProjectLogic
     {
-        private readonly ApplicationDbContext db;
+        private readonly ApplicationDbContext _db;
 
         public ProjectLogic(ApplicationDbContext context)
         {
-            db = context;
+            _db = context;
         }
 
-        internal ProjectsViewModel LoadProjects(string userId)
+        public ProjectsViewModel LoadProjects(string userId)
         {
             ProjectsViewModel viewModel = new ProjectsViewModel();
 
-            viewModel.Projects = db.WineProjects.Where(x => x.User == userId)
+            viewModel.Projects = _db.WineProjects.Where(x => x.User == userId)
                 .Include(x => x.Flavor)
                 .Include(x => x.Ingredients)
                 .ThenInclude(x => x.Fruit)
@@ -29,57 +29,57 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             return viewModel;
         }
 
-        internal CalculatorViewModel OpenProject(int projectId)
+        public CalculatorViewModel OpenProject(int projectId)
         {
             CalculatorViewModel viewModel = new CalculatorViewModel();
 
-            WineProject wineProject = db.WineProjects
+            WineProject wineProject = _db.WineProjects
                 .Include(x => x.Flavor)
                 .Include(x => x.Ingredients)
                 .ThenInclude(x => x.Fruit)
                 .First(x => x.Id == projectId);
 
-            viewModel.Ingredients = wineProject.Ingredients;
+            viewModel.Ingredients = wineProject.Ingredients.ToList();
             viewModel.SelectedFlavor = wineProject.Flavor.Id;
             viewModel.SelectedAlcoholQuantity = wineProject.AlcoholQuantity;
 
             return viewModel;
         }
 
-        internal EditProjectViewModel EditProject(int wineProjectId)
+        public EditProjectViewModel EditProject(int wineProjectId)
         {
             EditProjectViewModel model = new EditProjectViewModel();
 
-            model.WineProject = db.WineProjects
+            model.WineProject = _db.WineProjects
                 .Include(x => x.Flavor)
                 .Include(x => x.Ingredients)
                 .ThenInclude(x => x.Fruit)
                 .First(x => x.Id == wineProjectId);
 
-            model.Flavors = db.Flavors.ToList();
+            model.Flavors = _db.Flavors.ToList();
 
             return model;
         }
 
-        internal void DeleteProject(int wineProjectId)
+        public void DeleteProject(int wineProjectId)
         {
-            var projectIngerdients = db.Ingredients.Where(x => x.WineProject.Id == wineProjectId);
+            var projectIngerdients = _db.Ingredients.Where(x => x.WineProject.Id == wineProjectId);
 
             foreach (var ingerdient in projectIngerdients.ToList())
             {
-                db.Ingredients.Remove(ingerdient);
+                _db.Ingredients.Remove(ingerdient);
             }
 
-            WineProject wineProject = db.WineProjects.First(x => x.Id == wineProjectId);
+            WineProject wineProject = _db.WineProjects.First(x => x.Id == wineProjectId);
 
-            db.WineProjects.Remove(wineProject);
-            db.SaveChanges();
+            _db.WineProjects.Remove(wineProject);
+            _db.SaveChanges();
         }
-        
-        internal void Update(WineProject project)
+
+        public void Update(WineProject project)
         {
-            db.WineProjects.Update(project);
-            db.SaveChanges();
+            _db.WineProjects.Update(project);
+            _db.SaveChanges();
         }
     }
 }

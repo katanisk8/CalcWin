@@ -12,16 +12,13 @@ namespace CalcWin.Controllers
 {
     public class ProjectsController : Controller
     {
-        private readonly ProjectLogic _projectLogic;
-        private readonly ProjectsValidation _validator;
+        private readonly IProjectLogic _logic;
+        private readonly IProjectsValidator _validator;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public ProjectsController(
-            ProjectLogic projectLogic,
-            ProjectsValidation validator,
-            UserManager<ApplicationUser> userManager)
+        public ProjectsController(IProjectLogic logic, IProjectsValidator validator, UserManager<ApplicationUser> userManager)
         {
-            _projectLogic = projectLogic;
+            _logic = logic;
             _validator = validator;
             _userManager = userManager;
         }
@@ -30,7 +27,7 @@ namespace CalcWin.Controllers
         [Authorize]
         public IActionResult Index()
         {
-            ProjectsViewModel viewModel = _projectLogic.LoadProjects(_userManager.GetUserId(User));
+            ProjectsViewModel viewModel = _logic.LoadProjects(_userManager.GetUserId(User));
 
             return View(MVC.Views.Projects.Index, viewModel);
         }
@@ -42,7 +39,7 @@ namespace CalcWin.Controllers
             try
             {
                 _validator.ValidateOpenProjectId(projectId);
-                CalculatorViewModel viewModel = _projectLogic.OpenProject(projectId);
+                CalculatorViewModel viewModel = _logic.OpenProject(projectId);
                 return View(MVC.Views.Calculator.Index, viewModel);
             }
             catch (Exception ex)
@@ -60,7 +57,7 @@ namespace CalcWin.Controllers
             try
             {
                 _validator.ValidateEditProjectId(projectId);
-                EditProjectViewModel viewModel = _projectLogic.EditProject(projectId);
+                EditProjectViewModel viewModel = _logic.EditProject(projectId);
                 return View(MVC.Views.Projects.EditProject, viewModel);
             }
             catch (Exception ex)
@@ -78,7 +75,7 @@ namespace CalcWin.Controllers
             try
             {
                 _validator.ValidateModelToUpdate(model);
-                _projectLogic.Update(model.WineProject);
+                _logic.Update(model.WineProject);
             }
             catch (Exception ex)
             {
@@ -95,7 +92,7 @@ namespace CalcWin.Controllers
             try
             {
                 _validator.ValidateDeleteProjectId(projectId);
-                _projectLogic.DeleteProject(projectId);
+                _logic.DeleteProject(projectId);
             }
             catch (Exception ex)
             {

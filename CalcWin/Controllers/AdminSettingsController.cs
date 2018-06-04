@@ -9,14 +9,12 @@ namespace CalcWin.Controllers
    //[Authorize(Roles = "Admin, Dev")]
    public class AdminSettingsController : Controller
    {
-      private readonly AdminSettingsLogic _adminSettingsLogic;
-      private readonly AdminSettingsValidation _validator;
+      private readonly IAdminSettingsLogic _logic;
+      private readonly IAdminSettingsValidator _validator;
 
-      public AdminSettingsController(
-          AdminSettingsLogic adminSettingsLogic,
-          AdminSettingsValidation validator)
+      public AdminSettingsController(IAdminSettingsLogic logic, IAdminSettingsValidator validator)
       {
-         _adminSettingsLogic = adminSettingsLogic;
+         _logic = logic;
          _validator = validator;
       }
 
@@ -35,7 +33,7 @@ namespace CalcWin.Controllers
          try
          {
             _validator.ValidateModelToLoadDefaultData(model);
-            _adminSettingsLogic.LoadDefaultData(model);
+            _logic.LoadDefaultData(model);
 
             return View(MVC.Views.AdminSettings.Index);
          }
@@ -51,7 +49,7 @@ namespace CalcWin.Controllers
       {
          try
          {
-            UsersViewModel vieModel = _adminSettingsLogic.GetUserList();
+            UsersViewModel vieModel = _logic.GetUserList();
 
             return View(vieModel);
          }

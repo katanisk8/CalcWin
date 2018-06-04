@@ -1,47 +1,50 @@
 ﻿using System;
 using System.Linq;
-using Calculator.Models;
+using Calculator.Model;
 using System.Collections.Generic;
 
-namespace Calculator.BussinesLogic
+namespace Calculator
 {
-    public static class Calculations
+    public class Calculator : ICalculator
     {
-        public static Result CalculateWine(List<Ingredient> listElements, Flavor selectedFlavor, double expectedAlcohol, double juiceCorretion, List<Supplement> supplements)
+        public Result Calculate(IList<Ingredient> ingredients, Flavor flavor, double alcoholQuantity, double juiceCorretion, IList<Supplement> supplements)
         {
-            var result = CalculateHelper(listElements, selectedFlavor, expectedAlcohol, supplements);
+            Result result = Calculate(ingredients, flavor, alcoholQuantity, supplements);
 
-            if (juiceCorretion > 0)
+            if (IsJuiceCorrection(juiceCorretion))
             {
-                var correctedList = CorrectComponentts(result, juiceCorretion);
-                return CalculateHelper(correctedList, selectedFlavor, expectedAlcohol, supplements);
+                IList<Ingredient> correctedIngredients = CorrectIngredients(result, juiceCorretion);
+
+                return Calculate(correctedIngredients, flavor, alcoholQuantity, supplements);
             }
 
             return result;
         }
 
-
-        private static List<Ingredient> CorrectComponentts(Result orginalResult, double juiceCorretion)
+        private static bool IsJuiceCorrection(double juiceCorretion)
         {
-            List<Ingredient> correctedList = new List<Ingredient>();
-
-            foreach (var item in orginalResult.Recipe.Ingredients)
-            {
-                var newElement = new Ingredient
-                {
-                    Fruit = item.Fruit,
-                    Quantity = (item.Quantity * juiceCorretion / orginalResult.Mixture.JuiceQuantity)
-                };
-                correctedList.Add(newElement);
-            }
-            return correctedList;
+            return juiceCorretion > 0;
         }
 
-
-        private static Result CalculateHelper(List<Ingredient> listElements, Flavor selectedFlavor, double expectedAlcohol, List<Supplement> supplements)
+        private static IList<Ingredient> CorrectIngredients(Result result, double juiceCorretion)
         {
-            if (listElements == null || !listElements.Any())
-                throw new ArgumentException(nameof(listElements));
+            IList<Ingredient> correctedIngredients = new List<Ingredient>();
+
+            foreach (var ingredient in result.Recipe.Ingredients)
+            {
+                Ingredient newIngredient = new Ingredient();
+                newIngredient.Fruit = ingredient.Fruit;
+                newIngredient.Quantity = (ingredient.Quantity * juiceCorretion / result.Mixture.JuiceQuantity);
+
+                correctedIngredients.Add(newIngredient);
+            }
+
+            return correctedIngredients;
+        }
+
+        private static Result Calculate(IList<Ingredient> ingredients, Flavor flavor, double alcoholQuantity, IList<Supplement> supplements)
+        {
+            CheckIngredients(ingredients);
 
             Result result = new Result();
             Supplement sugar = supplements.First(x => x.NormalizedName == "Sugar");
@@ -54,11 +57,10 @@ namespace Calculator.BussinesLogic
             double acidSum = 0;
             double grapeQuantity = 0;
             double fruitsCost = 0;
+            double acidQuantity = 0;
 
-            // Calculation of basic Componenttsc (Grape)
-            foreach (var item in listElements)
+            foreach (var item in ingredients)
             {
-                // Fruit
                 Fruit fruit = item.Fruit;
 
                 // Fruits quantity
@@ -83,26 +85,20 @@ namespace Calculator.BussinesLogic
 
             //Juice
             double waterQuantity = grapeQuantity;
-
             double juiceQuantity = grapeQuantity + waterQuantity;
-
             double sugarFromFruitsInJuice = sugarSum / juiceQuantity;
             double acidFromFruitsInJuice = acidSum / juiceQuantity;
 
             // Expected final quantity
-            double esq = ExpectedSugarQuantity(expectedAlcohol);
-            double eaq = selectedFlavor.Acid;
-
-            double acidQuantity = 0;
-
+            double esq = ExpectedSugarQuantity(alcoholQuantity);
+            double eaq = flavor.Acid;
+            
             // Water calculation
             if (acidFromFruitsInJuice > eaq)
             {
                 // Add water
-                waterQuantity = ((acidInGrape / eaq) * grapeQuantity) - grapeQuantity;
+                waterQuantity = (acidInGrape / eaq * grapeQuantity) - grapeQuantity;
                 juiceQuantity = grapeQuantity + waterQuantity;
-                sugarFromFruitsInJuice = sugarSum / juiceQuantity;
-                acidFromFruitsInJuice = acidSum / juiceQuantity;
             }
             else if (acidFromFruitsInJuice < eaq)
             {
@@ -136,11 +132,11 @@ namespace Calculator.BussinesLogic
             result.Mixture.SugarInMixture = sugarInGrape;
             result.Mixture.AcidInMixture = acidInGrape;
             result.Mixture.JuiceQuantity = juiceQuantity;
-            result.Mixture.SugarInJuice = sugarFromFruitsInJuice;
-            result.Mixture.AcidInJuice = acidFromFruitsInJuice;
+            result.Mixture.SugarInJuice = sugarInFinalJuice;
+            result.Mixture.AcidInJuice = acidInFinalJuice;
 
             // Recipe
-            result.Recipe.Ingredients = listElements;
+            result.Recipe.Ingredients = ingredients;
             result.Recipe.Water = waterQuantity;
             result.Recipe.Acid = acidQuantity;
             result.Recipe.Sugar = sugarQuantity;
@@ -149,9 +145,9 @@ namespace Calculator.BussinesLogic
             result.Recipe.SuplementsCost = suplementsCost;
 
             // Wine
-            result.Wine.AlcoholQuantity = expectedAlcohol;
-            result.Wine.Flavor = selectedFlavor.Name;
-            result.Wine.Color = WineColor(listElements);
+            result.Wine.AlcoholQuantity = alcoholQuantity;
+            result.Wine.Flavor = flavor.Name;
+            result.Wine.Color = WineColor(ingredients);
             result.Wine.Quantity = wineQuantity;
             result.Wine.TotalCost = (fruitsCost + suplementsCost);
             result.Wine.CostPerLiter = (result.Wine.TotalCost / wineQuantity);
@@ -159,16 +155,21 @@ namespace Calculator.BussinesLogic
             return result;
         }
 
+        private static void CheckIngredients(IList<Ingredient> ingredients)
+        {
+            if (ingredients == null || !ingredients.Any())
+                throw new ArgumentException(nameof(ingredients));
+        }
+
         private static double ExpectedSugarQuantity(double expectedAlcoholPercent)
         {
             // 17.18 sugar quantity for each 1% of alcohol
-            return (expectedAlcoholPercent * 17.18);
+            return expectedAlcoholPercent * 17.18;
         }
 
-        private static string WineColor(List<Ingredient> Componentts)
+        private static string WineColor(IList<Ingredient> Componentts)
         {
             return "?";
         }
-
     }
 }

@@ -27,15 +27,15 @@ namespace CalcWin
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddTransient<CalculatorLogic, CalculatorLogic>();
-            services.AddTransient<ProjectLogic, ProjectLogic>();
-            services.AddTransient<SettingsLogic, SettingsLogic>();
-            services.AddTransient<AdminSettingsLogic, AdminSettingsLogic>();
+            services.AddTransient<ICalculatorLogic, CalculatorLogic>();
+            services.AddTransient<IProjectLogic, ProjectLogic>();
+            services.AddTransient<ISettingsLogic, SettingsLogic>();
+            services.AddTransient<IAdminSettingsLogic, AdminSettingsLogic>();
 
-            services.AddTransient<CalculatorValidation, CalculatorValidation>();
-            services.AddTransient<ProjectsValidation, ProjectsValidation>();
-            services.AddTransient<SettingsValidation, SettingsValidation>();
-            services.AddTransient<AdminSettingsValidation, AdminSettingsValidation>();
+            services.AddTransient<ICalculatorValidator, CalculatorValidator>();
+            services.AddTransient<IProjectsValidator, ProjectsValidator>();
+            services.AddTransient<ISettingsValidator, SettingsValidator>();
+            services.AddTransient<IAdminSettingsValidator, AdminSettingsValidator>();
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
              .AddEntityFrameworkStores<ApplicationDbContext>()

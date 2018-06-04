@@ -1,6 +1,7 @@
 ﻿namespace CalcWin.BusinessLogic.ControllersValidations
 {
-    public class SettingsValidation
+    public interface ISettingsValidator
     {
+        void Do();
     }
 }

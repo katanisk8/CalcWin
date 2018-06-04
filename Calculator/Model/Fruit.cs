@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Serialization;
 
-namespace Calculator.Models
+namespace Calculator.Model
 {
     [Serializable]
-    public class Supplement : ICalcWinElement
+    public class Fruit : IElement
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -14,10 +14,10 @@ namespace Calculator.Models
 
         [Timestamp]
         public byte[] Timestamp { get; set; }
-        
-        [XmlIgnore]
-        public WineProject WineProject { get; set; }
-        
+
+        [XmlAttribute("user")]
+        public string User { get; set; }
+
         [XmlAttribute("name")]
         [Required]
         public string Name { get; set; }
@@ -30,11 +30,16 @@ namespace Calculator.Models
         [Required]
         public bool IsDefault { get; set; }
 
+        [XmlAttribute("sugar")]
+        [Required]
+        public double Sugar { get; set; }
+
+        [XmlAttribute("acid")]
+        [Required]
+        public double Acid { get; set; }
+
         [XmlAttribute("price")]
         [Required]
         public double Price { get; set; }
-
-        [XmlAttribute("factor")]
-        public double Factor { get; set; }
     }
 }

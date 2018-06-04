@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Calculator.Models
+namespace Calculator.Model
 {
     public class Result
     {
@@ -30,7 +30,7 @@ namespace Calculator.Models
 
     public class Recipe
     {
-        public List<Ingredient> Ingredients { get; set; }
+        public IList<Ingredient> Ingredients { get; set; }
         public double Sugar { get; set; }
         public double Acid { get; set; }
         public double Water { get; set; }

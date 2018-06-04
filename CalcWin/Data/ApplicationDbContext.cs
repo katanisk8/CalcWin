@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Calculator.Models;
+using Calculator.Model;
 using CalcWin.Models.User;
 
 namespace CalcWin.Data

@@ -1,6 +1,6 @@
-﻿namespace Calculator.Models
+﻿namespace Calculator.Model
 {
-    public interface ICalcWinElement
+    public interface IElement
     {
         int Id { get; set; }
         string Name { get; set; }

@@ -6,14 +6,12 @@ namespace CalcWin.Controllers
 {
     public class SettingsController : Controller
     {
-        private readonly SettingsLogic _settingsLogic;
-        private readonly SettingsValidation _validator;
+        private readonly ISettingsLogic _logic;
+        private readonly ISettingsValidator _validator;
 
-        public SettingsController(
-            SettingsLogic settingsLogic,
-            SettingsValidation validator)
+        public SettingsController(ISettingsLogic logic, ISettingsValidator validator)
         {
-            _settingsLogic = settingsLogic;
+            _logic = logic;
             _validator = validator;
         }
 

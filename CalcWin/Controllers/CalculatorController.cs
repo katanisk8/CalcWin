@@ -10,13 +10,12 @@ namespace CalcWin.Controllers
 {
     public class CalculatorController : Controller
     {
-        private readonly CalculatorLogic _calculatorLogic;
-        private readonly CalculatorValidation _validator;
+        private readonly ICalculatorLogic _logic;
+        private readonly ICalculatorValidator _validator;
 
-        public CalculatorController(CalculatorLogic calculatorLogic,
-            CalculatorValidation validator)
+        public CalculatorController(ICalculatorLogic logic, ICalculatorValidator validator)
         {
-            _calculatorLogic = calculatorLogic;
+            _logic = logic;
             _validator = validator;
         }
 
@@ -25,7 +24,7 @@ namespace CalcWin.Controllers
         {
             try
             {
-                CalculatorViewModel viewModel = _calculatorLogic.PrepareStartData();
+                CalculatorViewModel viewModel = _logic.PrepareStartData();
                 return View(MVC.Views.Calculator.Index, viewModel);
             }
             catch (Exception ex)
@@ -43,14 +42,14 @@ namespace CalcWin.Controllers
             try
             {
                 _validator.ValidateModelToAddWineProject(model);
-                _calculatorLogic.AddWineProject(User.Claims.First().Value, model);
+                _logic.AddWineProject(User.Claims.First().Value, model);
             }
             catch (Exception ex)
             {
                 ModelState.AddModelError("Error", ex.Message);
             }
 
-            CalculatorViewModel newModel = _calculatorLogic.PrepareStartData();
+            CalculatorViewModel newModel = _logic.PrepareStartData();
             return View(MVC.Views.Calculator.Index, newModel);
         }
 
@@ -60,8 +59,8 @@ namespace CalcWin.Controllers
             try
             {
                 _validator.ValidateModelToCalculateWine(model);
-                _calculatorLogic.CalculateWineResult(model);
-                _calculatorLogic.FillMissingItemsInModel(model);
+                _logic.CalculateWineResult(model);
+                _logic.FillMissingItemsInModel(model);
                 return View(MVC.Views.Calculator.Index, model);
             }
             catch (Exception ex)
@@ -69,7 +68,7 @@ namespace CalcWin.Controllers
                 ModelState.AddModelError("Error", ex.Message);
             }
 
-            CalculatorViewModel newModel = _calculatorLogic.PrepareStartData();
+            CalculatorViewModel newModel = _logic.PrepareStartData();
             return View(MVC.Views.Calculator.Index, newModel);
         }
     }

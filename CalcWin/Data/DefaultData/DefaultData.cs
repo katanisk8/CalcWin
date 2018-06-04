@@ -1,5 +1,5 @@
 ﻿using System;
-using Calculator.Models;
+using Calculator.Model;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using CalcWin.Models.User;

@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Serialization;
 
-namespace Calculator.Models
+namespace Calculator.Model
 {
     public class NormalizedName
     {

@@ -1,33 +1,33 @@
 ﻿using System;
 using System.Linq;
 using CalcWin.Data;
-using Calculator.Models;
+using Calculator.Model;
 using CalcWin.Views.Calculator;
 using System.Collections.Generic;
-using Calculator.BussinesLogic;
+using Calculator;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CalcWin.Models.User;
 
 namespace CalcWin.BusinessLogic.ControllersLogic
 {
-    public class CalculatorLogic
+    public class CalculatorLogic : ICalculatorLogic
     {
         private readonly ApplicationDbContext db;
         private readonly UserManager<ApplicationUser> _userManager;
+        private readonly ICalculator _calculator;
 
-        public CalculatorLogic(
-            ApplicationDbContext context,
-            UserManager<ApplicationUser> userManager)
+        public CalculatorLogic(ApplicationDbContext context, UserManager<ApplicationUser> userManager, ICalculator calculator)
         {
             db = context;
             _userManager = userManager;
+            _calculator = calculator;
         }
 
         public CalculatorViewModel PrepareStartData()
         {
             CalculatorViewModel viewModel = GetInstanceCalculatorViewModel();
-            List<Ingredient> fruits = new List<Ingredient>();
+            IList<Ingredient> fruits = new List<Ingredient>();
 
             foreach (var fruit in db.Fruits.ToList())
             {
@@ -47,7 +47,6 @@ namespace CalcWin.BusinessLogic.ControllersLogic
         public void AddWineProject(string userId, CalculatorViewModel model)
         {
             WineProject wineProject = new WineProject();
-            List<Ingredient> ingredients = new List<Ingredient>();
 
             wineProject.User = userId;
             wineProject.Ingredients = GetIngredientsFromModel(model.Ingredients);
@@ -60,33 +59,33 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             db.SaveChanges();
         }
 
-        internal void FillMissingItemsInModel(CalculatorViewModel model)
+        public void FillMissingItemsInModel(CalculatorViewModel model)
         {
             model.Flavors = new SelectList(db.Flavors, "Id", "Name");
         }
 
         public void CalculateWineResult(CalculatorViewModel model)
         {
-            List<Ingredient> ingredients = GetIngredientsFromModel(model.Ingredients);
+            IList<Ingredient> ingredients = GetIngredientsFromModel(model.Ingredients);
             Flavor flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
             double selectedAlcoholQuantity = model.SelectedAlcoholQuantity;
             double juiceCorretion = model.JuiceCorretion;
-            List<Supplement> suplements = GetDefaultSupplements();
+            IList<Supplement> suplements = GetDefaultSupplements();
 
-            Result result = Calculations.CalculateWine(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
+            Result result = _calculator.Calculate(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
 
             model.Result = RoundResultValues(result);
         }
 
         public CalculatorViewModel CalculateWineResultForSavedProject(WineProject project, CalculatorViewModel model)
         {
-            List<Ingredient> ingredients = GetIngredientsFromModel(model.Ingredients);
+            IList<Ingredient> ingredients = GetIngredientsFromModel(model.Ingredients);
             Flavor flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
             double selectedAlcoholQuantity = model.SelectedAlcoholQuantity;
             double juiceCorretion = model.JuiceCorretion;
-            List<Supplement> suplements = GetProjectSupplementsOrDefault(project.Id);
+            IList<Supplement> suplements = GetProjectSupplementsOrDefault(project.Id);
 
-            Result result = Calculations.CalculateWine(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
+            Result result = _calculator.Calculate(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
 
             model.Flavors = new SelectList(db.Flavors, "Id", "Name");
             model.Result = RoundResultValues(result);
@@ -94,7 +93,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             return model;
         }
 
-        private List<Supplement> GetProjectSupplementsOrDefault(int wineProjectId)
+        private IList<Supplement> GetProjectSupplementsOrDefault(int wineProjectId)
         {
             if (CheckIfExistSupplementsForWineProjectId(wineProjectId))
             {
@@ -106,16 +105,16 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             }
         }
 
-        private List<Supplement> GetDefaultSupplements()
+        private IList<Supplement> GetDefaultSupplements()
         {
-            List<Supplement> supplements = db.Supplements.Where(x => x.IsDefault == true).ToList();
+            IList<Supplement> supplements = db.Supplements.Where(x => x.IsDefault).ToList();
 
             return supplements;
         }
 
-        private List<Supplement> GetSupplementsByWineProjectId(int wineProjectId)
+        private IList<Supplement> GetSupplementsByWineProjectId(int wineProjectId)
         {
-            List<Supplement> supplements = db.Supplements.Where(x => x.WineProject.Id == wineProjectId).ToList();
+            IList<Supplement> supplements = db.Supplements.Where(x => x.WineProject.Id == wineProjectId).ToList();
 
             return supplements;
         }
@@ -146,9 +145,9 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             };
         }
 
-        private List<Ingredient> GetIngredientsFromModel(IEnumerable<Ingredient> items)
+        private IList<Ingredient> GetIngredientsFromModel(IList<Ingredient> items)
         {
-            List<Ingredient> ingredients = new List<Ingredient>();
+            IList<Ingredient> ingredients = new List<Ingredient>();
 
             foreach (var ingredient in items)
             {

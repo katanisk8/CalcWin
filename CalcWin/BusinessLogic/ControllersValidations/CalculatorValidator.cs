@@ -1,14 +1,14 @@
 ﻿using CalcWin.Views.Calculator;
 using System;
-using Calculator.Models;
+using Calculator.Model;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace CalcWin.BusinessLogic.ControllersValidations
 {
-    public class CalculatorValidation
+    public class CalculatorValidator : ICalculatorValidator
     {        
-        internal void ValidateModelToCalculateWine(CalculatorViewModel model)
+        public void ValidateModelToCalculateWine(CalculatorViewModel model)
         {
             if (model == null)
             {
@@ -20,7 +20,7 @@ namespace CalcWin.BusinessLogic.ControllersValidations
             CheckAlcoholQuantity(model.SelectedAlcoholQuantity);
         }
 
-        internal void ValidateModelToAddWineProject(CalculatorViewModel model)
+        public void ValidateModelToAddWineProject(CalculatorViewModel model)
         {
             if (model == null)
             {

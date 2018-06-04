@@ -1,4 +1,4 @@
-﻿using Calculator.Models;
+﻿using Calculator.Model;
 using System.Collections.Generic;
 
 namespace CalcWin.Models.ProjectsViewModel

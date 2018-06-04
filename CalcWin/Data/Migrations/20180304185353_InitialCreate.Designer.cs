@@ -21,7 +21,7 @@ namespace CalcWin.Migrations
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Calculator.Models.Flavor", b =>
+            modelBuilder.Entity("Calculator.Model.Flavor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -45,7 +45,7 @@ namespace CalcWin.Migrations
                     b.ToTable("Flavors");
                 });
 
-            modelBuilder.Entity("Calculator.Models.Fruit", b =>
+            modelBuilder.Entity("Calculator.Model.Fruit", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -75,7 +75,7 @@ namespace CalcWin.Migrations
                     b.ToTable("Fruits");
                 });
 
-            modelBuilder.Entity("Calculator.Models.Ingredient", b =>
+            modelBuilder.Entity("Calculator.Model.Ingredient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -99,7 +99,7 @@ namespace CalcWin.Migrations
                     b.ToTable("Ingredients");
                 });
 
-            modelBuilder.Entity("Calculator.Models.NormalizedName", b =>
+            modelBuilder.Entity("Calculator.Model.NormalizedName", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -119,7 +119,7 @@ namespace CalcWin.Migrations
                     b.ToTable("NormalizedNames");
                 });
 
-            modelBuilder.Entity("Calculator.Models.Supplement", b =>
+            modelBuilder.Entity("Calculator.Model.Supplement", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -149,7 +149,7 @@ namespace CalcWin.Migrations
                     b.ToTable("Supplements");
                 });
 
-            modelBuilder.Entity("Calculator.Models.WineProject", b =>
+            modelBuilder.Entity("Calculator.Model.WineProject", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -337,29 +337,29 @@ namespace CalcWin.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Calculator.Models.Ingredient", b =>
+            modelBuilder.Entity("Calculator.Model.Ingredient", b =>
                 {
-                    b.HasOne("Calculator.Models.Fruit", "Fruit")
+                    b.HasOne("Calculator.Model.Fruit", "Fruit")
                         .WithMany()
                         .HasForeignKey("FruitId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Calculator.Models.WineProject", "WineProject")
+                    b.HasOne("Calculator.Model.WineProject", "WineProject")
                         .WithMany("Ingredients")
                         .HasForeignKey("WineProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Calculator.Models.Supplement", b =>
+            modelBuilder.Entity("Calculator.Model.Supplement", b =>
                 {
-                    b.HasOne("Calculator.Models.WineProject", "WineProject")
+                    b.HasOne("Calculator.Model.WineProject", "WineProject")
                         .WithMany()
                         .HasForeignKey("WineProjectId");
                 });
 
-            modelBuilder.Entity("Calculator.Models.WineProject", b =>
+            modelBuilder.Entity("Calculator.Model.WineProject", b =>
                 {
-                    b.HasOne("Calculator.Models.Flavor", "Flavor")
+                    b.HasOne("Calculator.Model.Flavor", "Flavor")
                         .WithMany()
                         .HasForeignKey("FlavorId")
                         .OnDelete(DeleteBehavior.Cascade);

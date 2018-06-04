@@ -1,14 +1,13 @@
-﻿using Calculator.Models;
+﻿using Calculator.Model;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using System.ComponentModel.DataAnnotations;
 
 namespace CalcWin.Views.Calculator
 {
    public class CalculatorViewModel
    {
       // Start data
-      public IEnumerable<Ingredient> Ingredients { get; set; }
+      public IList<Ingredient> Ingredients { get; set; }
       public SelectList Flavors { get; set; }
 
         // Wine Project

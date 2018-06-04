@@ -1,18 +1,15 @@
 ﻿using System.IO;
 using System.Linq;
 using CalcWin.Data;
-using Calculator.Models;
+using Calculator.Model;
 using CalcWin.Data.DefaultData;
 using CalcWin.Models.AdminSettingsViewModels;
-using System;
-using System.Collections.Generic;
-using CalcWin.Models.User;
 using Microsoft.AspNetCore.Identity;
 
 namespace CalcWin.BusinessLogic.ControllersLogic
 {
-   public class AdminSettingsLogic
-   {
+   public class AdminSettingsLogic : IAdminSettingsLogic
+    {
       private readonly ApplicationDbContext db;
 
       public AdminSettingsLogic(ApplicationDbContext context)
