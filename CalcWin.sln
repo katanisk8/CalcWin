@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27004.2008
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcWin", "CalcWin\CalcWin.csproj", "{0C7617AC-9EAE-478E-9472-E3C3070A4016}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator", "Calculator\Calculator.csproj", "{EC511251-73EB-4C58-927E-65406D0D6DC4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcService", "CalcService\CalcService.csproj", "{EC511251-73EB-4C58-927E-65406D0D6DC4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

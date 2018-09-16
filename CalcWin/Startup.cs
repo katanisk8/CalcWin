@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Builder;
+﻿using Calculator;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
@@ -27,6 +28,7 @@ namespace CalcWin
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddTransient<ICalculator, Calculator.Calculator>();
             services.AddTransient<ICalculatorLogic, CalculatorLogic>();
             services.AddTransient<IProjectLogic, ProjectLogic>();
             services.AddTransient<ISettingsLogic, SettingsLogic>();
