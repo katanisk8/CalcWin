@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 using System.Collections.Generic;
 
-namespace CalcWin.Migrations
+namespace DataAccess.Data.Migrations
 {
     public partial class InitialCreate : Migration
     {

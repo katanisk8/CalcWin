@@ -1,4 +1,4 @@
-﻿namespace CalcService.Model
+﻿namespace DataAccess.Model
 {
     public interface IElement
     {

@@ -1,13 +1,9 @@
-﻿using System.Linq;
-using Microsoft.AspNetCore.Mvc;
-using CalcWin.Data;
-using Calculator.Model;
-using System.Collections.Generic;
-using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using DataAccess.Data;
 
 namespace CalcWin.Controllers
 {
-    public class DevController : Controller
+   public class DevController : Controller
     {
         private readonly ApplicationDbContext _db;
 

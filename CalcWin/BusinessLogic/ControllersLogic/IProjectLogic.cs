@@ -1,4 +1,4 @@
-﻿using Calculator.Model;
+﻿using DataAccess.Model;
 using CalcWin.Models.ProjectsViewModel;
 using CalcWin.Views.Calculator;
 

@@ -4,7 +4,7 @@ using System.Text;
 using System.Xml;
 using System.Xml.Serialization;
 
-namespace CalcWin.Data.DefaultData
+namespace DataAccess.Data.DefaultData
 {
    public static class GenerateDefaultData
    {

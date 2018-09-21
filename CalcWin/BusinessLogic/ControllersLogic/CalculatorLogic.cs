@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Linq;
-using CalcWin.Data;
-using Calculator.Model;
+using DataAccess.Data;
+using DataAccess.Model;
 using CalcWin.Views.Calculator;
 using System.Collections.Generic;
-using Calculator;
+using CalcService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using CalcWin.Models.User;
+using DataAccess.Model.User;
 
 namespace CalcWin.BusinessLogic.ControllersLogic
 {
-    public class CalculatorLogic : ICalculatorLogic
+   public class CalculatorLogic : ICalculatorLogic
     {
         private readonly ApplicationDbContext db;
         private readonly UserManager<ApplicationUser> _userManager;

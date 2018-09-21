@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Calculator.Model;
-using CalcWin.Models.User;
+using DataAccess.Model;
+using DataAccess.Model.User;
 
-namespace CalcWin.Data
+namespace DataAccess.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
@@ -23,6 +23,6 @@ namespace CalcWin.Data
         public virtual DbSet<Supplement> Supplements { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
         public virtual DbSet<NormalizedName> NormalizedNames { get; set; }
-        public DbSet<CalcWin.Models.User.ApplicationUser> ApplicationUser { get; set; }
+        public DbSet<ApplicationUser> ApplicationUser { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using CalcWin.Views.Calculator;
 using System;
-using Calculator.Model;
+using DataAccess.Model;
 using System.Collections.Generic;
 using System.Linq;
 

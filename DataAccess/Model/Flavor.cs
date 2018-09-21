@@ -3,10 +3,10 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Serialization;
 
-namespace CalcService.Model
+namespace DataAccess.Model
 {
     [Serializable]
-    public class Fruit : IElement
+    public class Flavor : IElement
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -14,9 +14,6 @@ namespace CalcService.Model
 
         [Timestamp]
         public byte[] Timestamp { get; set; }
-
-        [XmlAttribute("user")]
-        public string User { get; set; }
 
         [XmlAttribute("name")]
         [Required]
@@ -30,16 +27,8 @@ namespace CalcService.Model
         [Required]
         public bool IsDefault { get; set; }
 
-        [XmlAttribute("sugar")]
-        [Required]
-        public double Sugar { get; set; }
-
         [XmlAttribute("acid")]
         [Required]
         public double Acid { get; set; }
-
-        [XmlAttribute("price")]
-        [Required]
-        public double Price { get; set; }
     }
 }

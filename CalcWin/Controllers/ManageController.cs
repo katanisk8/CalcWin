@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CalcWin.Models.ManageViewModels;
 using CalcWin.Services;
-using CalcWin.Models.User;
+using DataAccess.Model.User;
 
 namespace CalcWin.Controllers
 {

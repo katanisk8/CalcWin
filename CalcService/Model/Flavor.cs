@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Serialization;
 
-namespace Calculator.Model
+namespace CalcService.Model
 {
     [Serializable]
     public class Flavor : IElement

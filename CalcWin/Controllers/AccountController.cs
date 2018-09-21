@@ -8,11 +8,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CalcWin.Models.AccountViewModels;
 using CalcWin.Services;
-using CalcWin.Models.User;
+using DataAccess.Model.User;
 
 namespace CalcWin.Controllers
 {
-    [Authorize]
+   [Authorize]
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {

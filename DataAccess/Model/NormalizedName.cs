@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Serialization;
 
-namespace CalcService.Model
+namespace DataAccess.Model
 {
-    public class Ingredient
+    public class NormalizedName
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -12,13 +13,12 @@ namespace CalcService.Model
         [Timestamp]
         public byte[] Timestamp { get; set; }
 
+        [XmlAttribute("item")]
         [Required]
-        public WineProject WineProject { get; set; }
+        public string Item { get; set; }
 
+        [XmlAttribute("name")]
         [Required]
-        public Fruit Fruit { get; set; }
-
-        [Required]
-        public double Quantity { get; set; }
+        public string Name { get; set; }
     }
 }

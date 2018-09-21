@@ -1,13 +1,13 @@
 ﻿using System.Linq;
-using CalcWin.Data;
-using Calculator.Model;
+using DataAccess.Model;
 using CalcWin.Views.Calculator;
 using Microsoft.EntityFrameworkCore;
 using CalcWin.Models.ProjectsViewModel;
+using DataAccess.Data;
 
 namespace CalcWin.BusinessLogic.ControllersLogic
 {
-    public class ProjectLogic : IProjectLogic
+   public class ProjectLogic : IProjectLogic
     {
         private readonly ApplicationDbContext _db;
 

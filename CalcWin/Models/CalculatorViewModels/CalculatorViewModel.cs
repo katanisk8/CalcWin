@@ -1,4 +1,4 @@
-﻿using Calculator.Model;
+﻿using DataAccess.Model;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
 

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
-using Calculator.Model;
+using CalcService.Model;
 using System.Collections.Generic;
 
-namespace Calculator
+namespace CalcService
 {
     public class Calculator : ICalculator
     {

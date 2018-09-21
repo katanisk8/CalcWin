@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using CalcWin.Models.User;
+using DataAccess.Model.User;
 
 namespace CalcWin.Models.AdminSettingsViewModels
 {

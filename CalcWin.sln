@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcWin", "CalcWin\CalcWin.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcService", "CalcService\CalcService.csproj", "{EC511251-73EB-4C58-927E-65406D0D6DC4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccess", "DataAccess\DataAccess.csproj", "{11AF9B38-2612-4E4B-8BF1-13993C6A4022}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{EC511251-73EB-4C58-927E-65406D0D6DC4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC511251-73EB-4C58-927E-65406D0D6DC4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC511251-73EB-4C58-927E-65406D0D6DC4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11AF9B38-2612-4E4B-8BF1-13993C6A4022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11AF9B38-2612-4E4B-8BF1-13993C6A4022}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11AF9B38-2612-4E4B-8BF1-13993C6A4022}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11AF9B38-2612-4E4B-8BF1-13993C6A4022}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
