@@ -4,10 +4,10 @@ using DataAccess.Data;
 using DataAccess.Model;
 using CalcWin.Views.Calculator;
 using System.Collections.Generic;
-using CalcService;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DataAccess.Model.User;
+using CalcWin.Client.CalcService;
 
 namespace CalcWin.BusinessLogic.ControllersLogic
 {
@@ -15,13 +15,13 @@ namespace CalcWin.BusinessLogic.ControllersLogic
     {
         private readonly ApplicationDbContext db;
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly ICalculator _calculator;
+        private readonly ICalcService _calcService;
 
-        public CalculatorLogic(ApplicationDbContext context, UserManager<ApplicationUser> userManager, ICalculator calculator)
+        public CalculatorLogic(ApplicationDbContext context, UserManager<ApplicationUser> userManager, ICalcService calcService)
         {
             db = context;
             _userManager = userManager;
-            _calculator = calculator;
+           _calcService = calcService;
         }
 
         public CalculatorViewModel PrepareStartData()
@@ -72,7 +72,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             double juiceCorretion = model.JuiceCorretion;
             IList<Supplement> suplements = GetDefaultSupplements();
 
-            Result result = _calculator.Calculate(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
+            Result result = _calcService.Calculate(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
 
             model.Result = RoundResultValues(result);
         }
@@ -85,7 +85,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             double juiceCorretion = model.JuiceCorretion;
             IList<Supplement> suplements = GetProjectSupplementsOrDefault(project.Id);
 
-            Result result = _calculator.Calculate(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
+            Result result = _calcService.Calculate(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
 
             model.Flavors = new SelectList(db.Flavors, "Id", "Name");
             model.Result = RoundResultValues(result);

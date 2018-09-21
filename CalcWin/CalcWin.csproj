@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CalcService\CalcService.csproj" />
-    <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
+    <ProjectReference Include="..\CalcWin.Client\CalcWin.Client.csproj" />
+    <ProjectReference Include="..\DataAccess\CalcWin.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>
