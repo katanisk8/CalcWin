@@ -1,5 +1,5 @@
 @using Microsoft.AspNetCore.Identity
-@using CalcWin.Models.User
+@using DataAccess.Model.User
 
 @inject SignInManager<ApplicationUser> SignInManager
 @inject UserManager<ApplicationUser> UserManager
@@ -20,12 +20,9 @@
                     <li>
                         <a asp-area="" asp-controller="Settings" asp-action="Index"><i class="fa fa-gear fa-fw"></i> Settings</a>
                     </li>
-                    @if (this.User.IsInRole("Admin"))
-                    {
-                        <li>
-                            <a asp-area="" asp-controller="AdminSettings" asp-action="Index"><i class="fa fa-gear fa-fw"></i> Admin Settings</a>
-                        </li>
-                    }
+                    <li>
+                        <a asp-area="" asp-controller="AdminSettings" asp-action="Index"><i class="fa fa-gear fa-fw"></i> Admin Settings</a>
+                    </li>
                     <li class="divider"></li>
                     <li>
                         <a onclick="document.getElementById('logoutForm').submit()"><i class="fa fa-sign-out fa-fw"></i> Logout</a>

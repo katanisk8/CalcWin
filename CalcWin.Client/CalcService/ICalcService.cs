@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
-using CalcService.Model;
+﻿using CalcService.Core.Model;
+using DataAccess.Model;
+using System.Threading.Tasks;
 
 namespace CalcWin.Client.CalcService
 {
    public interface ICalcService
    {
-      Result Calculate(IList<Ingredient> ingredients, Flavor flavor, double selectedAlcoholQuantity, double juiceCorretion, IList<Supplement> suplements);
+        Task<Result> InitialAsync(CalcServiceRequest request);
    }
 }

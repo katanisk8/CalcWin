@@ -59,7 +59,7 @@ namespace CalcWin.Controllers
             try
             {
                 _validator.ValidateModelToCalculateWine(model);
-                _logic.CalculateWineResult(model);
+                _logic.CalculateWineResultAsync(model);
                 _logic.FillMissingItemsInModel(model);
                 return View(MVC.Views.Calculator.Index, model);
             }

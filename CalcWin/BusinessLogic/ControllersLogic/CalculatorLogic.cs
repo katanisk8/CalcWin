@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using DataAccess.Model.User;
 using CalcWin.Client.CalcService;
+using CalcService.Core.Model;
 
 namespace CalcWin.BusinessLogic.ControllersLogic
 {
@@ -64,7 +65,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             model.Flavors = new SelectList(db.Flavors, "Id", "Name");
         }
 
-        public void CalculateWineResult(CalculatorViewModel model)
+        public async void CalculateWineResultAsync(CalculatorViewModel model)
         {
             IList<Ingredient> ingredients = GetIngredientsFromModel(model.Ingredients);
             Flavor flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
@@ -72,9 +73,22 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             double juiceCorretion = model.JuiceCorretion;
             IList<Supplement> suplements = GetDefaultSupplements();
 
-            Result result = _calcService.Calculate(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
+            CalcServiceRequest request = GetCalcServiceRequest(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
+            Result result = await _calcService.InitialAsync(request);
 
             model.Result = RoundResultValues(result);
+        }
+
+        private CalcServiceRequest GetCalcServiceRequest(IList<Ingredient> ingredients, Flavor flavor, double selectedAlcoholQuantity, double juiceCorretion, IList<Supplement> suplements)
+        {
+            CalcServiceRequest request = new CalcServiceRequest();
+            request.Ingredients = ingredients;
+            request.Flavor = flavor;
+            request.AlcoholQuantity = selectedAlcoholQuantity;
+            request.JuiceCorretion = juiceCorretion;
+            request.Supplements = suplements;
+
+            return request;
         }
 
         public CalculatorViewModel CalculateWineResultForSavedProject(WineProject project, CalculatorViewModel model)
@@ -85,10 +99,10 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             double juiceCorretion = model.JuiceCorretion;
             IList<Supplement> suplements = GetProjectSupplementsOrDefault(project.Id);
 
-            Result result = _calcService.Calculate(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
+            //Result result = _calcService.Calculate(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
 
             model.Flavors = new SelectList(db.Flavors, "Id", "Name");
-            model.Result = RoundResultValues(result);
+            //model.Result = RoundResultValues(result);
 
             return model;
         }

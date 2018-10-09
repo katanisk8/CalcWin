@@ -2,6 +2,10 @@
   "iisSettings": {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
+    "iis": {
+      "applicationUrl": "http://localhost/CalcWin",
+      "sslPort": 0
+    },
     "iisExpress": {
       "applicationUrl": "http://localhost:53861/",
       "sslPort": 0
@@ -17,8 +21,7 @@
       }
     },
     "CalcWin": {
-      "commandName": "IISExpress",
-      "launchBrowser": true,
+      "commandName": "IIS",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
