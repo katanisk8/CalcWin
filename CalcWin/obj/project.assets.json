@@ -14342,11 +14342,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\CalcWin\\CalcWin\\CalcWin.csproj",
+      "projectUniqueName": "C:\\Users\\Makowej\\Desktop\\CalcWin\\CalcWin\\CalcWin.csproj",
       "projectName": "CalcWin",
-      "projectPath": "C:\\CalcWin\\CalcWin\\CalcWin.csproj",
+      "projectPath": "C:\\Users\\Makowej\\Desktop\\CalcWin\\CalcWin\\CalcWin.csproj",
       "packagesPath": "C:\\Users\\Makowej\\.nuget\\packages\\",
-      "outputPath": "C:\\CalcWin\\CalcWin\\obj\\",
+      "outputPath": "C:\\Users\\Makowej\\Desktop\\CalcWin\\CalcWin\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -14365,11 +14365,11 @@
       "frameworks": {
         "netcoreapp2.1": {
           "projectReferences": {
-            "C:\\CalcWin\\CalcWin.Client\\CalcWin.Client.csproj": {
-              "projectPath": "C:\\CalcWin\\CalcWin.Client\\CalcWin.Client.csproj"
+            "C:\\Users\\Makowej\\Desktop\\CalcWin\\CalcWin.Client\\CalcWin.Client.csproj": {
+              "projectPath": "C:\\Users\\Makowej\\Desktop\\CalcWin\\CalcWin.Client\\CalcWin.Client.csproj"
             },
-            "C:\\CalcWin\\DataAccess\\CalcWin.DataAccess.csproj": {
-              "projectPath": "C:\\CalcWin\\DataAccess\\CalcWin.DataAccess.csproj"
+            "C:\\Users\\Makowej\\Desktop\\CalcWin\\DataAccess\\CalcWin.DataAccess.csproj": {
+              "projectPath": "C:\\Users\\Makowej\\Desktop\\CalcWin\\DataAccess\\CalcWin.DataAccess.csproj"
             }
           }
         }
