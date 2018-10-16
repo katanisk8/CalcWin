@@ -30,8 +30,7 @@ namespace CalcWin.Client.CalcService
             client.BaseAddress = new Uri(_url);
 
             //var response = client.get(_method);
-
-
+            
 
             //var response = client.PostAsync(_method, byteContent).Result;
 
