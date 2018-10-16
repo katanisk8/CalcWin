@@ -29,11 +29,11 @@ namespace CalcWin.Client.CalcService
             HttpClient client = new HttpClient();
             client.BaseAddress = new Uri(_url);
 
-            var response = client.GetAsync(_method);
+            //var response = client.get(_method);
 
             //var response = client.PostAsync(_method, byteContent).Result;
 
-            //Result result = _calcServiceMapper.MapCalcServiceResponse(response);
+           //Result result = _calcServiceMapper.MapCalcServiceResponse(response);
 
             return new Result();
         }
