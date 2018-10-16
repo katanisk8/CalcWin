@@ -31,9 +31,11 @@ namespace CalcWin.Client.CalcService
 
             //var response = client.get(_method);
 
+
+
             //var response = client.PostAsync(_method, byteContent).Result;
 
-           //Result result = _calcServiceMapper.MapCalcServiceResponse(response);
+            //Result result = _calcServiceMapper.MapCalcServiceResponse(response);
 
             return new Result();
         }
