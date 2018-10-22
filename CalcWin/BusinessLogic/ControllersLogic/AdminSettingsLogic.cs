@@ -2,9 +2,9 @@
 using System.Linq;
 using CalcWin.DataAccess.Model;
 using CalcWin.Models.AdminSettingsViewModels;
-using CalcWin.CalcWin.DataAccess.Data.DefaultData;
+using CalcWin.DataAccess.Data.DefaultData;
 using Microsoft.AspNetCore.Identity;
-using CalcWin.CalcWin.DataAccess.Data;
+using CalcWin.DataAccess.Data;
 
 namespace CalcWin.BusinessLogic.ControllersLogic
 {

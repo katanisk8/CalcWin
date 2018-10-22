@@ -1,4 +1,4 @@
-﻿using CalcWin.CalcWin.DataAccess.Data;
+﻿using CalcWin.DataAccess.Data;
 
 namespace CalcWin.BusinessLogic.ControllersLogic
 {

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Xml.Serialization;
 using Microsoft.AspNetCore.Identity;
 
-namespace CalcWin.CalcWin.DataAccess.Data.DefaultData
+namespace CalcWin.DataAccess.Data.DefaultData
 {
    [Serializable]
    [XmlRoot("CalcWin")]

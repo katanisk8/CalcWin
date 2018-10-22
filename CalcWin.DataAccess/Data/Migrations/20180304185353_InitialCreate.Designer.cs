@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace CalcWin.CalcWin.DataAccess.Data.Migrations
+namespace CalcWin.DataAccess.Data.Migrations
 {
    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20180304185353_InitialCreate")]

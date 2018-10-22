@@ -3,7 +3,7 @@ using CalcWin.DataAccess.Model;
 using CalcWin.Views.Calculator;
 using Microsoft.EntityFrameworkCore;
 using CalcWin.Models.ProjectsViewModel;
-using CalcWin.CalcWin.DataAccess.Data;
+using CalcWin.DataAccess.Data;
 
 namespace CalcWin.BusinessLogic.ControllersLogic
 {
