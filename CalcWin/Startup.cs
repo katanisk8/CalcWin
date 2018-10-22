@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using DataAccess.Data;
+using CalcWin.CalcWin.DataAccess.Data;
 using CalcWin.Services;
 using CalcWin.BusinessLogic.ControllersLogic;
 using CalcWin.BusinessLogic.ControllersValidations;
-using DataAccess.Model.User;
+using CalcWin.DataAccess.Model.User;
 using CalcWin.Client.CalcService;
 
 namespace CalcWin

@@ -1,5 +1,5 @@
 ﻿using System.Net.Http;
-using DataAccess.Model;
+using CalcWin.DataAccess.Model;
 
 namespace CalcWin.Client.CalcService
 {

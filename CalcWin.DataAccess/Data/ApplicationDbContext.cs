@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using DataAccess.Model;
-using DataAccess.Model.User;
+using CalcWin.DataAccess.Model;
+using CalcWin.DataAccess.Model.User;
 
-namespace DataAccess.Data
+namespace CalcWin.DataAccess.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

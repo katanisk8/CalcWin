@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Serialization;
 
-namespace DataAccess.Model
+namespace CalcWin.DataAccess.Model
 {
     public class NormalizedName
     {

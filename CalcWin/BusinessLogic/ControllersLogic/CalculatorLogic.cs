@@ -1,12 +1,12 @@
 ﻿using System;
 using System.Linq;
-using DataAccess.Data;
-using DataAccess.Model;
+using CalcWin.CalcWin.DataAccess.Data;
+using CalcWin.DataAccess.Model;
 using CalcWin.Views.Calculator;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using DataAccess.Model.User;
+using CalcWin.DataAccess.Model.User;
 using CalcWin.Client.CalcService;
 using CalcService.Core.Model;
 

@@ -1,4 +1,4 @@
-﻿namespace DataAccess.Model
+﻿namespace CalcWin.DataAccess.Model
 {
     public interface IElement
     {

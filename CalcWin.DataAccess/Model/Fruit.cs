@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Serialization;
 
-namespace DataAccess.Model
+namespace CalcWin.DataAccess.Model
 {
     [Serializable]
     public class Fruit : IElement

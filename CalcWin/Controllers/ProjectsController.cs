@@ -6,7 +6,7 @@ using CalcWin.BusinessLogic.ControllersValidations;
 using CalcWin.Models.ProjectsViewModel;
 using System;
 using Microsoft.AspNetCore.Identity;
-using DataAccess.Model.User;
+using CalcWin.DataAccess.Model.User;
 
 namespace CalcWin.Controllers
 {

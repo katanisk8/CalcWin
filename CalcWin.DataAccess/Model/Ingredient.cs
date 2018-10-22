@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace DataAccess.Model
+namespace CalcWin.DataAccess.Model
 {
     public class Ingredient
     {

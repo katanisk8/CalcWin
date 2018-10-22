@@ -1,4 +1,4 @@
-﻿using DataAccess.Model;
+﻿using CalcWin.DataAccess.Model;
 using System.Collections.Generic;
 
 namespace CalcService.Core.Model

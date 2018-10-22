@@ -1,9 +1,9 @@
 ﻿using System.Linq;
-using DataAccess.Model;
+using CalcWin.DataAccess.Model;
 using CalcWin.Views.Calculator;
 using Microsoft.EntityFrameworkCore;
 using CalcWin.Models.ProjectsViewModel;
-using DataAccess.Data;
+using CalcWin.CalcWin.DataAccess.Data;
 
 namespace CalcWin.BusinessLogic.ControllersLogic
 {

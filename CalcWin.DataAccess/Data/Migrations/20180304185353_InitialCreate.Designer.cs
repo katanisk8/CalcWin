@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using System;
 
-namespace DataAccess.Data.Migrations
+namespace CalcWin.CalcWin.DataAccess.Data.Migrations
 {
    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20180304185353_InitialCreate")]
@@ -18,7 +18,7 @@ namespace DataAccess.Data.Migrations
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("DataAccess.Model.Flavor", b =>
+            modelBuilder.Entity("CalcWin.DataAccess.Model.Flavor", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -42,7 +42,7 @@ namespace DataAccess.Data.Migrations
                     b.ToTable("Flavors");
                 });
 
-            modelBuilder.Entity("DataAccess.Model.Fruit", b =>
+            modelBuilder.Entity("CalcWin.DataAccess.Model.Fruit", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -72,7 +72,7 @@ namespace DataAccess.Data.Migrations
                     b.ToTable("Fruits");
                 });
 
-            modelBuilder.Entity("DataAccess.Model.Ingredient", b =>
+            modelBuilder.Entity("CalcWin.DataAccess.Model.Ingredient", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -96,7 +96,7 @@ namespace DataAccess.Data.Migrations
                     b.ToTable("Ingredients");
                 });
 
-            modelBuilder.Entity("DataAccess.Model.NormalizedName", b =>
+            modelBuilder.Entity("CalcWin.DataAccess.Model.NormalizedName", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -116,7 +116,7 @@ namespace DataAccess.Data.Migrations
                     b.ToTable("NormalizedNames");
                 });
 
-            modelBuilder.Entity("DataAccess.Model.Supplement", b =>
+            modelBuilder.Entity("CalcWin.DataAccess.Model.Supplement", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -146,7 +146,7 @@ namespace DataAccess.Data.Migrations
                     b.ToTable("Supplements");
                 });
 
-            modelBuilder.Entity("DataAccess.Model.WineProject", b =>
+            modelBuilder.Entity("CalcWin.DataAccess.Model.WineProject", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -334,29 +334,29 @@ namespace DataAccess.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("DataAccess.Model.Ingredient", b =>
+            modelBuilder.Entity("CalcWin.DataAccess.Model.Ingredient", b =>
                 {
-                    b.HasOne("DataAccess.Model.Fruit", "Fruit")
+                    b.HasOne("CalcWin.DataAccess.Model.Fruit", "Fruit")
                         .WithMany()
                         .HasForeignKey("FruitId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("DataAccess.Model.WineProject", "WineProject")
+                    b.HasOne("CalcWin.DataAccess.Model.WineProject", "WineProject")
                         .WithMany("Ingredients")
                         .HasForeignKey("WineProjectId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("DataAccess.Model.Supplement", b =>
+            modelBuilder.Entity("CalcWin.DataAccess.Model.Supplement", b =>
                 {
-                    b.HasOne("DataAccess.Model.WineProject", "WineProject")
+                    b.HasOne("CalcWin.DataAccess.Model.WineProject", "WineProject")
                         .WithMany()
                         .HasForeignKey("WineProjectId");
                 });
 
-            modelBuilder.Entity("DataAccess.Model.WineProject", b =>
+            modelBuilder.Entity("CalcWin.DataAccess.Model.WineProject", b =>
                 {
-                    b.HasOne("DataAccess.Model.Flavor", "Flavor")
+                    b.HasOne("CalcWin.DataAccess.Model.Flavor", "Flavor")
                         .WithMany()
                         .HasForeignKey("FlavorId")
                         .OnDelete(DeleteBehavior.Cascade);

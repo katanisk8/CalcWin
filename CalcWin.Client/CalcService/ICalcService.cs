@@ -1,5 +1,5 @@
 ﻿using CalcService.Core.Model;
-using DataAccess.Model;
+using CalcWin.DataAccess.Model;
 using System.Threading.Tasks;
 
 namespace CalcWin.Client.CalcService

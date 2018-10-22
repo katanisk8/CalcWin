@@ -1,10 +1,10 @@
 ﻿using System;
-using DataAccess.Model;
+using CalcWin.DataAccess.Model;
 using System.Collections.Generic;
 using System.Xml.Serialization;
 using Microsoft.AspNetCore.Identity;
 
-namespace DataAccess.Data.DefaultData
+namespace CalcWin.CalcWin.DataAccess.Data.DefaultData
 {
    [Serializable]
    [XmlRoot("CalcWin")]

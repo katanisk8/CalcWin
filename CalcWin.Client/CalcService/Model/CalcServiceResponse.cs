@@ -1,4 +1,4 @@
-﻿using DataAccess.Model;
+﻿using CalcWin.DataAccess.Model;
 
 namespace CalcService.Core.Model
 {
