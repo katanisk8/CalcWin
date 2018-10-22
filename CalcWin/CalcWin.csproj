@@ -20,7 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CalcWin.Client\CalcWin.Client.csproj" />
-    <ProjectReference Include="..\DataAccess\CalcWin.DataAccess.csproj" />
+    <ProjectReference Include="..\CalcWin.DataAccess\CalcWin.DataAccess.csproj" />
   </ItemGroup>
 
 </Project>

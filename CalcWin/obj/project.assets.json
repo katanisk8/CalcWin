@@ -14321,8 +14321,8 @@
     },
     "CalcWin.DataAccess/1.0.0": {
       "type": "project",
-      "path": "../DataAccess/CalcWin.DataAccess.csproj",
-      "msbuildProject": "../DataAccess/CalcWin.DataAccess.csproj"
+      "path": "../CalcWin.DataAccess/CalcWin.DataAccess.csproj",
+      "msbuildProject": "../CalcWin.DataAccess/CalcWin.DataAccess.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -14368,8 +14368,8 @@
             "C:\\Users\\Makowej\\Desktop\\CalcWin\\CalcWin.Client\\CalcWin.Client.csproj": {
               "projectPath": "C:\\Users\\Makowej\\Desktop\\CalcWin\\CalcWin.Client\\CalcWin.Client.csproj"
             },
-            "C:\\Users\\Makowej\\Desktop\\CalcWin\\DataAccess\\CalcWin.DataAccess.csproj": {
-              "projectPath": "C:\\Users\\Makowej\\Desktop\\CalcWin\\DataAccess\\CalcWin.DataAccess.csproj"
+            "C:\\Users\\Makowej\\Desktop\\CalcWin\\CalcWin.DataAccess\\CalcWin.DataAccess.csproj": {
+              "projectPath": "C:\\Users\\Makowej\\Desktop\\CalcWin\\CalcWin.DataAccess\\CalcWin.DataAccess.csproj"
             }
           }
         }

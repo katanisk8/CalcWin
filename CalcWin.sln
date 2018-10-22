@@ -8,9 +8,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcWin", "CalcWin\CalcWin.
 		{1893D7B5-912C-4902-9ECC-2F9458B5C216} = {1893D7B5-912C-4902-9ECC-2F9458B5C216}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcWin.DataAccess", "DataAccess\CalcWin.DataAccess.csproj", "{11AF9B38-2612-4E4B-8BF1-13993C6A4022}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcWin.DataAccess", "CalcWin.DataAccess\CalcWin.DataAccess.csproj", "{11AF9B38-2612-4E4B-8BF1-13993C6A4022}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcWin.Client", "CalcWin.Client\CalcWin.Client.csproj", "{1893D7B5-912C-4902-9ECC-2F9458B5C216}"
+	ProjectSection(ProjectDependencies) = postProject
+		{11AF9B38-2612-4E4B-8BF1-13993C6A4022} = {11AF9B38-2612-4E4B-8BF1-13993C6A4022}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CalcWin.Tests", "CalcWin.Tests\CalcWin.Tests.csproj", "{81214BDF-ACD9-465A-B952-C885235A7380}"
 EndProject
