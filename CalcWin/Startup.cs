@@ -10,6 +10,7 @@ using CalcWin.BusinessLogic.ControllersLogic;
 using CalcWin.BusinessLogic.ControllersValidations;
 using CalcWin.DataAccess.Model.User;
 using CalcWin.Client.CalcService;
+using CalcWin.Client.CalcService.Mappers;
 
 namespace CalcWin
 {
@@ -28,8 +29,9 @@ namespace CalcWin
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddTransient<ICalcService, Client.CalcService.CalcService>();
-            services.AddTransient<ICalcServiceMapper, CalcServiceMapper>();
+            services.AddTransient<ICalcService, CalcService>();
+            services.AddTransient<ICalcServiceRequestMapper, CalcServiceRequestMapper>();
+            services.AddTransient<ICalcServiceResponseMapper, CalcServiceResponseMapper>();
 
             services.AddTransient<ICalculatorLogic, CalculatorLogic>();
             services.AddTransient<IProjectLogic, ProjectLogic>();

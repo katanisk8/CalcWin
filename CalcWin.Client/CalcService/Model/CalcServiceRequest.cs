@@ -1,7 +1,6 @@
-﻿using CalcWin.DataAccess.Model;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace CalcService.Core.Model
+namespace CalcWin.Client.CalcService.Model
 {
     public class CalcServiceRequest
     {

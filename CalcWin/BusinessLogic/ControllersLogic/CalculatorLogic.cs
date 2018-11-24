@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CalcWin.DataAccess.Model.User;
 using CalcWin.Client.CalcService;
-using CalcService.Core.Model;
 
 namespace CalcWin.BusinessLogic.ControllersLogic
 {
@@ -73,22 +72,9 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             double juiceCorretion = model.JuiceCorretion;
             IList<Supplement> suplements = GetDefaultSupplements();
 
-            CalcServiceRequest request = GetCalcServiceRequest(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
-            Result result = await _calcService.InitialAsync(request);
+            Result result = await _calcService.InitialAsync(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
 
             model.Result = RoundResultValues(result);
-        }
-
-        private CalcServiceRequest GetCalcServiceRequest(IList<Ingredient> ingredients, Flavor flavor, double selectedAlcoholQuantity, double juiceCorretion, IList<Supplement> suplements)
-        {
-            CalcServiceRequest request = new CalcServiceRequest();
-            request.Ingredients = ingredients;
-            request.Flavor = flavor;
-            request.AlcoholQuantity = selectedAlcoholQuantity;
-            request.JuiceCorretion = juiceCorretion;
-            request.Supplements = suplements;
-
-            return request;
         }
 
         public CalculatorViewModel CalculateWineResultForSavedProject(WineProject project, CalculatorViewModel model)
