@@ -1,12 +1,12 @@
 ﻿using CalcWin.Client.CalcService.Model;
-using CWDA = CalcWin.DataAccess.Model;
+using CalcWin.DataAccess.Model;
 using System.Collections.Generic;
 
 namespace CalcWin.Client.CalcService.Mappers
 {
     public class CalcServiceRequestMapper : ICalcServiceRequestMapper
     {
-        public CalcServiceRequest MapCalcServiceRequest(IList<CWDA.Ingredient> ingredients, CWDA.Flavor flavor, double selectedAlcoholQuantity, double juiceCorretion, IList<CWDA.Supplement> suplements)
+        public CalcServiceRequest MapCalcServiceRequest(IList<Ingredient> ingredients, Flavor flavor, double selectedAlcoholQuantity, double juiceCorretion, IList<Supplement> suplements)
         {
             CalcServiceRequest request = new CalcServiceRequest();
             request.Ingredients = GetIngredients(ingredients);
@@ -19,7 +19,7 @@ namespace CalcWin.Client.CalcService.Mappers
         }
 
 
-        private static IList<IngredientDTO> GetIngredients(IEnumerable<CWDA.Ingredient> ingredients)
+        private static IList<IngredientDTO> GetIngredients(IEnumerable<Ingredient> ingredients)
         {
             IList<IngredientDTO> newIngredients = new List<IngredientDTO>();
 
@@ -35,7 +35,7 @@ namespace CalcWin.Client.CalcService.Mappers
             return newIngredients;
         }
 
-        private static FruitDTO GetFruit(CWDA.Fruit fruit)
+        private static FruitDTO GetFruit(Fruit fruit)
         {
             FruitDTO newFruit = new FruitDTO();
             newFruit.Name = fruit.Name;
@@ -48,7 +48,7 @@ namespace CalcWin.Client.CalcService.Mappers
             return newFruit;
         }
 
-        private static FlavorDTO GetFlavor(CWDA.Flavor flavor)
+        private static FlavorDTO GetFlavor(Flavor flavor)
         {
             FlavorDTO newFlavor = new FlavorDTO();
             newFlavor.Name = flavor.Name;
@@ -59,7 +59,7 @@ namespace CalcWin.Client.CalcService.Mappers
             return newFlavor;
         }
 
-        private static IList<SupplementDTO> GetSupelements(IEnumerable<CWDA.Supplement> suplements)
+        private static IList<SupplementDTO> GetSupelements(IEnumerable<Supplement> suplements)
         {
             IList<SupplementDTO> newSuplements = new List<SupplementDTO>();
 

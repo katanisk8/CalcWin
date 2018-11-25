@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using CalcWin.Client.CalcService.Model;
-using CWDA = CalcWin.DataAccess.Model;
+using CalcWin.DataAccess.Model;
 
 namespace CalcWin.Client.CalcService.Mappers
 {
     public class CalcServiceResponseMapper : ICalcServiceResponseMapper
     {
-        public CWDA.Result MapCalcServiceResponse(CalcServiceResponse response)
+        public Result MapCalcServiceResponse(CalcServiceResponse response)
         {
-            CWDA.Result result = new CWDA.Result();
+            Result result = new Result();
 
             result.Mixture = GetMixture(response.Result.Mixture);
             result.Recipe = GetRecipe(response.Result.Recipe);
@@ -17,9 +17,9 @@ namespace CalcWin.Client.CalcService.Mappers
             return result;
         }
 
-        private CWDA.Mixture GetMixture(Mixture resultMixture)
+        private Mixture GetMixture(MixtureDTO resultMixture)
         {
-            CWDA.Mixture mixture = new CWDA.Mixture();
+            Mixture mixture = new Mixture();
             mixture.FruitsQuantity = resultMixture.FruitsQuantity;
             mixture.FruitsMixture = resultMixture.FruitsMixture;
             mixture.SugarInMixture = resultMixture.SugarInMixture;
@@ -31,9 +31,9 @@ namespace CalcWin.Client.CalcService.Mappers
             return mixture;
         }
 
-        private CWDA.Recipe GetRecipe(Recipe resultRecipe)
+        private Recipe GetRecipe(RecipeDTO resultRecipe)
         {
-            CWDA.Recipe recipe = new CWDA.Recipe();
+            Recipe recipe = new Recipe();
             recipe.Ingredients = GetIngredients(resultRecipe.Ingredients);
             recipe.Sugar = resultRecipe.Sugar;
             recipe.Acid = resultRecipe.Acid;
@@ -45,9 +45,9 @@ namespace CalcWin.Client.CalcService.Mappers
             return recipe;
         }
 
-        private CWDA.Wine GetWine(Wine resultWine)
+        private Wine GetWine(WineDTO resultWine)
         {
-            CWDA.Wine wine = new CWDA.Wine();
+            Wine wine = new Wine();
             wine.Color = resultWine.Color;
             wine.AlcoholQuantity = resultWine.AlcoholQuantity;
             wine.Flavor = resultWine.Flavor;
@@ -58,13 +58,13 @@ namespace CalcWin.Client.CalcService.Mappers
             return wine;
         }
 
-        private static IList<CWDA.Ingredient> GetIngredients(IList<IngredientDTO> ingredients)
+        private static IList<Ingredient> GetIngredients(IList<IngredientDTO> ingredients)
         {
-            IList<CWDA.Ingredient> newIngredients = new List<CWDA.Ingredient>();
+            IList<Ingredient> newIngredients = new List<Ingredient>();
 
             foreach (var ingredient in ingredients)
             {
-                CWDA.Ingredient newIngredient = new CWDA.Ingredient();
+                Ingredient newIngredient = new Ingredient();
                 newIngredient.Fruit = GetFruit(ingredient.Fruit);
                 newIngredient.Quantity = ingredient.Quantity;
                 
@@ -74,9 +74,9 @@ namespace CalcWin.Client.CalcService.Mappers
             return newIngredients;
         }
 
-        private static CWDA.Fruit GetFruit(FruitDTO fruit)
+        private static Fruit GetFruit(FruitDTO fruit)
         {
-            CWDA.Fruit newFruit = new CWDA.Fruit();
+            Fruit newFruit = new Fruit();
             newFruit.Name = fruit.Name;
             newFruit.NormalizedName = fruit.NormalizedName;
             newFruit.IsDefault = fruit.IsDefault;

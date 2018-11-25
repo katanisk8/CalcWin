@@ -4,20 +4,20 @@ namespace CalcWin.Client.CalcService.Model
 {
     public class ResultDTO
     {
-        public Mixture Mixture { get; set; }
-        public Recipe Recipe { get; set; }
-        public Wine Wine { get; set; }
+        public MixtureDTO Mixture { get; set; }
+        public RecipeDTO Recipe { get; set; }
+        public WineDTO Wine { get; set; }
 
         public ResultDTO()
         {
-            Mixture = new Mixture();
-            Recipe = new Recipe();
-            Wine = new Wine();
+            Mixture = new MixtureDTO();
+            Recipe = new RecipeDTO();
+            Wine = new WineDTO();
             Recipe.Ingredients = new List<IngredientDTO>();
         }
     }
 
-    public class Mixture
+    public class MixtureDTO
     {
         public double FruitsQuantity { get; set; }
         public double FruitsMixture { get; set; }
@@ -28,7 +28,7 @@ namespace CalcWin.Client.CalcService.Model
         public double AcidInJuice { get; set; }
     }
 
-    public class Recipe
+    public class RecipeDTO
     {
         public IList<IngredientDTO> Ingredients { get; set; }
         public double Sugar { get; set; }
@@ -39,7 +39,7 @@ namespace CalcWin.Client.CalcService.Model
         public double SuplementsCost { get; set; }
     }
 
-    public class Wine
+    public class WineDTO
     {
         public string Color { get; set; }
         public double AlcoholQuantity { get; set; }
