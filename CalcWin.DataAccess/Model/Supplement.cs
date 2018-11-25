@@ -26,6 +26,10 @@ namespace CalcWin.DataAccess.Model
         [Required]
         public string NormalizedName { get; set; }
 
+        [XmlAttribute("type")]
+        [Required]
+        public SuplementType Type { get; set; }
+
         [XmlAttribute("isDefault")]
         [Required]
         public bool IsDefault { get; set; }
@@ -36,5 +40,19 @@ namespace CalcWin.DataAccess.Model
 
         [XmlAttribute("factor")]
         public double Factor { get; set; }
+    }
+    
+    public enum SuplementType
+    {
+        [XmlEnum("0")]
+        Sugar = 0,
+        [XmlEnum("1")]
+        Acid = 1,
+        [XmlEnum("2")]
+        Water = 2,
+        [XmlEnum("3")]
+        Yeast = 3,
+        [XmlEnum("4")]
+        YeastFood = 4
     }
 }

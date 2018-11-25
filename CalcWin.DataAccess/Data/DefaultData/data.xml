@@ -29,11 +29,11 @@
     <Flavor name="Dry" normalizedName="Dry" isDefault="true" acid="10" />
   </Flavors>
   <Supplements>
-    <Supplement name="Sugar" normalizedName="Sugar" isDefault="true" price="2.5" factor="1" />
-    <Supplement name="Acid" normalizedName="Acid" isDefault="true" price="11.5" factor="1" />
-    <Supplement name="Water" normalizedName="Water" isDefault="true" price="0.01015" factor="1" />
-    <Supplement name="Yeast" normalizedName="Yeast" isDefault="true" price="385" factor="0.28" />
-    <Supplement name="Yeast Food" normalizedName="Yeast Food" isDefault="true" price="385" factor="0.28" />
+    <Supplement name="Sugar" normalizedName="Sugar" type="0" isDefault="true" price="2.5" factor="1" />
+    <Supplement name="Acid" normalizedName="Acid" type="1" isDefault="true" price="11.5" factor="1" />
+    <Supplement name="Water" normalizedName="Water" type="2" isDefault="true" price="0.01015" factor="1" />
+    <Supplement name="Yeast" normalizedName="Yeast" type="3" isDefault="true" price="385" factor="0.28" />
+    <Supplement name="Yeast Food" normalizedName="Yeast Food" type="4" isDefault="true" price="385" factor="0.28" />
   </Supplements>
   <NormalizedNames>
     <NormalizedName item="Fruit" name="Apple" />
