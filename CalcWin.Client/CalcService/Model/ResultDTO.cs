@@ -2,18 +2,18 @@
 
 namespace CalcWin.Client.CalcService.Model
 {
-    public class Result
+    public class ResultDTO
     {
         public Mixture Mixture { get; set; }
         public Recipe Recipe { get; set; }
         public Wine Wine { get; set; }
 
-        public Result()
+        public ResultDTO()
         {
             Mixture = new Mixture();
             Recipe = new Recipe();
             Wine = new Wine();
-            Recipe.Ingredients = new List<Ingredient>();
+            Recipe.Ingredients = new List<IngredientDTO>();
         }
     }
 
@@ -30,7 +30,7 @@ namespace CalcWin.Client.CalcService.Model
 
     public class Recipe
     {
-        public IList<Ingredient> Ingredients { get; set; }
+        public IList<IngredientDTO> Ingredients { get; set; }
         public double Sugar { get; set; }
         public double Acid { get; set; }
         public double Water { get; set; }

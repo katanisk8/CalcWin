@@ -1,8 +1,8 @@
 ﻿namespace CalcWin.Client.CalcService.Model
 {
-    public class Ingredient
+    public class IngredientDTO
     {
-        public Fruit Fruit { get; set; }
+        public FruitDTO Fruit { get; set; }
         public double Quantity { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using CalcWin.DataAccess.Data;
 using CalcWin.DataAccess.Model;
 using CalcWin.Views.Calculator;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using CalcWin.DataAccess.Model.User;
@@ -64,7 +65,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             model.Flavors = new SelectList(db.Flavors, "Id", "Name");
         }
 
-        public async void CalculateWineResultAsync(CalculatorViewModel model)
+        public async Task<Result> CalculateWineResultAsync(CalculatorViewModel model)
         {
             IList<Ingredient> ingredients = GetIngredientsFromModel(model.Ingredients);
             Flavor flavor = db.Flavors.First(x => x.Id == model.SelectedFlavor);
@@ -74,7 +75,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
 
             Result result = await _calcService.InitialAsync(ingredients, flavor, selectedAlcoholQuantity, juiceCorretion, suplements);
 
-            model.Result = RoundResultValues(result);
+            return RoundResultValues(result);
         }
 
         public CalculatorViewModel CalculateWineResultForSavedProject(WineProject project, CalculatorViewModel model)

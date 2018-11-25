@@ -1,6 +1,6 @@
 ﻿namespace CalcWin.Client.CalcService.Model
 {
-    public class Flavor
+    public class FlavorDTO
     {
         public string Name { get; set; }
         public string NormalizedName { get; set; }

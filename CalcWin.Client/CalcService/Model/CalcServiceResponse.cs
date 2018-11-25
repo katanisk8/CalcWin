@@ -2,7 +2,7 @@
 {
     public class CalcServiceResponse
     {
-        public Result Result { get; set; }
+        public ResultDTO Result { get; set; }
         public bool IsSuccess { get; set; }
     }
 }

@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Authorization;
 using System.Linq;
 using CalcWin.BusinessLogic.ControllersLogic;
 using System;
+using System.Threading.Tasks;
 using CalcWin.BusinessLogic.ControllersValidations;
+using CalcWin.DataAccess.Model;
 
 namespace CalcWin.Controllers
 {
@@ -54,12 +56,12 @@ namespace CalcWin.Controllers
         }
 
         [HttpPost]
-        public IActionResult Calculate(CalculatorViewModel model)
+        public async Task<IActionResult> Calculate(CalculatorViewModel model)
         {
             try
             {
                 _validator.ValidateModelToCalculateWine(model);
-                _logic.CalculateWineResultAsync(model);
+                model.Result =  await _logic.CalculateWineResultAsync(model);
                 _logic.FillMissingItemsInModel(model);
                 return View(MVC.Views.Calculator.Index, model);
             }

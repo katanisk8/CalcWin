@@ -19,13 +19,13 @@ namespace CalcWin.Client.CalcService.Mappers
         }
 
 
-        private static IList<Ingredient> GetIngredients(IEnumerable<CWDA.Ingredient> ingredients)
+        private static IList<IngredientDTO> GetIngredients(IEnumerable<CWDA.Ingredient> ingredients)
         {
-            IList<Ingredient> newIngredients = new List<Ingredient>();
+            IList<IngredientDTO> newIngredients = new List<IngredientDTO>();
 
             foreach (var ingredient in ingredients)
             {
-                Ingredient newIngredient = new Ingredient();
+                IngredientDTO newIngredient = new IngredientDTO();
                 newIngredient.Fruit = GetFruit(ingredient.Fruit);
                 newIngredient.Quantity = ingredient.Quantity;
 
@@ -35,9 +35,9 @@ namespace CalcWin.Client.CalcService.Mappers
             return newIngredients;
         }
 
-        private static Fruit GetFruit(CWDA.Fruit fruit)
+        private static FruitDTO GetFruit(CWDA.Fruit fruit)
         {
-            Fruit newFruit = new Fruit();
+            FruitDTO newFruit = new FruitDTO();
             newFruit.Name = fruit.Name;
             newFruit.NormalizedName = fruit.NormalizedName;
             newFruit.IsDefault = fruit.IsDefault;
@@ -48,9 +48,9 @@ namespace CalcWin.Client.CalcService.Mappers
             return newFruit;
         }
 
-        private static Flavor GetFlavor(CWDA.Flavor flavor)
+        private static FlavorDTO GetFlavor(CWDA.Flavor flavor)
         {
-            Flavor newFlavor = new Flavor();
+            FlavorDTO newFlavor = new FlavorDTO();
             newFlavor.Name = flavor.Name;
             newFlavor.NormalizedName = flavor.NormalizedName;
             newFlavor.IsDefault = flavor.IsDefault;
@@ -59,15 +59,16 @@ namespace CalcWin.Client.CalcService.Mappers
             return newFlavor;
         }
 
-        private static IList<Supplement> GetSupelements(IEnumerable<CWDA.Supplement> suplements)
+        private static IList<SupplementDTO> GetSupelements(IEnumerable<CWDA.Supplement> suplements)
         {
-            IList<Supplement> newSuplements = new List<Supplement>();
+            IList<SupplementDTO> newSuplements = new List<SupplementDTO>();
 
             foreach (var suplement in suplements)
             {
-                Supplement newSupplement = new Supplement();
+                SupplementDTO newSupplement = new SupplementDTO();
                 newSupplement.Name = suplement.Name;
                 newSupplement.NormalizedName = suplement.NormalizedName;
+                newSupplement.Type = suplement.Type;
                 newSupplement.IsDefault = suplement.IsDefault;
                 newSupplement.Price = suplement.Price;
                 newSupplement.Factor = suplement.Factor;

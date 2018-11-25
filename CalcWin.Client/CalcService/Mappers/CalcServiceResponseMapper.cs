@@ -58,7 +58,7 @@ namespace CalcWin.Client.CalcService.Mappers
             return wine;
         }
 
-        private static IList<CWDA.Ingredient> GetIngredients(IList<Ingredient> ingredients)
+        private static IList<CWDA.Ingredient> GetIngredients(IList<IngredientDTO> ingredients)
         {
             IList<CWDA.Ingredient> newIngredients = new List<CWDA.Ingredient>();
 
@@ -74,7 +74,7 @@ namespace CalcWin.Client.CalcService.Mappers
             return newIngredients;
         }
 
-        private static CWDA.Fruit GetFruit(Fruit fruit)
+        private static CWDA.Fruit GetFruit(FruitDTO fruit)
         {
             CWDA.Fruit newFruit = new CWDA.Fruit();
             newFruit.Name = fruit.Name;
