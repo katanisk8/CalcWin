@@ -26,10 +26,6 @@ namespace CalcWin.Controllers
             {
                 _db.Flavors.Remove(flavor);
             }
-            foreach (var normalizedName in _db.NormalizedNames)
-            {
-                _db.NormalizedNames.Remove(normalizedName);
-            }
             foreach (var ingredient in _db.Ingredients)
             {
                 _db.Ingredients.Remove(ingredient);

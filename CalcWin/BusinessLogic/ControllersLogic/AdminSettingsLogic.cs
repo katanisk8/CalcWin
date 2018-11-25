@@ -65,14 +65,6 @@ namespace CalcWin.BusinessLogic.ControllersLogic
             }
          }
 
-         foreach (var normalizedName in defaultData.NormalizedNames)
-         {
-            if (CheckIfNormalizedNameAlreadyExist(normalizedName) == false)
-            {
-               db.NormalizedNames.Add(normalizedName);
-            }
-         }
-
          foreach (var role in defaultData.Roles)
          {
             if (CheckIfAspNetRoleAlreadyExist(role) == false)
@@ -96,12 +88,7 @@ namespace CalcWin.BusinessLogic.ControllersLogic
 
       private bool CheckIfSupplementAlreadyExist(Supplement supplement)
       {
-         return db.Supplements.Any(x => x.NormalizedName == supplement.NormalizedName && x.IsDefault == true);
-      }
-
-      private bool CheckIfNormalizedNameAlreadyExist(NormalizedName normalizedName)
-      {
-         return db.NormalizedNames.Any(x => x.Name == normalizedName.Name);
+         return db.Supplements.Any(x => x.Type == supplement.Type && x.IsDefault == true);
       }
 
       private bool CheckIfAspNetRoleAlreadyExist(IdentityRole role)

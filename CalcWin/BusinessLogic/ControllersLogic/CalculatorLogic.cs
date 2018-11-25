@@ -122,11 +122,11 @@ namespace CalcWin.BusinessLogic.ControllersLogic
 
         private bool CheckIfExistSupplementsForWineProjectId(int wineProjectId)
         {
-            if (db.Supplements.Any(x => x.NormalizedName == "Sugar" && x.WineProject.Id == wineProjectId) &&
-                db.Supplements.Any(x => x.NormalizedName == "Acid" && x.WineProject.Id == wineProjectId) &&
-                db.Supplements.Any(x => x.NormalizedName == "Water" && x.WineProject.Id == wineProjectId) &&
-                db.Supplements.Any(x => x.NormalizedName == "Yeast" && x.WineProject.Id == wineProjectId) &&
-                db.Supplements.Any(x => x.NormalizedName == "YeastFood" && x.WineProject.Id == wineProjectId))
+            if (db.Supplements.Any(x => x.Type == SuplementType.Sugar && x.WineProject.Id == wineProjectId) &&
+                db.Supplements.Any(x => x.Type == SuplementType.Acid && x.WineProject.Id == wineProjectId) &&
+                db.Supplements.Any(x => x.Type == SuplementType.Water && x.WineProject.Id == wineProjectId) &&
+                db.Supplements.Any(x => x.Type == SuplementType.Yeast && x.WineProject.Id == wineProjectId) &&
+                db.Supplements.Any(x => x.Type == SuplementType.YeastFood && x.WineProject.Id == wineProjectId))
             {
                 return true;
             }

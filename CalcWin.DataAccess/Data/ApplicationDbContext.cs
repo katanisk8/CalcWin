@@ -22,7 +22,6 @@ namespace CalcWin.DataAccess.Data
         public virtual DbSet<Flavor> Flavors { get; set; }
         public virtual DbSet<Supplement> Supplements { get; set; }
         public virtual DbSet<Ingredient> Ingredients { get; set; }
-        public virtual DbSet<NormalizedName> NormalizedNames { get; set; }
         public DbSet<ApplicationUser> ApplicationUser { get; set; }
     }
 }

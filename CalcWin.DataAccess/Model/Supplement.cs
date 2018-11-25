@@ -22,10 +22,6 @@ namespace CalcWin.DataAccess.Model
         [Required]
         public string Name { get; set; }
 
-        [XmlAttribute("normalizedName")]
-        [Required]
-        public string NormalizedName { get; set; }
-
         [XmlAttribute("type")]
         [Required]
         public SuplementType Type { get; set; }

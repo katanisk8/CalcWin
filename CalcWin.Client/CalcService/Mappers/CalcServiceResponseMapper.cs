@@ -77,9 +77,6 @@ namespace CalcWin.Client.CalcService.Mappers
         private static Fruit GetFruit(FruitDTO fruit)
         {
             Fruit newFruit = new Fruit();
-            newFruit.Name = fruit.Name;
-            newFruit.NormalizedName = fruit.NormalizedName;
-            newFruit.IsDefault = fruit.IsDefault;
             newFruit.Sugar = fruit.Sugar;
             newFruit.Acid = fruit.Acid;
             newFruit.Price = fruit.Price;

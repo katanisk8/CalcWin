@@ -23,9 +23,6 @@ namespace CalcWin.DataAccess.Data.DefaultData
       public List<Supplement> Supplements { get; set; }
 
       [XmlArray]
-      public List<NormalizedName> NormalizedNames { get; set; }
-
-      [XmlArray]
       public List<IdentityRole> Roles { get; set; }
    }
 }

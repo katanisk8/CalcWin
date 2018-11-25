@@ -38,9 +38,6 @@ namespace CalcWin.Client.CalcService.Mappers
         private static FruitDTO GetFruit(Fruit fruit)
         {
             FruitDTO newFruit = new FruitDTO();
-            newFruit.Name = fruit.Name;
-            newFruit.NormalizedName = fruit.NormalizedName;
-            newFruit.IsDefault = fruit.IsDefault;
             newFruit.Sugar = fruit.Sugar;
             newFruit.Acid = fruit.Acid;
             newFruit.Price = fruit.Price;
@@ -52,8 +49,6 @@ namespace CalcWin.Client.CalcService.Mappers
         {
             FlavorDTO newFlavor = new FlavorDTO();
             newFlavor.Name = flavor.Name;
-            newFlavor.NormalizedName = flavor.NormalizedName;
-            newFlavor.IsDefault = flavor.IsDefault;
             newFlavor.Acid = flavor.Acid;
 
             return newFlavor;
@@ -66,8 +61,6 @@ namespace CalcWin.Client.CalcService.Mappers
             foreach (var suplement in suplements)
             {
                 SupplementDTO newSupplement = new SupplementDTO();
-                newSupplement.Name = suplement.Name;
-                newSupplement.NormalizedName = suplement.NormalizedName;
                 newSupplement.Type = suplement.Type;
                 newSupplement.IsDefault = suplement.IsDefault;
                 newSupplement.Price = suplement.Price;
