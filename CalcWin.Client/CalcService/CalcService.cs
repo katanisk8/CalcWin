@@ -32,7 +32,7 @@ namespace CalcWin.Client.CalcService
             var jSONResponse = await response.Content.ReadAsStringAsync();
             var model = JsonConvert.DeserializeObject<CS.CalcServiceResponse>(jSONResponse);
             var result = _responseMapper.MapCalcServiceResponse(model);
-
+             
             return result;
         }
 

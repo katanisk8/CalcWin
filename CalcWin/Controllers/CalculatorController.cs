@@ -6,7 +6,6 @@ using CalcWin.BusinessLogic.ControllersLogic;
 using System;
 using System.Threading.Tasks;
 using CalcWin.BusinessLogic.ControllersValidations;
-using CalcWin.DataAccess.Model;
 
 namespace CalcWin.Controllers
 {
@@ -43,8 +42,12 @@ namespace CalcWin.Controllers
         {
             try
             {
-                _validator.ValidateModelToAddWineProject(model);
-                _logic.AddWineProject(User.Claims.First().Value, model);
+                _validator.ValidateModelToAddWineProject(ModelState, model);
+
+                if (ModelState.IsValid)
+                {
+                    _logic.AddWineProject(User.Claims.First().Value, model);
+                }
             }
             catch (Exception ex)
             {
@@ -60,7 +63,7 @@ namespace CalcWin.Controllers
         {
             try
             {
-                _validator.ValidateModelToCalculateWine(model);
+                _validator.ValidateModelToCalculateWine(ModelState, model);
                 model.Result =  await _logic.CalculateWineResultAsync(model);
                 _logic.FillMissingItemsInModel(model);
                 return View(MVC.Views.Calculator.Index, model);

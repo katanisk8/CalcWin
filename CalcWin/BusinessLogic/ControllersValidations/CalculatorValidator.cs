@@ -1,71 +1,73 @@
 ﻿using CalcWin.Views.Calculator;
-using System;
 using CalcWin.DataAccess.Model;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 namespace CalcWin.BusinessLogic.ControllersValidations
 {
     public class CalculatorValidator : ICalculatorValidator
     {        
-        public void ValidateModelToCalculateWine(CalculatorViewModel model)
+        public void ValidateModelToCalculateWine(ModelStateDictionary modelState, CalculatorViewModel model)
         {
             if (model == null)
             {
-                throw new Exception("Something went wrong!");
+                modelState.AddModelError("Model", "Model is null.");
+                return;
             }
 
-            CheckIngredients(model.Ingredients);
-            CheckFlavor(model.SelectedFlavor);
-            CheckAlcoholQuantity(model.SelectedAlcoholQuantity);
+            CheckIngredients(modelState, model.Ingredients);
+            CheckFlavor(modelState, model.SelectedFlavor);
+            CheckAlcoholQuantity(modelState, model.SelectedAlcoholQuantity);
         }
 
-        public void ValidateModelToAddWineProject(CalculatorViewModel model)
+        public void ValidateModelToAddWineProject(ModelStateDictionary modelState, CalculatorViewModel model)
         {
             if (model == null)
             {
-                throw new Exception("Something went wrong!");
+                modelState.AddModelError("Model", "Model is null.");
+                return;
             }
 
-            CheckIngredients(model.Ingredients);
-            CheckFlavor(model.SelectedFlavor);
-            CheckAlcoholQuantity(model.SelectedAlcoholQuantity);
-            CheckProjectName(model.Name);
+            CheckIngredients(modelState, model.Ingredients);
+            CheckFlavor(modelState, model.SelectedFlavor);
+            CheckAlcoholQuantity(modelState, model.SelectedAlcoholQuantity);
+            CheckProjectName(modelState, model.Name);
         }
 
-        private void CheckProjectName(string name)
+        private void CheckProjectName(ModelStateDictionary modelState, string name)
         {
-            if (String.IsNullOrEmpty(name) || String.IsNullOrWhiteSpace(name))
+            if (string.IsNullOrEmpty(name) || string.IsNullOrWhiteSpace(name))
             {
-                throw new Exception("Please set name of wine project");
+                modelState.AddModelError("Project name", "Please set name of wine project.");
             }
         }
 
-        private void CheckIngredients(IEnumerable<Ingredient> ingredients)
+        private void CheckIngredients(ModelStateDictionary modelState, IEnumerable<Ingredient> ingredients)
         {
             if (ingredients.Any(x => x.Quantity > 0) == false)
             {
-                throw new Exception("Please choose fruits");
+                modelState.AddModelError("Fruits", "Please choose fruits.");
             }
         }
 
-        private void CheckFlavor(int selectedFlavor)
+        private void CheckFlavor(ModelStateDictionary modelState, int selectedFlavor)
         {
             if (selectedFlavor < 0)
             {
-                throw new Exception("Please choose flavor");
+                modelState.AddModelError("Flavor", "Please choose flavor.");
             }
         }
 
-        private void CheckAlcoholQuantity(double selectedAlcoholQuantity)
+        private void CheckAlcoholQuantity(ModelStateDictionary modelState, double selectedAlcoholQuantity)
         {
             if (selectedAlcoholQuantity <= 0)
             {
-                throw new Exception("Please set alcohol quantity");
+                modelState.AddModelError("Alcohol quantity", "Please set alcohol quantity.");
             }
             else if (selectedAlcoholQuantity > 20)
             {
-                throw new Exception("Alcohol quantity can't be bigger then 20%");
+                modelState.AddModelError("Alcohol quantity", "Alcohol quantity can't be bigger then 20%.");
             }
         }
     }
